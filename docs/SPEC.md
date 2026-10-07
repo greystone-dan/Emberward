@@ -1,8 +1,8 @@
 # Emberward: Demo Rules Spec
 
-Version 1 · 7 Oct 2026 · Owner: Daniel
+Version 2 · 7 Oct 2026 (traits, the Drift and the revealed deck replace Orders and the Procession) · Owner: Daniel
 
-This is the source of truth for the demo's rules. Card data is in `cards.json`. Art direction is in `ART.md`.
+This is the source of truth for the demo's rules. Card data is in `content/cards.json` (traits, positional rules, combos, wardens, relics, enemies). Decisions that changed from v1 are in `docs/DECISIONS.md`. Art direction is in `ART.md`.
 
 Any number marked **[flag]** is a first-pass value. Implement it as a named config constant so simulations can compare alternatives. If a rule is ambiguous, pick the simplest reading, put it behind a flag, log it in `docs/DECISIONS.md`, and list it under "Questions for Daniel" in `PROGRESS.md`. Never quietly invent a rule.
 
@@ -10,15 +10,14 @@ Any number marked **[flag]** is a first-pass value. Implement it as a named conf
 
 ## 1. Fiction in one paragraph
 
-The city of Vael sank in a single night, and its dead never left. Their spirits, the **Kindled**, cling to anything that still holds light. You play a **Warden** carrying the last lantern down the drowned stairs. Kindled bound to your lantern follow you in a line called the **Procession**. In battle, each one fights as a body on the board or is spent as a burst of power (a spell).
+The city of Vael sank in a single night, and its dead never left. Their spirits, the **Kindled**, cling to anything that still holds light. You play a **Warden** carrying the last lantern down the drowned stairs. Kindled drift past you after every fight, and you choose which to bind to your lantern. In battle, each one fights as a body on the board or is spent as a burst of power (a spell).
 
-**Embers ✦** are the lantern's fuel. They are also the market's currency and the cost of every spell. That single number is the whole economy, so light you spend to win this fight is light you won't have later.
-
+**Embers ✦** are the lantern's fuel. They are also the market's currency, the price of reaching past the free cards in the Drift, and the cost of every spell. That single number is the whole economy, so light you spend to win this fight is light you won't have later.
 ## 2. Demo scope
 
 - Act I only, "The Stair". It ends with the boss, "The Lamplighter Who Drowned".
 - Three Wardens: the Lamplighter, the Ferryman and the Bell-Keeper. The Sexton is listed as locked and unlocks after a first win **[flag]**.
-- All 60 cards in `cards.json`, all four Orders, and the 12 relics.
+- All 60 cards in `cards.json`, all traits, and the relics.
 - 8 normal fight encounters, 3 elites and 1 boss, with 3 to 5 Shrine events.
 - Target run length: 15 to 25 minutes.
 - Platform: desktop browser only (mouse and keyboard, landscape, minimum 1280×720). Don't build touch or mobile layouts. The Steam build (Electron) comes later, so don't paint the code into a browser-only corner.
@@ -37,6 +36,8 @@ The city of Vael sank in a single night, and its dead never left. Their spirits,
 
 ## 4. Battle flow
 
+Your **entire deck is face-up for the whole battle**. There is no draw, no order and no hidden information. Any card you brought can be played on any action. The tension is in what you bring, what you spend, and where you place.
+
 A battle runs for up to **6 waves [flag]**. Each wave has two parts.
 
 1. **Action phase.** Sides alternate single actions.
@@ -45,13 +46,20 @@ A battle runs for up to **6 waves [flag]**. Each wave has two parts.
    - A side that passes takes no more actions this wave. The other side may still use its remaining actions.
 2. **Clash.** Resolution is deterministic (see §6), followed by the end-of-wave steps.
 
+### 4.0 Muster (before each battle)
+
+- The player sees the enemy's **whole deck** and its first wave.
+- They then choose up to **10 cards [flag: try 8, 10, unlimited]** from their deck to bring. A Flame or Fire counts as one card.
+- Cards not brought take no part in the battle and are not spent.
+- Choosing the 10 is the main pre-battle decision. A bigger deck means more choice at the Muster, not more power on the board.
+
 ### 4.1 Actions
 
-- **Play a card** from your Procession, choosing one of its two faces:
+- **Play a card** from your mustered cards, in any order, choosing one of its two faces:
   - **Summon** it as a Kindled into any empty cell on your grid. This is free, and its **Kindle** text triggers.
   - **Cast** its spell by paying the spell's ember cost. The spell resolves immediately. Targets come from the card text, and the player picks where the text allows.
-  - Either way, also pay the card's **reach cost** (§5).
-  - A played card is spent for this battle.
+  - A played card is spent for this battle (it returns afterwards).
+  - There is **no reach cost** in battle. Reach is paid in the Drift (§5).
 - **Pass.** End your part of the wave. The first side to pass each wave gains **1✦ [flag]**.
 
 **Moving is not an action.**
@@ -61,35 +69,36 @@ A battle runs for up to **6 waves [flag]**. Each wave has two parts.
 - Each extra step costs **1✦ [flag]**.
 - **Rooted** units never move. Spells can move units regardless of Swift.
 
-### 4.2 Telegraphing
+### 4.2 Intent (the enemy telegraph)
 
-The enemy has a face-up Procession too. Its two lit cards are its telegraph. Above their grid, show:
+The enemy's deck is fully revealed too. Above their grid, show:
 
-- the enemy's next card,
-- its preferred lane,
+- an **intent marker** on the card the enemy plans to play next, and the cell it is aimed at,
+- their preferred lane,
 - and attack arrows for the projected Clash.
 
 The full Clash preview (all arrows and damage numbers) updates live as the player acts, as in Into the Breach.
+## 5. The Drift (paid reach, in drafting)
 
-## 5. The Procession (paid reach)
+Reach is no longer a battle mechanic. It is how you choose cards between fights.
 
-- Your deck is an ordered, face-up line.
-- The first **2 [flag]** cards still in it are **lit**. Lit cards have no reach cost.
-- Any other card can be played now, at a reach cost of **1✦ for each place it sits behind the lit cards [flag]**. The 3rd card costs 1✦, the 4th 2✦, the 5th 3✦, and so on.
-- Skipped cards keep their places. Cards ahead of them leave as they're played, so they become lit.
-- **Between battles:**
-  - The order carries over from battle to battle.
-  - New cards join the back.
-  - On the **Muster** screen before each battle, the player sees the enemy's first wave and their Procession. They may make **2 free moves [flag]** (lift a card and drop it anywhere), and each further move costs **1✦ [flag]**.
-- At the end of a battle, spent cards return to their slots.
-- Cards and relics that bend the line:
-  - Candlewright: "Light the Way".
-  - Gravedigger: "Dig Up".
-  - Ferry Boatman.
-  - The Ferryman's first free reach.
-  - The Ferryman's Pole relic.
-  - The Long Wick relic.
+- After every fight, a line of **6 cards [flag]** drifts past.
+- The first **2 [flag]** are **free**. Each card behind them costs **1✦ more than the one ahead [flag]**: the 3rd costs 1✦, the 4th 2✦, up to 4✦ for the 6th.
+- The player takes **1 card**, or **2 after an elite [flag]**. Or they may **skip the whole Drift for 3✦ [flag]**.
+- Cards left behind **advance 2 places per node [flag]**, getting cheaper. The front 2 then **wash away**. New cards join the back.
+- The player can see the **next node's Drift** before choosing a path on the map.
+- **Opening Drift:** a line of 8 before the first fight, at normal prices. The player starts with 8✦ and gets 3 takes.
+- Cards and relics that bend the Drift:
+  - Pilgrim 4: the third card is free too.
+  - Kindler 3: Drift reaches cost 1✦ less.
+  - Long Wick relic: the first three cards are free.
+  - The Ferryman's relic: the first reach after each fight is free.
+  - Ferryman's Pole and other relics in `relics`.
+- **Echoes:** about one Drift in three contains an **Echo**, a marked copy of a card the player owns. Weight 3× toward cards owned exactly twice **[flag]**. The Echo Shell relic guarantees one per Drift.
+- **Omens:** at the start of an act, 3 traits **wax**. Their cards appear 1.5× as often in the Drift and markets. Show the Omens on the map.
+- Rarity odds per slot (common / uncommon / rare): Act I 65 / 31 / 4, plus +1% rare chance for every Drift without a rare (pity).
 
+There is no order to the deck and no Muster reordering. Slots in the player's deck are an unordered collection.
 ## 6. The Clash
 
 The Clash resolves in three **beats**: Front row, then Mid, then Back.
@@ -149,18 +158,27 @@ Use this order everywhere: the side with initiative this wave first, then lane A
 | Pull | Move an enemy toward its own Front row. A pull that's blocked does nothing. |
 | Persist | The unit stays on the board into the next battle, in its cell. |
 | Wisp | A 1/1 Hollow token with Strike. |
-| Rubble / Bone Wall | A 0/N Rooted token with no Order and no attack. |
+| Rubble / Bone Wall | A 0/N Rooted token with no traits and no attack. |
 
-## 8. Orders and clusters
+## 8. Traits and positional bonuses
 
-There are four Orders: **Lamp, Hollow, Brine and Bell**. **Wanderers** are neutral and have no cluster bonus.
+There are **no fixed factions or Orders**. Every card carries 2 to 4 **traits** (TFT-style), from `cards.json → traits`: 8 **Origins** (what it is) and 9 **Classes** (what it does).
 
-- A cluster bonus counts only your **largest orthogonally connected group** of that Order.
-- The thresholds are 2, 3 and 5.
-- A bridge card (order `"X+Y"`) counts as both Orders.
-- Recompute clusters continuously.
-- The bonuses are in `cards.json → orders`.
+- A trait counts the number of **different cards** on your grid that carry it. Two copies of one card count once. A Flame or Fire counts once.
+- Tiers stack: Bonebound 4 keeps Bonebound 2's bonus. Tier thresholds and text are in the data.
+- Recompute trait counts live, from the board, every time a unit enters or leaves. Never store trait effects as permanent changes.
+- **Sigils** inscribe an extra trait on a card in the deck for the rest of the run (`cards.json → sigils`). One Sigil per card.
 
+### 8.1 Positional rules (`cards.json → positional`)
+
+- **Kinship:** +1/+1 for each orthogonal neighbour sharing a trait, up to +2/+2. Applies to every unit.
+- Many Class bonuses have a positional rider: Front-row Guardians shield the unit behind them, Back-row Marksmen gain Power, Brawlers need a Brawler Beside them, Chanter 2 extends auras diagonally.
+- Burn spreads to neighbours and Cleave hits Beside targets, so clumping for Kinship has a price.
+- Lanes and Taunt: an empty lane lets face damage through on both sides.
+
+### 8.2 Combos and comps
+
+`cards.json → combos` (10) and `comps` (8) are designed examples for the AI opponents' decks, the balance harness and the tutorial. They are not rules. Don't hard-code them.
 ## 9. Winning and health
 
 - **Health:**
@@ -189,7 +207,7 @@ Daniel's direction is that card levels read as **sparks, flames and fires**.
 How Rekindling works:
 
 - It's offered automatically when the copy that completes a set arrives. The player may postpone it until the next Hearth or Market.
-- The merged card takes the Procession slot of the front-most copy, so the Procession gets 2 cards shorter. That's the point: everything behind it gets cheaper to reach.
+- Three cards become one, so the deck gets 2 cards shorter. That's the point: it thins the deck and makes a bigger share of your brought cards strong.
 - Mid-battle fusion doesn't exist, and there's no deck cap.
 
 ## 11. Run structure and economy
@@ -199,7 +217,7 @@ How Rekindling works:
 - Start a run with **8✦**.
 - Battle pay: fights **5✦**, elites **8✦ plus a relic**, the boss **12✦**.
 - After each battle, before the payout, gain interest: **+1✦ per 5✦ banked, capped at +4 [flag]**.
-- Embers spent in battle (reach, spells, extra moves) come from the same purse.
+- Embers spent in battle (spells, extra moves) and in the Drift (reach) come from the same purse.
 
 ### Map
 
@@ -217,19 +235,15 @@ How Rekindling works:
 
 | Source | Offer |
 |---|---|
-| Opening draft | Before the first fight: 3 packs of 3, pick 1 from each. Pack 1 comes from the Warden's Order (bridges included). |
-| Salvage after a fight | Pick 1 of 3, or skip for **3✦**. 35% of the time one slot is an **Echo** **[flag]**. |
-| Elite salvage | Pick 1 of 3, all uncommon or better. Also gives a relic. |
-| Boss salvage | Pick 1 of 3 rares. |
-| Market | 5 cards, one of them always an Echo, plus 1 relic. Prices 3/5/8✦ by rarity **[flag]**. Reroll costs 1✦ and rises by 1 per reroll in that visit. Hold one slot to the next visit. Sell any card for half price, rounded down. |
+| Opening Drift | A line of 8 before the first fight. Three takes. See §5. |
+| Drift after a fight | A line of 6, front 2 free, +1✦ per place behind. One take, or skip for **3✦**. |
+| Drift after an elite | Uncommon or better. Two takes, plus a relic or a Sigil. |
+| After the boss | Three rares side by side, one free pick. |
+| Market | 4 cards, one of them always an Echo, plus a relic and a Sigil. Cards cost 3/5/8✦ by rarity, Sigils 6✦ **[flag]**. Reroll costs 1✦ and rises by 1 per reroll in that visit. Hold one slot to the next visit. Sell any card for half price, rounded down. |
 
-- An **Echo** is a copy of a card you already own. Weight Echoes 3× toward cards you own exactly two of.
-- **Omens**: at the start of an act, 2 Orders wax. Their cards (including bridges) appear 1.5× as often in salvage and markets. Show the Omens on the map.
-- **Rarity odds** per slot (common / uncommon / rare):
-  - Act I: 65 / 31 / 4.
-  - Every offer without a rare adds +1% to the rare chance until a rare appears (pity).
-  - Acts II and III (40/44/16) come later.
-- Wardens and their starting Processions are in `cards.json → wardens`.
+- Echoes and Omens: see §5.
+- **Rarity odds** per slot: see §5. Acts II and III (40/44/16) come later.
+- Wardens, their Origin and their starting decks (6 cards) are in `cards.json → wardens`. A starting deck is an unordered set. The first fight has 9 cards (6 plus 3 opening takes); by the end of Act I expect 12 to 14.
 
 ### Relics
 
@@ -237,18 +251,18 @@ There are 12, listed in `cards.json → relics`.
 
 ## 12. Enemies
 
-Enemies use the **same card system** as the player: a face-up Procession, embers, the same 4×3 grid and the same rules.
+Enemies use the **same card system** as the player: a fully revealed deck, embers, the same 4×3 grid and the same rules.
 
-- Each encounter is data: an enemy Warden HP, a starting board (optional), a Procession and starting embers.
+- Each encounter is data: an enemy Warden HP, a starting board (optional), a deck and starting embers.
 - Enemy-only cards are allowed (as data). Prefix their ids with `e_`.
 
 Act I roster: `cards.json` has `enemyUnits`, `fights` (8), `elites` (3), `boss` and `events` (5), all designed in the pitch. Guidance:
 
-- **Fights**: themed by Order. Examples:
-  - a Drowned Patrol (Brine pullers),
-  - a Bell-Tower Watch (a Bell wall with archers),
-  - a Grave Swarm (Hollow Wisps),
-  - a Candle Procession (Lamp burners).
+- **Fights**: themed by trait. Examples:
+  - a Drowned Patrol (Drowned Binders),
+  - a Bell-Tower Watch (a Bellforged wall with archers),
+  - a Grave Swarm (Bonebound Wisps),
+  - a Candle Procession (Waxborn burners).
 - **Elites**: each breaks one rule. Examples:
   - **The Choir Abbot**: Wisps refill its empty cells.
   - **The Tide-Caller**: pulls your Front row each wave.
@@ -256,11 +270,11 @@ Act I roster: `cards.json` has `enemyUnits`, `fights` (8), `elites` (3), `boss` 
 - **Boss: The Lamplighter Who Drowned.**
   - HP 40.
   - Each wave it snuffs one of your lanes, shown a wave in advance. Your units in a dark lane can't attack.
-  - Its Procession escalates over the waves.
+  - Its deck escalates over the waves (phases in `cards.json → boss`).
 
 AI ladder (see `research/05` §1.4–1.5):
 
-- Fights: scripted, playing lit cards with simple lane preferences.
+- Fights: scripted, playing cards in a scripted order with simple lane preferences.
 - Elites: greedy 1-ply with Clash lookahead.
 - Boss: greedy plus scripted phases.
 

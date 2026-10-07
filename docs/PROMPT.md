@@ -8,7 +8,7 @@ You are the lead engineer and technical artist on **Emberward**, a card roguelit
 
 ## The game in five sentences
 
-You are a Warden carrying the last lantern into a drowned gothic city. Your deck is a face-up line called the Procession: the first two cards are free to play, and reaching deeper costs embers. Each card is both a creature (summoned onto a 4×3 grid) and a spell. Battles run in alternating-action waves, followed by a deterministic Clash where creatures attack down shared lanes. Embers are the only currency: they buy cards, pay for spells and reach, and earn interest if saved. Three copies of a card Rekindle into a stronger Flame card that thins your deck.
+You are a Warden carrying the last lantern into a drowned gothic city. Your whole deck is face-up during battle, so you can play any card you brought. Each card is both a creature (summoned onto a 4×3 grid) and a spell. Battles run in alternating-action waves, followed by a deterministic Clash where creatures attack down shared lanes. Embers are the only currency: they buy cards, pay for spells and for reaching past the free cards in the post-fight draft (the Drift), and earn interest if saved. Cards carry TFT-style traits that switch on when enough different cards share them, plus positional bonuses on the grid. Three copies of a card Rekindle into a stronger Flame card (Spark, Flame, Fire) that thins your deck.
 
 ## Inputs (read all of them before writing code)
 
@@ -16,15 +16,16 @@ You are a Warden carrying the last lantern into a drowned gothic city. Your deck
 |---|---|---|
 | `docs/SPEC.md` | Demo rules | **Source of truth for rules** |
 | `docs/ART.md` | Pixel art and audio direction | **Source of truth for look and sound** |
-| `content/cards.json` | 60 cards with Flame forms, Orders, Wardens, relics, archetypes, Fire examples, Act I enemies, fights, elites, boss and events | **Source of truth for content**. Convert it to typed content; don't edit the meaning of a card without logging it. |
+| `content/cards.json` | 60 cards with traits and Flame forms, plus trait tiers, positional rules, combos, comps, Sigils, Wardens, relics, Fire examples, Act I enemies, fights, elites, boss and events | **Source of truth for content**. Convert it to typed content; don't edit the meaning of a card without logging it. |
 | `docs/research/03-ai-workflow-and-prompts.md` | Architecture, verification ladder, draft CLAUDE.md, prompt templates | Strong guidance. Follow it unless SPEC says otherwise. |
 | `docs/research/05-ai-opponents-and-encounters.md` | Enemy AI ladder, map generator, encounter design | Guidance |
 | `docs/research/06-strategic-depth-and-systems.md`, `04-design-references.md` | Design reasoning, reference numbers | Background |
 | `docs/research/01-repos-and-engines.md`, `02-assets.md` | Stack and asset licensing | Background. Obey the licence rules. |
 | `docs/reference/emberward-pitch.html` | The pitch page (open it in a browser to see the cards, Procession and Rekindling diagrams) | Visual reference for intent, not for pixel style |
 | `docs/design-notes.md` | Daniel's original notes | Background |
+| `docs/DECISIONS.md` | Daniel's decisions, which win over the older research and pitch text | **Overrides research** |
 
-Where the inputs conflict, SPEC.md beats cards.json beats research. 
+Where the inputs conflict, DECISIONS.md and SPEC.md beat cards.json, which beats research. The research docs and the pitch page were written before some decisions: they still mention a Procession, paid reach in battle and four fixed Orders. Ignore those. 
 
 ## Non-negotiables
 
@@ -74,13 +75,13 @@ Set this up in phase 0 and follow it from then on (details in research/03 §4–
 | Phase | Build | Exit check |
 |---|---|---|
 | **0. Scaffold** | Repo, tooling, CLAUDE.md, features.json (derived from SPEC, roughly 60 to 100 entries), content converted from cards.json with schema validation, sprite pipeline skeleton (`npm run sprites`, `npm run sprites:sheet`) | `npm run check` green; schema test passes on all 60 cards |
-| **1. Headless battle** | Grid, shapes, Taunt, Clash beats, statuses, keywords, clusters, Procession with lit cards and reach, Summon and Cast, Pass, moves, win check, ASCII renderer, `tools/sim.ts` | 1,000 random-bot battles with zero `ERROR` lines; golden replays for each shape and status |
-| **2. Playable battle** | Battle screen: grid, Procession strip with lit and reach badges, card inspect, live Clash preview arrows, skippable event-driven animations, scripted enemy | Playwright plays a full battle; screenshots reviewed; a human can tell what will happen before pressing End Turn |
-| **3. Sprites, pass 1** | All 60 card sprites, plus tokens and Act I enemies, as code; contact sheet; level effects (Spark, Flame, Fire) | Contact sheet reviewed: every sprite reads at ×1, and no two in an Order share a silhouette |
-| **4. Run loop** | Warden select, opening draft, Act I map, salvage, Echoes, Omens, market (reroll, hold, sell), Hearth, Shrines, Scout, relics, interest, Rekindling with postpone, Muster screen, Flame forms for all cards | A bot completes a full run headless; Playwright completes a run on a fixed seed |
+| **1. Headless battle** | Grid, shapes, Taunt, Clash beats, statuses, keywords, clusters, Muster (bring up to 10 cards) and a fully revealed deck, Summon and Cast, trait counting and Kinship, Pass, moves, win check, ASCII renderer, `tools/sim.ts` | 1,000 random-bot battles with zero `ERROR` lines; golden replays for each shape and status |
+| **2. Playable battle** | Battle screen: grid, deck strip showing every card (brought cards highlighted, spent cards greyed), card inspect, live Clash preview arrows, skippable event-driven animations, scripted enemy | Playwright plays a full battle; screenshots reviewed; a human can tell what will happen before pressing End Turn; enemy intent markers show |
+| **3. Sprites, pass 1** | All 60 card sprites, plus tokens and Act I enemies, as code; contact sheet; level effects (Spark, Flame, Fire) | Contact sheet reviewed: every sprite reads at ×1, and no two cards sharing a trait share a silhouette |
+| **4. Run loop** | Warden select, the opening Drift (8 cards, 3 takes), Act I map with Drift preview, the post-fight Drift (6 cards, front 2 free, +1✦ per place, advance 2 per node), Echoes, Omens, Sigils, market (reroll, hold, sell), Hearth, Shrines, Scout, relics, interest, Rekindling with postpone, Muster screen, Flame forms for all cards | A bot completes a full run headless; Playwright completes a run on a fixed seed |
 | **5. Enemies and boss** | 8 fights, 3 elites (each breaks one rule), the Lamplighter Who Drowned; AI ladder (scripted, greedy, boss phases) | 1,000 sim runs per Warden; report win rate by Warden and by node |
-| **6. Balance** | `npm run balance`: per-card include win-rate, pick rate, first-seat win rate, ember-spend split, run length | Bands: no card above 60% include-win-rate, first seat between 45% and 55%, median run 15 to 25 minutes (simulated actions × a measured average action time), every archetype reachable |
-| **7. Juice and onboarding** | ZzFX SFX, Tone.js music, hover tooltips for every keyword, a first-battle tutorial that teaches lit cards, reach and the Clash preview, run save and resume (IndexedDB), settings (volume, animation speed), defeat screen "The light goes out." | A fresh evaluator completes a run from a cold start with no instructions and reports any confusion |
+| **6. Balance** | `npm run balance`: per-card include win-rate, pick rate, first-seat win rate, ember-spend split, run length | Bands: no card above 60% include-win-rate, first seat between 45% and 55%, median run 15 to 25 minutes (simulated actions × a measured average action time), every trait's 4-tier reachable from a normal draft |
+| **7. Juice and onboarding** | ZzFX SFX, Tone.js music, hover tooltips for every keyword, a first-battle tutorial that teaches the revealed deck, traits and the Clash preview; a first-Drift tutorial that teaches free and paid reach, run save and resume (IndexedDB), settings (volume, animation speed), defeat screen "The light goes out." | A fresh evaluator completes a run from a cold start with no instructions and reports any confusion |
 | **8. Ship the demo** | Production build deployable as static files; `README` with how to run; `CREDITS.md` | `npm run build` output runs from a static server; all features.json entries pass |
 
 Don't start a phase until the previous phase's exit check passes. If something in SPEC turns out to be unfun or broken in simulation, don't redesign it silently. Show the numbers in `PROGRESS.md` under "Questions for Daniel", propose a flag change, and keep building on the current rule.
