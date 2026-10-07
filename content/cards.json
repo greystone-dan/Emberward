@@ -1,0 +1,1684 @@
+{
+ "version": 1,
+ "cards": [
+  {
+   "id": 1,
+   "name": "Lampwick Squire",
+   "order": "Lamp",
+   "rar": "C",
+   "atk": 2,
+   "hp": 3,
+   "shape": "strike",
+   "icon": "lantern-flame",
+   "text": "Kindle: Shield 2.",
+   "sn": "Flare",
+   "sc": 1,
+   "st": "Deal 3 to the front-most enemy in a lane.",
+   "flame": {
+    "stats": "5/6 Cleave",
+    "text": "Kindle: Shield 4. Lamp units Beside it also gain Shield 2.",
+    "spell": "Flare (0✦): Deal 5 to the front-most enemy in a lane."
+   },
+   "fireLine": "Kindle: every ally gains Shield 4. Your Lamp units can't be destroyed while it stands."
+  },
+  {
+   "id": 2,
+   "name": "Tallow Imp",
+   "order": "Lamp",
+   "rar": "C",
+   "atk": 1,
+   "hp": 2,
+   "shape": "shoot",
+   "icon": "spark-spirit",
+   "text": "Swift 1. Hits apply Burn 1.",
+   "sn": "Spark",
+   "sc": 0,
+   "st": "Burn 2 to an enemy.",
+   "flame": {
+    "stats": "2/4 Shoot",
+    "text": "Swift 2. Hits apply Burn 2, and Burn it applies spreads in full.",
+    "spell": "Spark (0✦): Burn 4 to an enemy."
+   },
+   "fireLine": "Every enemy hit by any of your attacks gains Burn 1."
+  },
+  {
+   "id": 3,
+   "name": "Wickmonger",
+   "order": "Lamp",
+   "rar": "C",
+   "atk": 2,
+   "hp": 2,
+   "shape": "lob",
+   "icon": "candle-flame",
+   "text": "Hits apply Burn 1.",
+   "sn": "Trim the Wick",
+   "sc": 1,
+   "st": "An enemy's Burn ticks right now, without spreading.",
+   "flame": {
+    "stats": "4/4 Lob",
+    "text": "Hits apply Burn 2. Wave End: the enemy it hit last has its Burn tick again.",
+    "spell": "Trim the Wick (0✦): Every Burning enemy's Burn ticks right now, without spreading."
+   }
+  },
+  {
+   "id": 4,
+   "name": "Candlewright",
+   "order": "Lamp",
+   "rar": "C",
+   "atk": 0,
+   "hp": 4,
+   "shape": "none",
+   "icon": "candles",
+   "text": "Aura (Ahead): the ally Ahead gains +1 Power.",
+   "sn": "Light the Way",
+   "sc": 1,
+   "st": "Your next reach this wave is free.",
+   "flame": {
+    "stats": "0/8 Support",
+    "text": "Aura (Ahead and Behind): those allies gain +2 Power.",
+    "spell": "Light the Way (0✦): Your next two reaches this wave are free."
+   }
+  },
+  {
+   "id": 5,
+   "name": "Ember Hound",
+   "order": "Lamp",
+   "rar": "C",
+   "atk": 3,
+   "hp": 2,
+   "shape": "strike",
+   "icon": "flaming-claw",
+   "text": "Swift 1. Last Gasp: Burn 2 to the enemy across.",
+   "sn": "Scatter Embers",
+   "sc": 2,
+   "st": "Burn 1 to every enemy in their Front row.",
+   "flame": {
+    "stats": "6/4 Strike",
+    "text": "Swift 2. Last Gasp: Burn 4 to the enemy across and to the enemies Beside it.",
+    "spell": "Scatter Embers (1✦): Burn 2 to every enemy in their Front and Mid rows."
+   }
+  },
+  {
+   "id": 6,
+   "name": "Kiln Mortar",
+   "order": "Lamp",
+   "rar": "U",
+   "atk": 3,
+   "hp": 2,
+   "shape": "lob",
+   "icon": "fire-bowl",
+   "text": "Hits apply Burn 2.",
+   "sn": "Kiln Breath",
+   "sc": 3,
+   "st": "Burn 3 to an enemy and to every enemy Beside it.",
+   "flame": {
+    "stats": "6/4 Lob",
+    "text": "Hits apply Burn 3 to the target and to every enemy Beside it.",
+    "spell": "Kiln Breath (2✦): Burn 5 to an enemy and to every enemy Around it."
+   }
+  },
+  {
+   "id": 7,
+   "name": "Lantern Sentry",
+   "order": "Lamp",
+   "rar": "U",
+   "atk": 2,
+   "hp": 5,
+   "shape": "shoot",
+   "icon": "lantern",
+   "text": "Rooted. Hits ignore Shield.",
+   "sn": "Overcharge",
+   "sc": 2,
+   "st": "A Lamp unit attacks twice this wave, then takes 2.",
+   "flame": {
+    "stats": "4/10 Shoot",
+    "text": "Rooted. Hits ignore Shield and strip it.",
+    "spell": "Overcharge (1✦): A Lamp unit attacks twice this wave. It takes no damage from this."
+   }
+  },
+  {
+   "id": 8,
+   "name": "Smoke Wraith",
+   "order": "Lamp",
+   "rar": "U",
+   "atk": 1,
+   "hp": 4,
+   "shape": "none",
+   "icon": "fluffy-flame",
+   "text": "Aura (Around): ranged hits on allies Around deal 1 less.",
+   "sn": "Smokescreen",
+   "sc": 2,
+   "st": "Enemy attacks into one lane deal half damage this wave.",
+   "flame": {
+    "stats": "2/8 Support",
+    "text": "Aura (Around): ranged hits on allies Around deal 2 less.",
+    "spell": "Smokescreen (1✦): Enemy attacks into two adjacent lanes deal half damage this wave."
+   }
+  },
+  {
+   "id": 9,
+   "name": "Brazier Golem",
+   "order": "Lamp",
+   "rar": "U",
+   "atk": 3,
+   "hp": 6,
+   "shape": "strike",
+   "icon": "golem-head",
+   "text": "Rooted. Immune to Burn. Wave End: Burn 1 to every unit Beside it, friend or foe.",
+   "sn": "Stoke",
+   "sc": 2,
+   "st": "Double the Burn on an enemy.",
+   "flame": {
+    "stats": "6/12 Strike",
+    "text": "Rooted. Immune to Burn. Wave End: Burn 2 to every enemy Around the cell across from it. Allies are spared.",
+    "spell": "Stoke (1✦): Triple the Burn on an enemy."
+   }
+  },
+  {
+   "id": 10,
+   "name": "The Candle Saint",
+   "order": "Lamp",
+   "rar": "R",
+   "atk": 2,
+   "hp": 6,
+   "shape": "none",
+   "icon": "candle-holder",
+   "text": "Wave End: heal allies Around by 2.",
+   "sn": "Last Light",
+   "sc": 5,
+   "st": "Return your most recently fallen Kindled to its cell at full health.",
+   "flame": {
+    "stats": "4/12 Support",
+    "text": "Wave End: heal every ally by 2, and allies Around by 4.",
+    "spell": "Last Light (4✦): Return your two most recently fallen Kindled to their cells at full health."
+   }
+  },
+  {
+   "id": 11,
+   "name": "Lamplighter's Ghost",
+   "order": "Lamp",
+   "rar": "R",
+   "atk": 3,
+   "hp": 4,
+   "shape": "shoot",
+   "icon": "burning-skull",
+   "text": "When a Burning enemy dies, gain 1✦ and heal your Warden 2.",
+   "sn": "Wildfire",
+   "sc": 4,
+   "st": "Burn 2 to every enemy. Burn spreads in full this wave.",
+   "flame": {
+    "stats": "6/8 Shoot",
+    "text": "When a Burning enemy dies, gain 2✦ and heal your Warden 3.",
+    "spell": "Wildfire (3✦): Burn 3 to every enemy. Burn spreads in full this wave."
+   }
+  },
+  {
+   "id": 12,
+   "name": "The Sun Furnace",
+   "order": "Lamp",
+   "rar": "R",
+   "atk": 5,
+   "hp": 8,
+   "shape": "lob",
+   "icon": "sun",
+   "text": "Rooted. Hits apply Burn 4.",
+   "sn": "Daybreak",
+   "sc": 6,
+   "st": "Deal 3 to every enemy and strip all enemy Shields.",
+   "flame": {
+    "stats": "10/16 Lob",
+    "text": "Rooted. Hits apply Burn 6 and the Burn can't be removed.",
+    "spell": "Daybreak (5✦): Deal 5 to every enemy and strip all enemy Shields."
+   }
+  },
+  {
+   "id": 13,
+   "name": "Gloomshot",
+   "order": "Hollow",
+   "rar": "C",
+   "atk": 2,
+   "hp": 2,
+   "shape": "shoot",
+   "icon": "raven",
+   "text": "Last Gasp: a Wisp takes its cell.",
+   "sn": "Grave Volley",
+   "sc": 1,
+   "st": "Deal 1 to every enemy in the Back row.",
+   "flame": {
+    "stats": "4/4 Shoot",
+    "text": "Last Gasp: a 2/2 Wisp with Shoot takes its cell.",
+    "spell": "Grave Volley (0✦): Deal 2 to every enemy in the Back row."
+   }
+  },
+  {
+   "id": 14,
+   "name": "Marrowhound",
+   "order": "Hollow",
+   "rar": "C",
+   "atk": 3,
+   "hp": 2,
+   "shape": "strike",
+   "icon": "wolf-head",
+   "text": "Swift 2.",
+   "sn": "Scent the Gap",
+   "sc": 1,
+   "st": "Move an ally up to 2 cells, even if Rooted.",
+   "flame": {
+    "stats": "6/4 Strike",
+    "text": "Swift 3. Strikes first in its beat.",
+    "spell": "Scent the Gap (0✦): Move up to two allies 2 cells each, even if Rooted."
+   },
+   "fireLine": "Swift 4. Attacks in every beat, not only its own row."
+  },
+  {
+   "id": 15,
+   "name": "Bone Gnawer",
+   "order": "Hollow",
+   "rar": "C",
+   "atk": 1,
+   "hp": 1,
+   "shape": "strike",
+   "icon": "bone-gnawer",
+   "text": "Last Gasp: a Wisp takes its cell.",
+   "sn": "Gnaw",
+   "sc": 0,
+   "st": "Destroy one of your units. Gain 2✦.",
+   "flame": {
+    "stats": "2/2 Strike",
+    "text": "Last Gasp: two Wisps fill its cell and an empty cell Beside it.",
+    "spell": "Gnaw (0✦): Destroy one of your units. Gain 4✦."
+   },
+   "fireLine": "Last Gasp: Wisps fill every empty cell on your grid."
+  },
+  {
+   "id": 16,
+   "name": "Crypt Keeper",
+   "order": "Hollow",
+   "rar": "C",
+   "atk": 2,
+   "hp": 3,
+   "shape": "strike",
+   "icon": "cowled",
+   "text": "+1 Power for each ally that has died this battle.",
+   "sn": "Exhume",
+   "sc": 2,
+   "st": "Put a fallen Kindled back at the front of your Procession.",
+   "flame": {
+    "stats": "4/6 Strike",
+    "text": "+2 Power for each ally that has died this battle.",
+    "spell": "Exhume (1✦): Put two fallen Kindled back at the front of your Procession."
+   }
+  },
+  {
+   "id": 17,
+   "name": "Bat Swarm",
+   "order": "Hollow",
+   "rar": "C",
+   "atk": 1,
+   "hp": 1,
+   "shape": "shoot",
+   "icon": "bat-wing",
+   "text": "Swift 2. Kindle: a 1/1 Bat joins Beside it.",
+   "sn": "Night Flight",
+   "sc": 1,
+   "st": "Swap two of your units.",
+   "flame": {
+    "stats": "2/2 Shoot",
+    "text": "Swift 3. Kindle: a 2/2 Bat joins on each side of it.",
+    "spell": "Night Flight (0✦): Swap two of your units, then swap two more."
+   }
+  },
+  {
+   "id": 18,
+   "name": "Bellringer Wight",
+   "order": "Hollow",
+   "rar": "U",
+   "atk": 3,
+   "hp": 3,
+   "shape": "cleave",
+   "icon": "spectre",
+   "text": "Last Gasp: allies Around gain +1 Power.",
+   "sn": "Toll",
+   "sc": 2,
+   "st": "Deal 2 to every enemy in a lane. Refund 2✦ if one dies.",
+   "flame": {
+    "stats": "6/6 Cleave",
+    "text": "Last Gasp: allies Around gain +2 Power and Shield 2.",
+    "spell": "Toll (1✦): Deal 3 to every enemy in a lane. Refund 2✦ for each one that dies."
+   }
+  },
+  {
+   "id": 19,
+   "name": "Ossuary Knight",
+   "order": "Hollow",
+   "rar": "U",
+   "atk": 3,
+   "hp": 5,
+   "shape": "strike",
+   "icon": "crowned-skull",
+   "text": "The first time it dies, it returns with 1 health.",
+   "sn": "Undying",
+   "sc": 3,
+   "st": "A unit returns once this battle with 1 health.",
+   "flame": {
+    "stats": "6/10 Strike",
+    "text": "The first two times it dies, it returns with full health.",
+    "spell": "Undying (2✦): Two units each return once this battle with full health."
+   }
+  },
+  {
+   "id": 20,
+   "name": "Wisp Herder",
+   "order": "Hollow",
+   "rar": "U",
+   "atk": 0,
+   "hp": 4,
+   "shape": "none",
+   "icon": "ghost",
+   "text": "Your Wisps have +1/+1.",
+   "sn": "Will-o'-Wisp",
+   "sc": 1,
+   "st": "Summon two Wisps in your Back row.",
+   "flame": {
+    "stats": "0/8 Support",
+    "text": "Your Wisps have +2/+2 and Shoot.",
+    "spell": "Will-o'-Wisp (0✦): Summon three Wisps in your Back and Mid rows."
+   }
+  },
+  {
+   "id": 21,
+   "name": "Gravedigger",
+   "order": "Hollow",
+   "rar": "U",
+   "atk": 2,
+   "hp": 3,
+   "shape": "strike",
+   "icon": "tombstone",
+   "text": "Wave End: if an ally died this wave, gain 1✦.",
+   "sn": "Dig Up",
+   "sc": 1,
+   "st": "Move any card in your Procession to the front.",
+   "flame": {
+    "stats": "4/6 Strike",
+    "text": "Wave End: gain 1✦ for each ally that died this wave (up to 3).",
+    "spell": "Dig Up (0✦): Move any two cards in your Procession to the front."
+   }
+  },
+  {
+   "id": 22,
+   "name": "Choir of Bones",
+   "order": "Hollow",
+   "rar": "R",
+   "atk": 1,
+   "hp": 6,
+   "shape": "none",
+   "icon": "skull-crossed-bones",
+   "text": "When an ally dies, a Wisp fills an empty cell Beside it.",
+   "sn": "Requiem",
+   "sc": 4,
+   "st": "Summon a Wisp in every empty cell of your Front row.",
+   "flame": {
+    "stats": "2/12 Support",
+    "text": "When an ally dies, 2/2 Wisps fill every empty cell Beside it.",
+    "spell": "Requiem (3✦): Summon a 2/2 Wisp in every empty cell of your Front and Mid rows."
+   }
+  },
+  {
+   "id": 23,
+   "name": "The Grey Reaper",
+   "order": "Hollow",
+   "rar": "R",
+   "atk": 4,
+   "hp": 4,
+   "shape": "cleave",
+   "icon": "grim-reaper",
+   "text": "Each enemy it kills leaves a Wisp on your side.",
+   "sn": "Harvest",
+   "sc": 5,
+   "st": "Destroy every enemy with 2 or less health.",
+   "flame": {
+    "stats": "8/8 Cleave",
+    "text": "Each enemy it kills leaves a 2/2 Wisp on your side, in that lane.",
+    "spell": "Harvest (4✦): Destroy every enemy with 4 or less health."
+   }
+  },
+  {
+   "id": 24,
+   "name": "The Lich of Vael",
+   "order": "Hollow",
+   "rar": "R",
+   "atk": 2,
+   "hp": 7,
+   "shape": "shoot",
+   "icon": "daemon-skull",
+   "text": "Your Last Gasps trigger twice.",
+   "sn": "Second Death",
+   "sc": 4,
+   "st": "Trigger the Last Gasp of every ally that died this battle.",
+   "flame": {
+    "stats": "4/14 Shoot",
+    "text": "Your Last Gasps trigger three times.",
+    "spell": "Second Death (3✦): Trigger the Last Gasp of every ally that died this battle, twice."
+   }
+  },
+  {
+   "id": 25,
+   "name": "Drowned Archer",
+   "order": "Brine",
+   "rar": "C",
+   "atk": 2,
+   "hp": 2,
+   "shape": "shoot",
+   "icon": "archer",
+   "text": "Hits apply Poison 1.",
+   "sn": "Bilge Shot",
+   "sc": 1,
+   "st": "Poison 3 to the front-most enemy in a lane.",
+   "flame": {
+    "stats": "4/4 Shoot",
+    "text": "Hits apply Poison 3.",
+    "spell": "Bilge Shot (0✦): Poison 5 to the front-most enemy in a lane."
+   },
+   "fireLine": "Hits apply Poison 5. Poison it applies can't be removed or reduced."
+  },
+  {
+   "id": 26,
+   "name": "Moray",
+   "order": "Brine",
+   "rar": "C",
+   "atk": 3,
+   "hp": 2,
+   "shape": "strike",
+   "icon": "eel",
+   "text": "Swift 1.",
+   "sn": "Snare",
+   "sc": 1,
+   "st": "Pull an enemy forward one row.",
+   "flame": {
+    "stats": "6/4 Strike",
+    "text": "Swift 2. Kindle: pull the enemy across forward one row.",
+    "spell": "Snare (0✦): Pull an enemy forward to their Front row."
+   }
+  },
+  {
+   "id": 27,
+   "name": "Kelp Wraith",
+   "order": "Brine",
+   "rar": "C",
+   "atk": 0,
+   "hp": 5,
+   "shape": "none",
+   "icon": "spiral-tentacle",
+   "text": "Rooted. Aura (Ahead): the ally Ahead's hits apply Poison 1.",
+   "sn": "Tangle",
+   "sc": 1,
+   "st": "An enemy loses Swift and can't move this battle.",
+   "flame": {
+    "stats": "0/10 Support",
+    "text": "Rooted. Aura (Ahead and Beside): those allies' hits apply Poison 2.",
+    "spell": "Tangle (0✦): Two enemies lose Swift and can't move this battle."
+   }
+  },
+  {
+   "id": 28,
+   "name": "Pearl Diver",
+   "order": "Brine",
+   "rar": "C",
+   "atk": 1,
+   "hp": 3,
+   "shape": "shoot",
+   "icon": "oyster-pearl",
+   "text": "Wave End: gain 1✦ if any enemy is Poisoned.",
+   "sn": "Pearl Dive",
+   "sc": 0,
+   "st": "Gain 2✦.",
+   "flame": {
+    "stats": "2/6 Shoot",
+    "text": "Wave End: gain 1✦ for every two Poisoned enemies (at least 1 if any).",
+    "spell": "Pearl Dive (0✦): Gain 4✦."
+   }
+  },
+  {
+   "id": 29,
+   "name": "Barnacle Thrall",
+   "order": "Brine",
+   "rar": "C",
+   "atk": 1,
+   "hp": 4,
+   "shape": "strike",
+   "icon": "armoured-shell",
+   "text": "Enemies that hit it gain Poison 1.",
+   "sn": "Encrust",
+   "sc": 1,
+   "st": "Poison 2 to an enemy. It can't move this battle.",
+   "flame": {
+    "stats": "2/8 Strike",
+    "text": "Taunt. Enemies that hit it gain Poison 2.",
+    "spell": "Encrust (0✦): Poison 4 to an enemy. It can't move or be moved this battle."
+   }
+  },
+  {
+   "id": 30,
+   "name": "Brine Choir",
+   "order": "Brine",
+   "rar": "U",
+   "atk": 0,
+   "hp": 5,
+   "shape": "none",
+   "icon": "floating-ghost",
+   "text": "Aura (Beside): allies' hits apply Poison 1.",
+   "sn": "Undertow",
+   "sc": 2,
+   "st": "Pull an enemy to its Front row and give it Poison 3.",
+   "flame": {
+    "stats": "0/10 Support",
+    "text": "Aura (Around): allies' hits apply Poison 2.",
+    "spell": "Undertow (1✦): Pull an enemy to its Front row and give it Poison 5."
+   }
+  },
+  {
+   "id": 31,
+   "name": "Siren of Vael",
+   "order": "Brine",
+   "rar": "U",
+   "atk": 1,
+   "hp": 4,
+   "shape": "shoot",
+   "icon": "siren",
+   "text": "Wave Start: pull the back-most enemy in its lane forward one row.",
+   "sn": "Siren Song",
+   "sc": 3,
+   "st": "Pull every enemy in a lane to their Front row.",
+   "flame": {
+    "stats": "2/8 Shoot",
+    "text": "Wave Start: pull the back-most enemy in its lane and the lanes Beside it forward one row.",
+    "spell": "Siren Song (2✦): Pull every enemy in two adjacent lanes to their Front row."
+   }
+  },
+  {
+   "id": 32,
+   "name": "Rot Priest",
+   "order": "Brine",
+   "rar": "U",
+   "atk": 2,
+   "hp": 4,
+   "shape": "shoot",
+   "icon": "plague-doctor-profile",
+   "text": "Poison you apply is +1.",
+   "sn": "Plague Censer",
+   "sc": 2,
+   "st": "Poison 2 to every enemy in a row.",
+   "flame": {
+    "stats": "4/8 Shoot",
+    "text": "Poison you apply is +2.",
+    "spell": "Plague Censer (1✦): Poison 3 to every enemy in a row."
+   }
+  },
+  {
+   "id": 33,
+   "name": "Gloom Jelly",
+   "order": "Brine",
+   "rar": "U",
+   "atk": 1,
+   "hp": 3,
+   "shape": "shoot",
+   "icon": "jellyfish",
+   "text": "Hits Stun Poisoned enemies.",
+   "sn": "Sting",
+   "sc": 2,
+   "st": "Stun an enemy and give it Poison 2.",
+   "flame": {
+    "stats": "2/6 Shoot",
+    "text": "Hits Stun Poisoned enemies and add Poison 2.",
+    "spell": "Sting (1✦): Stun two enemies and give them Poison 3."
+   }
+  },
+  {
+   "id": 34,
+   "name": "Leviathan Calf",
+   "order": "Brine",
+   "rar": "R",
+   "atk": 4,
+   "hp": 8,
+   "shape": "pierce",
+   "icon": "sperm-whale",
+   "text": "Rooted. Persist.",
+   "sn": "Flood the Gap",
+   "sc": 6,
+   "st": "Push every enemy Front-row unit back a row. Blocked units take 4 and are Stunned.",
+   "flame": {
+    "stats": "8/16 Pierce",
+    "text": "Rooted. Persist. Wave Start: Shield 4.",
+    "spell": "Flood the Gap (5✦): Push every enemy Front-row unit back a row. Blocked units take 6 and are Stunned."
+   }
+  },
+  {
+   "id": 35,
+   "name": "Mother of Silt",
+   "order": "Brine",
+   "rar": "R",
+   "atk": 2,
+   "hp": 6,
+   "shape": "none",
+   "icon": "octopus",
+   "text": "Poison on enemies doesn't decay.",
+   "sn": "Black Tide",
+   "sc": 4,
+   "st": "Double the Poison on every enemy.",
+   "flame": {
+    "stats": "4/12 Support",
+    "text": "Poison on enemies doesn't decay, and grows by 1 at Wave End.",
+    "spell": "Black Tide (3✦): Triple the Poison on every enemy."
+   }
+  },
+  {
+   "id": 36,
+   "name": "Kraken of the Undercroft",
+   "order": "Brine",
+   "rar": "R",
+   "atk": 5,
+   "hp": 7,
+   "shape": "strike",
+   "icon": "giant-squid",
+   "text": "Before it attacks, it pulls its target to the Front row.",
+   "sn": "Drag Under",
+   "sc": 5,
+   "st": "Destroy a Poisoned enemy in the Front row with 6 or less health.",
+   "flame": {
+    "stats": "10/14 Strike",
+    "text": "Before it attacks, it pulls its target and the enemies Beside it to the Front row.",
+    "spell": "Drag Under (4✦): Destroy a Poisoned enemy with 10 or less health."
+   }
+  },
+  {
+   "id": 37,
+   "name": "Tallow Bulwark",
+   "order": "Bell",
+   "rar": "C",
+   "atk": 1,
+   "hp": 7,
+   "shape": "strike",
+   "icon": "rock-golem",
+   "text": "Taunt. Rooted.",
+   "sn": "Wax Seal",
+   "sc": 2,
+   "st": "A unit gains Shield 5 this wave.",
+   "flame": {
+    "stats": "2/14 Strike",
+    "text": "Taunt. Rooted. Wave Start: Shield 3.",
+    "spell": "Wax Seal (1✦): Two units gain Shield 6 this wave."
+   }
+  },
+  {
+   "id": 38,
+   "name": "Bell Warden",
+   "order": "Bell",
+   "rar": "C",
+   "atk": 2,
+   "hp": 4,
+   "shape": "strike",
+   "icon": "bell-shield",
+   "text": "Gains Shield 1 each wave while in the Front row.",
+   "sn": "Brace",
+   "sc": 1,
+   "st": "Your Front-row units gain Shield 2.",
+   "flame": {
+    "stats": "4/8 Strike",
+    "text": "Taunt. Gains Shield 3 each wave while in the Front row.",
+    "spell": "Brace (0✦): Your Front-row units gain Shield 4."
+   },
+   "fireLine": "Taunt for every lane. Your Shields don't expire while it stands."
+  },
+  {
+   "id": 39,
+   "name": "Gargoyle",
+   "order": "Bell",
+   "rar": "C",
+   "atk": 2,
+   "hp": 5,
+   "shape": "strike",
+   "icon": "gargoyle",
+   "text": "Rooted. Last Gasp: leaves 0/3 Rubble in its cell.",
+   "sn": "Rubble",
+   "sc": 1,
+   "st": "Put 0/3 Rubble in an empty cell.",
+   "flame": {
+    "stats": "4/10 Strike",
+    "text": "Rooted. Last Gasp: leaves 0/6 Rubble in its cell and in an empty cell Beside it.",
+    "spell": "Rubble (0✦): Put 0/6 Rubble in two empty cells."
+   }
+  },
+  {
+   "id": 40,
+   "name": "Chain Acolyte",
+   "order": "Bell",
+   "rar": "C",
+   "atk": 1,
+   "hp": 3,
+   "shape": "strike",
+   "icon": "crossed-chains",
+   "text": "Aura (Behind): the ally Behind gains Shield 1 each wave.",
+   "sn": "Ring Out",
+   "sc": 1,
+   "st": "Stun an enemy in their Front row.",
+   "flame": {
+    "stats": "2/6 Strike",
+    "text": "Aura (Behind and Beside): those allies gain Shield 2 each wave.",
+    "spell": "Ring Out (0✦): Stun two enemies in their Front row."
+   }
+  },
+  {
+   "id": 41,
+   "name": "Tower Archer",
+   "order": "Bell",
+   "rar": "C",
+   "atk": 2,
+   "hp": 3,
+   "shape": "shoot",
+   "icon": "stone-tower",
+   "text": "+1 Power while a Bell unit is Ahead of it.",
+   "sn": "Arrow Slit",
+   "sc": 1,
+   "st": "Deal 2 to the back-most enemy in a lane.",
+   "flame": {
+    "stats": "4/6 Shoot",
+    "text": "+2 Power while a Bell unit is Ahead of it. Can't be hit by Lob.",
+    "spell": "Arrow Slit (0✦): Deal 4 to the back-most enemy in a lane."
+   }
+  },
+  {
+   "id": 42,
+   "name": "Cathedral Golem",
+   "order": "Bell",
+   "rar": "U",
+   "atk": 2,
+   "hp": 9,
+   "shape": "strike",
+   "icon": "metal-golem-head",
+   "text": "Taunt, covering both neighbouring lanes.",
+   "sn": "Sanctuary",
+   "sc": 3,
+   "st": "Your Warden takes no face damage this wave.",
+   "flame": {
+    "stats": "4/18 Strike",
+    "text": "Taunt, covering both neighbouring lanes. Takes 1 less damage from every hit.",
+    "spell": "Sanctuary (2✦): Your Warden takes no face damage this wave and the next."
+   }
+  },
+  {
+   "id": 43,
+   "name": "Great Bell",
+   "order": "Bell",
+   "rar": "U",
+   "atk": 0,
+   "hp": 6,
+   "shape": "none",
+   "icon": "ringing-bell",
+   "text": "Rooted. Wave Start: allies Around gain Shield 2.",
+   "sn": "Toll the Hour",
+   "sc": 2,
+   "st": "Stun every enemy in a lane.",
+   "flame": {
+    "stats": "0/12 Support",
+    "text": "Rooted. Wave Start: allies Around gain Shield 4; enemies across are Stunned on the first wave.",
+    "spell": "Toll the Hour (1✦): Stun every enemy in two adjacent lanes."
+   }
+  },
+  {
+   "id": 44,
+   "name": "Iron Penitent",
+   "order": "Bell",
+   "rar": "U",
+   "atk": 3,
+   "hp": 5,
+   "shape": "strike",
+   "icon": "brutal-helm",
+   "text": "Takes 1 less damage from every hit.",
+   "sn": "Penance",
+   "sc": 2,
+   "st": "A unit takes 1 less damage from every hit this battle.",
+   "flame": {
+    "stats": "6/10 Strike",
+    "text": "Takes 2 less damage from every hit.",
+    "spell": "Penance (1✦): Two units take 2 less damage from every hit this battle."
+   }
+  },
+  {
+   "id": 45,
+   "name": "Belfry Watch",
+   "order": "Bell",
+   "rar": "U",
+   "atk": 2,
+   "hp": 4,
+   "shape": "lob",
+   "icon": "church",
+   "text": "Can't be hit by Lob.",
+   "sn": "Hold Fast",
+   "sc": 2,
+   "st": "Your Shields don't expire at the end of this wave.",
+   "flame": {
+    "stats": "4/8 Lob",
+    "text": "Can't be hit by Lob or Shoot from more than one row away.",
+    "spell": "Hold Fast (1✦): Your Shields don't expire this wave or the next."
+   }
+  },
+  {
+   "id": 46,
+   "name": "The Bronze Abbess",
+   "order": "Bell",
+   "rar": "R",
+   "atk": 3,
+   "hp": 8,
+   "shape": "strike",
+   "icon": "nun-face",
+   "text": "Taunt. Shields on your units never expire.",
+   "sn": "Cloister",
+   "sc": 5,
+   "st": "Every ally gains Shield 6.",
+   "flame": {
+    "stats": "6/16 Strike",
+    "text": "Taunt. Shields on your units never expire, and they start each battle with Shield 2.",
+    "spell": "Cloister (4✦): Every ally gains Shield 10."
+   }
+  },
+  {
+   "id": 47,
+   "name": "Bellfounder Titan",
+   "order": "Bell",
+   "rar": "R",
+   "atk": 6,
+   "hp": 10,
+   "shape": "cleave",
+   "icon": "gong",
+   "text": "Rooted.",
+   "sn": "Cast in Bronze",
+   "sc": 4,
+   "st": "An ally becomes Rooted and gains +3/+6 this battle.",
+   "flame": {
+    "stats": "12/20 Cleave",
+    "text": "Rooted. Wave Start: Shield equal to its Power.",
+    "spell": "Cast in Bronze (3✦): An ally becomes Rooted and gains +5/+10 this battle."
+   }
+  },
+  {
+   "id": 48,
+   "name": "The Silent Bell",
+   "order": "Bell",
+   "rar": "R",
+   "atk": 0,
+   "hp": 8,
+   "shape": "none",
+   "icon": "cracked-shield",
+   "text": "Rooted. Enemy spells cost 1 more. Face damage to your Warden is 2 less per hit.",
+   "sn": "Hush",
+   "sc": 3,
+   "st": "The enemy can't cast spells next wave.",
+   "flame": {
+    "stats": "0/16 Support",
+    "text": "Rooted. Enemy spells cost 2 more. Face damage to your Warden is 3 less per hit.",
+    "spell": "Hush (2✦): The enemy can't cast spells or reach for the next two waves."
+   }
+  },
+  {
+   "id": 49,
+   "name": "Beacon Keeper",
+   "order": "Lamp+Bell",
+   "rar": "U",
+   "atk": 2,
+   "hp": 6,
+   "shape": "strike",
+   "icon": "torch",
+   "text": "Taunt. Lamp units Behind it gain +1 Power.",
+   "sn": "Lighthouse",
+   "sc": 3,
+   "st": "Front row gains Shield 3; Back row gains +2 Power this wave.",
+   "flame": {
+    "stats": "4/12 Strike",
+    "text": "Taunt. Lamp units Behind it gain +2 Power and hits apply Burn 1.",
+    "spell": "Lighthouse (2✦): Front row gains Shield 5; Back row gains +3 Power this wave."
+   }
+  },
+  {
+   "id": 50,
+   "name": "Pyre Wight",
+   "order": "Lamp+Hollow",
+   "rar": "U",
+   "atk": 3,
+   "hp": 3,
+   "shape": "shoot",
+   "icon": "primitive-torch",
+   "text": "Last Gasp: Burn 3 to the enemy across.",
+   "sn": "Funeral Pyre",
+   "sc": 2,
+   "st": "Destroy one of your units. Burn equal to its Power hits every enemy in its lane.",
+   "flame": {
+    "stats": "6/6 Shoot",
+    "text": "Last Gasp: Burn 5 to the enemy across and to the enemies Beside it.",
+    "spell": "Funeral Pyre (1✦): Destroy one of your units. Burn equal to twice its Power hits every enemy in its lane."
+   }
+  },
+  {
+   "id": 51,
+   "name": "Scalding Font",
+   "order": "Lamp+Brine",
+   "rar": "U",
+   "atk": 1,
+   "hp": 5,
+   "shape": "none",
+   "icon": "incense",
+   "text": "Wave End: Burning enemies gain Poison 1, Poisoned enemies gain Burn 1.",
+   "sn": "Boil",
+   "sc": 3,
+   "st": "Every Poisoned enemy gains Burn equal to its Poison.",
+   "flame": {
+    "stats": "2/10 Support",
+    "text": "Wave End: Burning enemies gain Poison 2, Poisoned enemies gain Burn 2.",
+    "spell": "Boil (2✦): Every Poisoned enemy gains Burn equal to twice its Poison."
+   }
+  },
+  {
+   "id": 52,
+   "name": "Bone Bellwether",
+   "order": "Hollow+Bell",
+   "rar": "U",
+   "atk": 2,
+   "hp": 5,
+   "shape": "strike",
+   "icon": "raise-skeleton",
+   "text": "Taunt. When it dies, it returns at the next Wave Start with full health.",
+   "sn": "Ossuary Wall",
+   "sc": 3,
+   "st": "Fill your empty Front-row cells with 0/3 Bone Walls.",
+   "flame": {
+    "stats": "4/10 Strike",
+    "text": "Taunt. When it dies, it returns at the next Wave Start with full health and Shield 4.",
+    "spell": "Ossuary Wall (2✦): Fill your empty Front and Mid cells with 0/5 Bone Walls."
+   }
+  },
+  {
+   "id": 53,
+   "name": "Drowned Bride",
+   "order": "Hollow+Brine",
+   "rar": "U",
+   "atk": 2,
+   "hp": 4,
+   "shape": "shoot",
+   "icon": "mermaid",
+   "text": "Poisoned enemies that die become Wisps on your side.",
+   "sn": "Drown",
+   "sc": 3,
+   "st": "Destroy a Poisoned enemy whose health is at most twice its Poison.",
+   "flame": {
+    "stats": "4/8 Shoot",
+    "text": "Poisoned enemies that die become 2/2 Wisps with Shoot on your side.",
+    "spell": "Drown (2✦): Destroy a Poisoned enemy whose health is at most three times its Poison."
+   }
+  },
+  {
+   "id": 54,
+   "name": "Barnacle Abbot",
+   "order": "Brine+Bell",
+   "rar": "U",
+   "atk": 1,
+   "hp": 7,
+   "shape": "strike",
+   "icon": "anchor",
+   "text": "Taunt. Enemies that hit it gain Poison 2.",
+   "sn": "Undertow Wall",
+   "sc": 2,
+   "st": "Pull an enemy into the Front row, into the lane of your Taunt unit.",
+   "flame": {
+    "stats": "2/14 Strike",
+    "text": "Taunt. Enemies that hit it gain Poison 3 and can't move next wave.",
+    "spell": "Undertow Wall (1✦): Pull two enemies into the Front row, into the lane of your Taunt unit."
+   }
+  },
+  {
+   "id": 55,
+   "name": "Drift Lantern",
+   "order": "Wanderer",
+   "rar": "C",
+   "atk": 0,
+   "hp": 2,
+   "shape": "none",
+   "icon": "old-lantern",
+   "text": "Last Gasp: gain 2✦.",
+   "sn": "Ember Jar",
+   "sc": 0,
+   "st": "Gain 2✦.",
+   "flame": {
+    "stats": "0/4 Support",
+    "text": "Last Gasp: gain 4✦.",
+    "spell": "Ember Jar (0✦): Gain 4✦."
+   }
+  },
+  {
+   "id": 56,
+   "name": "Wandering Squire",
+   "order": "Wanderer",
+   "rar": "C",
+   "atk": 2,
+   "hp": 3,
+   "shape": "strike",
+   "icon": "black-knight-helm",
+   "text": "Swift 1.",
+   "sn": "Second Wind",
+   "sc": 1,
+   "st": "Heal a unit 4.",
+   "flame": {
+    "stats": "4/6 Strike",
+    "text": "Swift 2. Kindle: heal an ally 3.",
+    "spell": "Second Wind (0✦): Heal a unit 8."
+   }
+  },
+  {
+   "id": 57,
+   "name": "Ferry Boatman",
+   "order": "Wanderer",
+   "rar": "C",
+   "atk": 1,
+   "hp": 3,
+   "shape": "shoot",
+   "icon": "harpoon-trident",
+   "text": "Kindle: your next reach this wave is free.",
+   "sn": "Ferry",
+   "sc": 1,
+   "st": "Move any card in your Procession to the front.",
+   "flame": {
+    "stats": "2/6 Shoot",
+    "text": "Kindle: your next two reaches this wave are free.",
+    "spell": "Ferry (0✦): Move any two cards in your Procession to the front."
+   }
+  },
+  {
+   "id": 58,
+   "name": "Rubble Golem",
+   "order": "Wanderer",
+   "rar": "C",
+   "atk": 1,
+   "hp": 6,
+   "shape": "strike",
+   "icon": "stone-pile",
+   "text": "Rooted.",
+   "sn": "Barricade",
+   "sc": 1,
+   "st": "Put 0/4 Rubble in an empty cell.",
+   "flame": {
+    "stats": "2/12 Strike",
+    "text": "Rooted. Taunt.",
+    "spell": "Barricade (0✦): Put 0/6 Rubble in two empty cells."
+   }
+  },
+  {
+   "id": 59,
+   "name": "Mirror Shade",
+   "order": "Wanderer",
+   "rar": "U",
+   "atk": 2,
+   "hp": 2,
+   "shape": "strike",
+   "icon": "mirror-mirror",
+   "text": "Kindle: takes the Order of an ally Beside it (it counts for that cluster).",
+   "sn": "Reflection",
+   "sc": 2,
+   "st": "Cast a copy of the last spell you cast this battle.",
+   "flame": {
+    "stats": "4/4 Strike",
+    "text": "Kindle: takes the Orders of both allies Beside it (it counts for both clusters).",
+    "spell": "Reflection (1✦): Cast a copy of the last spell you cast this battle, twice."
+   }
+  },
+  {
+   "id": 60,
+   "name": "Pact Merchant",
+   "order": "Wanderer",
+   "rar": "U",
+   "atk": 1,
+   "hp": 4,
+   "shape": "none",
+   "icon": "two-coins",
+   "text": "When you pass first in a wave, gain 2✦ instead of 1.",
+   "sn": "Pawn",
+   "sc": 0,
+   "st": "Sell a card from your Procession for its full price.",
+   "flame": {
+    "stats": "2/8 Support",
+    "text": "When you pass first in a wave, gain 3✦ instead of 1.",
+    "spell": "Pawn (0✦): Sell a card from your Procession for one and a half times its price."
+   }
+  }
+ ],
+ "orders": {
+  "Lamp": {
+   "col": "#f2a541",
+   "icon": "lantern-flame",
+   "plays": "A back-row battery of fire",
+   "shape": "Back row, firing over a wall",
+   "kws": "Burn, Lob, Ahead auras",
+   "weak": "Burn spreads to clumps, so it wants room; fragile if its wall falls",
+   "c2": "Hits apply Burn 1",
+   "c3": "Back-row Lamps +1 Power",
+   "c5": "Burn also hits the unit behind its target"
+  },
+  "Hollow": {
+   "col": "#c9d3df",
+   "icon": "skeleton",
+   "plays": "A swarm that profits from its own deaths",
+   "shape": "Fills empty cells; trades bodies for value",
+   "kws": "Last Gasp, Wisps, sacrifice",
+   "weak": "Cleave and Pierce sweep the small bodies; Silence-style effects stop Last Gasps",
+   "c2": "First Hollow death each wave leaves a Wisp",
+   "c3": "Wisps gain Shoot",
+   "c5": "Fallen Hollow return once at Wave End"
+  },
+  "Brine": {
+   "col": "#4fc1ae",
+   "icon": "jellyfish",
+   "plays": "A net of poison and pulling",
+   "shape": "Spread across all four lanes",
+   "kws": "Poison, Pull, Shoot",
+   "weak": "Burst damage kills it before Poison adds up; healing and Shields",
+   "c2": "Shoot attacks apply Poison 1",
+   "c3": "Poison 2 instead",
+   "c5": "Poisoned enemies take +1 from every hit"
+  },
+  "Bell": {
+   "col": "#d0925c",
+   "icon": "bell-shield",
+   "plays": "A wall of bronze in the Front row",
+   "shape": "A horizontal Front-row line",
+   "kws": "Shield, Taunt, Rooted",
+   "weak": "Lob and Poison go around or through it; slow to deal damage",
+   "c2": "Front-row Bells gain Shield 2 each wave",
+   "c3": "The centre Bell gains Taunt",
+   "c5": "Bell Shields don't expire"
+  },
+  "Wanderer": {
+   "col": "#b8a98f",
+   "icon": "old-lantern",
+   "plays": "Neutral glue: economy and Procession tricks",
+   "shape": "Anywhere",
+   "kws": "Reach, embers",
+   "weak": "No cluster bonus",
+   "c2": "",
+   "c3": "",
+   "c5": ""
+  }
+ },
+ "wardens": [
+  {
+   "name": "The Lamplighter",
+   "order": "Lamp",
+   "relic": "Tinderbox: the first Burn you apply each wave is +1.",
+   "deck": [
+    1,
+    1,
+    2,
+    2,
+    4,
+    55
+   ]
+  },
+  {
+   "name": "The Ferryman",
+   "order": "Brine",
+   "relic": "Coin for the Crossing: interest cap +1, and your first reach each battle is free.",
+   "deck": [
+    25,
+    25,
+    26,
+    26,
+    28,
+    57
+   ]
+  },
+  {
+   "name": "The Bell-Keeper",
+   "order": "Bell",
+   "relic": "Cracked Bell: your Front row starts each battle with Shield 3.",
+   "deck": [
+    38,
+    38,
+    37,
+    41,
+    41,
+    56
+   ]
+  },
+  {
+   "name": "The Sexton (unlock)",
+   "order": "Hollow",
+   "relic": "Grave Lantern: your first Wisp each battle is a 2/2.",
+   "deck": [
+    13,
+    13,
+    15,
+    15,
+    14,
+    16
+   ]
+  }
+ ],
+ "relics": [
+  {
+   "name": "Bellows",
+   "rarity": "Common",
+   "text": "Your first paid step each wave is free."
+  },
+  {
+   "name": "Long Wick",
+   "rarity": "Common",
+   "text": "Three cards in your Procession are lit instead of two."
+  },
+  {
+   "name": "Miser's Wick",
+   "rarity": "Common",
+   "text": "Interest cap +3, but spells cost 1✦ more."
+  },
+  {
+   "name": "Tinder Pouch",
+   "rarity": "Common",
+   "text": "Start each battle with 2✦ that vanish if unspent at the end."
+  },
+  {
+   "name": "Echo Shell",
+   "rarity": "Common",
+   "text": "Salvage always offers one Echo of a card you own."
+  },
+  {
+   "name": "Snuffer",
+   "rarity": "Common",
+   "text": "Selling a card refunds its full price."
+  },
+  {
+   "name": "Anchorstone",
+   "rarity": "Uncommon",
+   "text": "At the end of a battle, one survivor of your choice Persists."
+  },
+  {
+   "name": "Twin Lantern",
+   "rarity": "Uncommon",
+   "text": "Two copies are enough to Rekindle a common."
+  },
+  {
+   "name": "Ferryman's Pole",
+   "rarity": "Uncommon",
+   "text": "Reaching costs nothing for cards up to two past the lit ones."
+  },
+  {
+   "name": "Cracked Lens",
+   "rarity": "Uncommon",
+   "text": "Clusters count diagonal neighbours."
+  },
+  {
+   "name": "Saint's Reliquary",
+   "rarity": "Rare",
+   "text": "Bright cards Kindle twice."
+  },
+  {
+   "name": "The Black Candle",
+   "rarity": "Rare",
+   "text": "Burn and Poison on enemies tick at Wave Start as well as Wave End."
+  }
+ ],
+ "archetypes": [
+  {
+   "a": "Lamp",
+   "b": "Bell",
+   "name": "Lighthouse",
+   "sign": "Beacon Keeper",
+   "plan": "A Bell wall holds the Front row while Lamp artillery burns from behind. The safest first draft: Bell keeps you alive while Lamp deals the damage."
+  },
+  {
+   "a": "Lamp",
+   "b": "Hollow",
+   "name": "Pyre",
+   "sign": "Pyre Wight",
+   "plan": "Hollow bodies die on purpose and their Last Gasps set the enemy alight. Aggressive and explosive, weak to enemies that don't need to attack."
+  },
+  {
+   "a": "Lamp",
+   "b": "Brine",
+   "name": "Scald",
+   "sign": "Scalding Font",
+   "plan": "Stack Burn and Poison on the same targets and let them tick. Slow to start, impossible to out-heal by wave 4."
+  },
+  {
+   "a": "Hollow",
+   "b": "Bell",
+   "name": "Ossuary",
+   "sign": "Bone Bellwether",
+   "plan": "A wall that refuses to stay dead. Taunt units return and Wisps refill the gaps, so you win the long game on face damage."
+  },
+  {
+   "a": "Hollow",
+   "b": "Brine",
+   "name": "Drowned",
+   "sign": "Drowned Bride",
+   "plan": "Poison weakens the enemy and every poisoned death becomes a Wisp on your side. The board slowly tips your way."
+  },
+  {
+   "a": "Brine",
+   "b": "Bell",
+   "name": "Undertow",
+   "sign": "Barnacle Abbot",
+   "plan": "Pull enemies into lanes held by poisonous Taunt units. A control deck that wins by attrition and spends embers on pulls."
+  }
+ ],
+ "fireExamples": {
+  "Lampwick Squire": "Kindle: every ally gains Shield 4. Your Lamp units can't be destroyed while it stands.",
+  "Marrowhound": "Swift 4. Attacks in every beat, not only its own row.",
+  "Drowned Archer": "Hits apply Poison 5. Poison it applies can't be removed or reduced.",
+  "Bell Warden": "Taunt for every lane. Your Shields don't expire while it stands.",
+  "Bone Gnawer": "Last Gasp: Wisps fill every empty cell on your grid.",
+  "Tallow Imp": "Every enemy hit by any of your attacks gains Burn 1."
+ },
+ "enemyUnits": [
+  {
+   "id": "e_sentry",
+   "name": "Drowned Sentry",
+   "order": "Brine",
+   "atk": 2,
+   "hp": 4,
+   "shape": "strike",
+   "icon": "diving-helmet",
+   "text": "Rooted. Hits apply Poison 1."
+  },
+  {
+   "id": "e_hook",
+   "name": "Tide Hook",
+   "order": "Brine",
+   "atk": 1,
+   "hp": 3,
+   "shape": "shoot",
+   "icon": "fishing-hook",
+   "text": "Wave Start: pull the enemy across forward one row."
+  },
+  {
+   "id": "e_salthound",
+   "name": "Salt Hound",
+   "order": "Brine",
+   "atk": 3,
+   "hp": 2,
+   "shape": "strike",
+   "icon": "hound",
+   "text": "Swift 1."
+  },
+  {
+   "id": "e_chorister",
+   "name": "Chorister",
+   "order": "Hollow",
+   "atk": 1,
+   "hp": 1,
+   "shape": "strike",
+   "icon": "hooded-figure",
+   "text": "Aura (Beside): allies gain +1 Power."
+  },
+  {
+   "id": "e_shambler",
+   "name": "Shambler",
+   "order": "Hollow",
+   "atk": 2,
+   "hp": 3,
+   "shape": "strike",
+   "icon": "shambling-zombie",
+   "text": "Last Gasp: a Wisp takes its cell."
+  },
+  {
+   "id": "e_thief",
+   "name": "Candle Thief",
+   "order": "Lamp",
+   "atk": 2,
+   "hp": 2,
+   "shape": "strike",
+   "icon": "hooded-assassin",
+   "text": "Swift 2. Kindle: you lose 1✦ if you have any."
+  },
+  {
+   "id": "e_waxen",
+   "name": "Waxen Effigy",
+   "order": "Lamp",
+   "atk": 0,
+   "hp": 6,
+   "shape": "none",
+   "icon": "wax-tablet",
+   "text": "Taunt. Last Gasp: Burn 2 to every enemy Around the cell across."
+  },
+  {
+   "id": "e_ghoulbell",
+   "name": "Bell Ghoul",
+   "order": "Bell",
+   "atk": 2,
+   "hp": 5,
+   "shape": "strike",
+   "icon": "raise-zombie",
+   "text": "Taunt."
+  },
+  {
+   "id": "e_crab",
+   "name": "Belfry Crab",
+   "order": "Bell",
+   "atk": 1,
+   "hp": 6,
+   "shape": "strike",
+   "icon": "crab",
+   "text": "Shield 2 each wave."
+  }
+ ],
+ "fights": [
+  {
+   "name": "Drowned Patrol",
+   "order": "Brine",
+   "lesson": "Teaches reach: two Tide Hooks pull your Front row, so you want your Taunt unit early.",
+   "procession": [
+    "e_sentry",
+    "e_hook",
+    "Moray",
+    "e_hook",
+    "Drowned Archer",
+    "e_sentry"
+   ],
+   "embers": 3
+  },
+  {
+   "name": "Bell-Tower Watch",
+   "order": "Bell",
+   "lesson": "A slow wall with archers behind it. Lob and Poison get around it; Strike decks stall.",
+   "procession": [
+    "e_ghoulbell",
+    "Tower Archer",
+    "e_crab",
+    "Tower Archer",
+    "Bell Warden",
+    "e_ghoulbell"
+   ],
+   "embers": 2
+  },
+  {
+   "name": "Grave Swarm",
+   "order": "Hollow",
+   "lesson": "Many small bodies that come back as Wisps. Cleave and Pierce are rewarded.",
+   "procession": [
+    "e_shambler",
+    "Bone Gnawer",
+    "e_shambler",
+    "Gloomshot",
+    "e_chorister",
+    "Bat Swarm"
+   ],
+   "embers": 2
+  },
+  {
+   "name": "Candle Procession",
+   "order": "Lamp",
+   "lesson": "Burn spreads through clumps. Teaches spacing your units out.",
+   "procession": [
+    "Tallow Imp",
+    "Wickmonger",
+    "e_waxen",
+    "Tallow Imp",
+    "Kiln Mortar",
+    "e_thief"
+   ],
+   "embers": 3
+  },
+  {
+   "name": "Thieves' Stair",
+   "order": "Lamp",
+   "lesson": "Candle Thieves steal embers when they arrive. Kill them fast or bank less.",
+   "procession": [
+    "e_thief",
+    "Ember Hound",
+    "e_thief",
+    "Lampwick Squire",
+    "e_thief",
+    "Wickmonger"
+   ],
+   "embers": 4
+  },
+  {
+   "name": "Salt Hounds",
+   "order": "Brine",
+   "lesson": "Swift flankers that hunt your open lanes. Teaches covering all four lanes.",
+   "procession": [
+    "e_salthound",
+    "e_salthound",
+    "Marrowhound",
+    "e_salthound",
+    "Moray",
+    "Barnacle Thrall"
+   ],
+   "embers": 2
+  },
+  {
+   "name": "Choir Loft",
+   "order": "Hollow",
+   "lesson": "Choristers buff their neighbours, so the order you kill them in matters.",
+   "procession": [
+    "e_chorister",
+    "e_chorister",
+    "e_shambler",
+    "e_chorister",
+    "Bellringer Wight",
+    "Crypt Keeper"
+   ],
+   "embers": 3
+  },
+  {
+   "name": "Flooded Nave",
+   "order": "Brine",
+   "lesson": "A mixed late-act fight: pulls, Poison and a Taunt wall together.",
+   "procession": [
+    "e_sentry",
+    "Barnacle Thrall",
+    "Siren of Vael",
+    "e_hook",
+    "Brine Choir",
+    "Rot Priest"
+   ],
+   "embers": 5
+  }
+ ],
+ "elites": [
+  {
+   "name": "The Choir Abbot",
+   "order": "Hollow",
+   "icon": "abbot-meeple",
+   "rule": "Breaks the rule that empty cells stay empty: at Wave End, every empty cell on its side fills with a Chorister.",
+   "counter": "Pierce, Cleave and Burn spread. Kill the Abbot (it sits in the Back row) and the refilling stops.",
+   "hp": 22
+  },
+  {
+   "name": "The Tide-Caller",
+   "order": "Brine",
+   "icon": "wave-crest",
+   "rule": "Breaks the rule that your units stay where you put them: at Wave Start it pulls your whole Front row one lane toward lane A.",
+   "counter": "Rooted units and Taunt anchors. Place with the drift in mind, or pay embers to move back.",
+   "hp": 22
+  },
+  {
+   "name": "The Brazier Knight",
+   "order": "Lamp",
+   "icon": "black-knight-helm",
+   "rule": "Breaks the rule that Burn helps you: it is immune to Burn, and every unit Burning anywhere heals it 1 at Wave End.",
+   "counter": "Poison and plain damage. Burn decks must change plan or reach for something else.",
+   "hp": 22
+  }
+ ],
+ "boss": {
+  "name": "The Lamplighter Who Drowned",
+  "icon": "drowning",
+  "hp": 40,
+  "rule": "Snuffs one of your lanes each wave, shown a wave ahead. Your units in a dark lane can't attack, and spells can't target it.",
+  "phases": [
+   [
+    "Waves 1–2",
+    "Lights the Way",
+    "Plays Wax Effigies and Candle Thieves. Snuffs lanes from A to D in order."
+   ],
+   [
+    "Waves 3–4",
+    "The Long Dark",
+    "At 26 HP it snuffs two lanes at once and pays to reach for Kiln Mortars."
+   ],
+   [
+    "Waves 5–6",
+    "Last Wick",
+    "At 12 HP its own lane goes dark too. Its Procession is all Sun Furnace sparks: survive one Daybreak and the face damage is yours."
+   ]
+  ],
+  "counter": "Swift units and paid moves to escape dark lanes, Lob to reach its Back row, and keeping embers for the wave it snuffs two lanes."
+ },
+ "events": [
+  {
+   "name": "The Drowned Bell",
+   "icon": "ringing-bell",
+   "flavour": "A bell rings under the water. Something answers.",
+   "options": [
+    "Dive for it: gain a random Bell card, lose 6 HP.",
+    "Ring it back: the next fight's enemy starts Stunned.",
+    "Leave."
+   ]
+  },
+  {
+   "name": "A Lantern-Seller's Corpse",
+   "icon": "old-lantern",
+   "flavour": "Her stock is still dry.",
+   "options": [
+    "Take the oil: gain 8✦.",
+    "Take a lantern: gain the relic Long Wick, but your next fight's reach costs double.",
+    "Bury her: heal 10 HP."
+   ]
+  },
+  {
+   "name": "Choir of the Sunk",
+   "icon": "hooded-figure",
+   "flavour": "Voices sing your cards' names back to you.",
+   "options": [
+    "Join the song: Rekindle any card you own two copies of, now.",
+    "Silence them: remove a card from your Procession.",
+    "Leave."
+   ]
+  },
+  {
+   "name": "The Ferry Toll",
+   "icon": "harpoon-trident",
+   "flavour": "A boatman blocks the stair.",
+   "options": [
+    "Pay 5✦: skip the next fight and still take its salvage.",
+    "Fight him: an elite-strength fight with an elite's reward.",
+    "Turn back: take another path."
+   ]
+  },
+  {
+   "name": "Pool of Reflections",
+   "icon": "mirror-mirror",
+   "flavour": "The water shows a copy of what you carry.",
+   "options": [
+    "Reach in: gain an Echo of your front-most card.",
+    "Look away: gain 3✦.",
+    "Stare too long: duplicate a card, then lose 12 HP."
+   ]
+  }
+ ]
+}
