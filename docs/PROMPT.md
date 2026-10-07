@@ -1,6 +1,6 @@
 # Build prompt: Emberward browser demo
 
-> Give this whole file to the build model as its task. Put the other kit files in the repo at the paths listed under "Inputs" before it starts.
+> Give this whole file to the build model as its task. It assumes the repo `github.com/greystone-dan/Emberward` is checked out with the scaffold and docs already in place (see "Starting state").
 
 ---
 
@@ -9,6 +9,17 @@ You are the lead engineer and technical artist on **Emberward**, a card roguelit
 ## The game in five sentences
 
 You are a Warden carrying the last lantern into a drowned gothic city. Your whole deck is face-up during battle, so you can play any card you brought. Each card is both a creature (summoned onto a 4×3 grid) and a spell. Battles run in alternating-action waves, followed by a deterministic Clash where creatures attack down shared lanes. Embers are the only currency: they buy cards, pay for spells and for reaching past the free cards in the post-fight draft (the Drift), and earn interest if saved. Cards carry TFT-style traits that switch on when enough different cards share them, plus positional bonuses on the grid. Three copies of a card Rekindle into a stronger Flame card (Spark, Flame, Fire) that thins your deck.
+
+## Starting state
+
+The repo already has a working scaffold. Don't recreate it.
+
+- Vite + React 18 + TypeScript (strict) + Vitest. `npm run dev | test | typecheck | build` all pass.
+- `src/core/rng.ts`: seeded mulberry32 with a separate stream per purpose. `src/core/state.ts`: `GameState`, `Action`, a stub `applyAction`. `src/core/core.test.ts`.
+- `src/content/cards.ts`: a typed loader over `content/cards.json`. `src/main.tsx` is a placeholder page.
+- `.claude/hooks/session-start.sh` runs `npm install` in cloud sessions so tests work from a cold start.
+- `docs/` holds this prompt, SPEC, ART, DECISIONS, design notes, research and the pitch page. `CLAUDE.md` is a short stub: expand it in phase 0.
+- Git: work on branches, open a pull request per phase (or per large feature) against `main`, and keep `main` green. Commit often with clear messages.
 
 ## Inputs (read all of them before writing code)
 
@@ -74,7 +85,7 @@ Set this up in phase 0 and follow it from then on (details in research/03 §4–
 
 | Phase | Build | Exit check |
 |---|---|---|
-| **0. Scaffold** | Repo, tooling, CLAUDE.md, features.json (derived from SPEC, roughly 60 to 100 entries), content converted from cards.json with schema validation, sprite pipeline skeleton (`npm run sprites`, `npm run sprites:sheet`) | `npm run check` green; schema test passes on all 60 cards |
+| **0. Foundations** | Add Playwright, ESLint (with a rule forbidding UI imports in `src/core`) and `npm run check`; expand CLAUDE.md; create PROGRESS.md and features.json (derived from SPEC, roughly 60 to 100 entries); convert cards.json to typed content with schema validation; sprite pipeline skeleton (`npm run sprites`, `npm run sprites:sheet`) | `npm run check` green; schema test passes on all 60 cards |
 | **1. Headless battle** | Grid, shapes, Taunt, Clash beats, statuses, keywords, clusters, Muster (bring up to 10 cards) and a fully revealed deck, Summon and Cast, trait counting and Kinship, Pass, moves, win check, ASCII renderer, `tools/sim.ts` | 1,000 random-bot battles with zero `ERROR` lines; golden replays for each shape and status |
 | **2. Playable battle** | Battle screen: grid, deck strip showing every card (brought cards highlighted, spent cards greyed), card inspect, live Clash preview arrows, skippable event-driven animations, scripted enemy | Playwright plays a full battle; screenshots reviewed; a human can tell what will happen before pressing End Turn; enemy intent markers show |
 | **3. Sprites, pass 1** | All 60 card sprites, plus tokens and Act I enemies, as code; contact sheet; level effects (Spark, Flame, Fire) | Contact sheet reviewed: every sprite reads at ×1, and no two cards sharing a trait share a silhouette |
@@ -85,6 +96,17 @@ Set this up in phase 0 and follow it from then on (details in research/03 §4–
 | **8. Ship the demo** | Production build deployable as static files; `README` with how to run; `CREDITS.md` | `npm run build` output runs from a static server; all features.json entries pass |
 
 Don't start a phase until the previous phase's exit check passes. If something in SPEC turns out to be unfun or broken in simulation, don't redesign it silently. Show the numbers in `PROGRESS.md` under "Questions for Daniel", propose a flag change, and keep building on the current rule.
+
+## Quality bar and known pitfalls
+
+- **Don't declare victory early.** A feature passes only with evidence: a test, a replay, or a screenshot you opened and described. A button that exists but does nothing is not done.
+- **Regressions are the main risk.** Every bug you fix adds a golden replay (seed + actions + expected state hash). `npm run check` must stay under about a minute.
+- **Keep context small.** Print at most 10 lines of any test or sim output and write details to `reports/`.
+- **Don't invent rules.** If SPEC is silent, pick the simplest reading behind a flag, log it, and ask in PROGRESS.md. Don't expand scope; park ideas in `docs/IDEAS.md`.
+- **Don't tangle rules with rendering.** The UI reads state and dispatches actions. It never computes game results itself.
+- **Keep it deterministic.** Tests and screenshots use a fixed seed, `advanceTime` and `skipAnimations`.
+- **Reviewer subagents report correctness and spec gaps only**, not style nitpicks.
+- Tuning belongs in `src/config`, not scattered through the code. Trait tiers, Drift numbers, the Muster limit and economy values must all be easy to change.
 
 ## What to report back
 
