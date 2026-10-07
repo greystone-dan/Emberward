@@ -19,7 +19,7 @@ export function makeRng(seed: string, stream: string): RngState {
 
 /** Returns [value in [0,1), next state]. Pure. */
 export function nextFloat(r: RngState): [number, RngState] {
-  let t = (r.s + 0x6d2b79f5) >>> 0;
+  const t = (r.s + 0x6d2b79f5) >>> 0;
   let x = t;
   x = Math.imul(x ^ (x >>> 15), x | 1);
   x ^= x + Math.imul(x ^ (x >>> 7), x | 61);

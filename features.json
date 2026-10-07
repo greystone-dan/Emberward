@@ -1,0 +1,878 @@
+[
+  {
+    "id": "FOUND-001",
+    "area": "foundation",
+    "desc": "npm run check runs typecheck, lint and unit tests and is green",
+    "verify": [
+      "ci: check workflow"
+    ],
+    "passes": true
+  },
+  {
+    "id": "FOUND-002",
+    "area": "foundation",
+    "desc": "ESLint forbids UI imports, Math.random and Date.now in src/core",
+    "verify": [
+      "lint: eslint.config.js core rules"
+    ],
+    "passes": true
+  },
+  {
+    "id": "FOUND-003",
+    "area": "foundation",
+    "desc": "Playwright e2e smoke test loads the app at 1280x720",
+    "verify": [
+      "e2e: smoke.spec.ts"
+    ],
+    "passes": true
+  },
+  {
+    "id": "FOUND-004",
+    "area": "foundation",
+    "desc": "Content loader types all of cards.json and a schema test validates all 60 cards",
+    "verify": [
+      "unit: cards.test.ts"
+    ],
+    "passes": true
+  },
+  {
+    "id": "FOUND-005",
+    "area": "foundation",
+    "desc": "Sprite pipeline renders an atlas and a contact sheet from code-authored 32x32 grids",
+    "verify": [
+      "tool: npm run sprites, npm run sprites:sheet",
+      "unit: sprites.test.ts"
+    ],
+    "passes": true
+  },
+  {
+    "id": "FOUND-006",
+    "area": "foundation",
+    "desc": "Every SPEC [flag] value is a named constant in src/config/flags.ts",
+    "verify": [
+      "review: flags.ts vs SPEC"
+    ],
+    "passes": true
+  },
+  {
+    "id": "FOUND-007",
+    "area": "foundation",
+    "desc": "window.__game exposes getState, renderToText, dispatch, legalActions, advanceTime, skipAnimations, loadScenario, exportReplay, importReplay",
+    "verify": [
+      "e2e: debug-api.spec.ts"
+    ],
+    "passes": false
+  },
+  {
+    "id": "FOUND-008",
+    "area": "foundation",
+    "desc": "URL params ?seed=&scenario=&debug=1 are honoured",
+    "verify": [
+      "e2e: debug-api.spec.ts"
+    ],
+    "passes": false
+  },
+  {
+    "id": "BATTLE-001",
+    "area": "battle",
+    "desc": "4x3 grid per side, lanes A-D shared, row 0 is Front; orthogonal adjacency behind a flag",
+    "verify": [
+      "unit: grid.test.ts"
+    ],
+    "passes": false
+  },
+  {
+    "id": "BATTLE-002",
+    "area": "battle",
+    "desc": "Muster: bring up to musterLimit cards; unbrought cards take no part and are not spent",
+    "verify": [
+      "unit: battle.test.ts muster"
+    ],
+    "passes": false
+  },
+  {
+    "id": "BATTLE-003",
+    "area": "battle",
+    "desc": "Whole deck is revealed; any brought card can be played on any action",
+    "verify": [
+      "unit: battle.test.ts legalActions"
+    ],
+    "passes": false
+  },
+  {
+    "id": "BATTLE-004",
+    "area": "battle",
+    "desc": "Waves: 2 actions per side (3 in wave 1), alternating single actions, initiative alternates by wave",
+    "verify": [
+      "unit: battle.test.ts waves"
+    ],
+    "passes": false
+  },
+  {
+    "id": "BATTLE-005",
+    "area": "battle",
+    "desc": "Pass ends a side's wave; first to pass gains passFirstEmbers",
+    "verify": [
+      "unit: battle.test.ts pass"
+    ],
+    "passes": false
+  },
+  {
+    "id": "BATTLE-006",
+    "area": "battle",
+    "desc": "Summon places a card in an empty own cell for free and fires Kindle",
+    "verify": [
+      "unit: battle.test.ts summon"
+    ],
+    "passes": false
+  },
+  {
+    "id": "BATTLE-007",
+    "area": "battle",
+    "desc": "Cast pays the spell cost (with discounts) and resolves immediately with chosen targets",
+    "verify": [
+      "unit: battle.test.ts cast"
+    ],
+    "passes": false
+  },
+  {
+    "id": "BATTLE-008",
+    "area": "battle",
+    "desc": "Moving is free up to Swift N steps per wave, then costs extraStepCost; Rooted never moves",
+    "verify": [
+      "unit: battle.test.ts move"
+    ],
+    "passes": false
+  },
+  {
+    "id": "BATTLE-009",
+    "area": "battle",
+    "desc": "Battle ends after wavesPerBattle; higher face damage wins; ties and HP loss per SPEC \u00a79",
+    "verify": [
+      "unit: battle.test.ts waveLimit"
+    ],
+    "passes": false
+  },
+  {
+    "id": "BATTLE-010",
+    "area": "battle",
+    "desc": "Warden at 0 HP loses; simultaneous zero resolves by flag; empty board is not a loss",
+    "verify": [
+      "unit: battle.test.ts win"
+    ],
+    "passes": false
+  },
+  {
+    "id": "BATTLE-011",
+    "area": "battle",
+    "desc": "State JSON round-trips and applyAction never mutates its input",
+    "verify": [
+      "unit: battle.test.ts purity"
+    ],
+    "passes": false
+  },
+  {
+    "id": "BATTLE-012",
+    "area": "battle",
+    "desc": "renderToText prints an ASCII board with both grids, HP, embers and wave",
+    "verify": [
+      "unit: render.test.ts"
+    ],
+    "passes": false
+  },
+  {
+    "id": "BATTLE-013",
+    "area": "battle",
+    "desc": "Random-bot fuzz: 1000 battles with zero ERROR lines",
+    "verify": [
+      "sim: npm run sim -- --battles 1000 --bot random"
+    ],
+    "passes": false
+  },
+  {
+    "id": "BATTLE-014",
+    "area": "battle",
+    "desc": "Golden replays (seed + actions + state hash) pass",
+    "verify": [
+      "unit: replays.test.ts"
+    ],
+    "passes": false
+  },
+  {
+    "id": "CLASH-001",
+    "area": "clash",
+    "desc": "Clash resolves Front, Mid, Back beats; damage within a beat is simultaneous, deaths after",
+    "verify": [
+      "unit: clash.test.ts beats"
+    ],
+    "passes": false
+  },
+  {
+    "id": "CLASH-002",
+    "area": "clash",
+    "desc": "Strike: front-most enemy in lane, from Front or Mid with empty cell Ahead; face damage on empty lane",
+    "verify": [
+      "unit: clash.test.ts strike",
+      "replay: shape-strike"
+    ],
+    "passes": false
+  },
+  {
+    "id": "CLASH-003",
+    "area": "clash",
+    "desc": "Shoot: front-most enemy in lane from any row; face damage on empty lane",
+    "verify": [
+      "unit: clash.test.ts shoot",
+      "replay: shape-shoot"
+    ],
+    "passes": false
+  },
+  {
+    "id": "CLASH-004",
+    "area": "clash",
+    "desc": "Pierce: every enemy in lane from any row, ignores Taunt",
+    "verify": [
+      "unit: clash.test.ts pierce",
+      "replay: shape-pierce"
+    ],
+    "passes": false
+  },
+  {
+    "id": "CLASH-005",
+    "area": "clash",
+    "desc": "Cleave: like Strike plus enemies Beside the target",
+    "verify": [
+      "unit: clash.test.ts cleave",
+      "replay: shape-cleave"
+    ],
+    "passes": false
+  },
+  {
+    "id": "CLASH-006",
+    "area": "clash",
+    "desc": "Lob: back-most enemy in lane over blockers, never from Front, nothing on empty lane",
+    "verify": [
+      "unit: clash.test.ts lob",
+      "replay: shape-lob"
+    ],
+    "passes": false
+  },
+  {
+    "id": "CLASH-007",
+    "area": "clash",
+    "desc": "Taunt redirects Strike, Shoot and Cleave in its lane; wide Taunt covers neighbouring lanes",
+    "verify": [
+      "unit: clash.test.ts taunt"
+    ],
+    "passes": false
+  },
+  {
+    "id": "CLASH-008",
+    "area": "clash",
+    "desc": "Wave End order: Burn, Poison, Wave End triggers, Shields expire, win check",
+    "verify": [
+      "unit: clash.test.ts waveEnd"
+    ],
+    "passes": false
+  },
+  {
+    "id": "CLASH-009",
+    "area": "clash",
+    "desc": "Deterministic ordering: initiative side, lane A-D, Front-Back; trigger queue capped at 200 with ERROR TRIGGER_LOOP",
+    "verify": [
+      "unit: triggers.test.ts"
+    ],
+    "passes": false
+  },
+  {
+    "id": "CLASH-010",
+    "area": "clash",
+    "desc": "Clash preview computes the projected attacks and damage for the current board without mutating it",
+    "verify": [
+      "unit: preview.test.ts"
+    ],
+    "passes": false
+  },
+  {
+    "id": "STATUS-001",
+    "area": "status",
+    "desc": "Shield absorbs before health and expires at Wave End unless kept",
+    "verify": [
+      "unit: statuses.test.ts shield",
+      "replay: status-shield"
+    ],
+    "passes": false
+  },
+  {
+    "id": "STATUS-002",
+    "area": "status",
+    "desc": "Burn ticks at Wave End, spreads floor(N/2) to orthogonal allies, then decays by 1",
+    "verify": [
+      "unit: statuses.test.ts burn",
+      "replay: status-burn"
+    ],
+    "passes": false
+  },
+  {
+    "id": "STATUS-003",
+    "area": "status",
+    "desc": "Poison ticks at Wave End ignoring Shield, then decays by 1 unless decay is stopped",
+    "verify": [
+      "unit: statuses.test.ts poison",
+      "replay: status-poison"
+    ],
+    "passes": false
+  },
+  {
+    "id": "STATUS-004",
+    "area": "status",
+    "desc": "Stun skips the unit's next attack",
+    "verify": [
+      "unit: statuses.test.ts stun",
+      "replay: status-stun"
+    ],
+    "passes": false
+  },
+  {
+    "id": "STATUS-005",
+    "area": "status",
+    "desc": "Swift, Rooted, Persist, Pull and push behave per SPEC \u00a77",
+    "verify": [
+      "unit: statuses.test.ts movement"
+    ],
+    "passes": false
+  },
+  {
+    "id": "STATUS-006",
+    "area": "status",
+    "desc": "Kindle, Last Gasp, Wave Start and Wave End triggers fire at the right time",
+    "verify": [
+      "unit: triggers.test.ts"
+    ],
+    "passes": false
+  },
+  {
+    "id": "STATUS-007",
+    "area": "status",
+    "desc": "Auras are recomputed from the board, never stored",
+    "verify": [
+      "unit: auras.test.ts"
+    ],
+    "passes": false
+  },
+  {
+    "id": "STATUS-008",
+    "area": "status",
+    "desc": "Tokens: Wisp 1/1 Strike, Bat, Rubble and Bone Wall 0/N Rooted with no traits",
+    "verify": [
+      "unit: tokens.test.ts"
+    ],
+    "passes": false
+  },
+  {
+    "id": "TRAIT-001",
+    "area": "traits",
+    "desc": "Trait counts count different cards on the grid; copies and Flames count once",
+    "verify": [
+      "unit: traits.test.ts count"
+    ],
+    "passes": false
+  },
+  {
+    "id": "TRAIT-002",
+    "area": "traits",
+    "desc": "Tiers stack and are recomputed live whenever a unit enters or leaves",
+    "verify": [
+      "unit: traits.test.ts tiers"
+    ],
+    "passes": false
+  },
+  {
+    "id": "TRAIT-003",
+    "area": "traits",
+    "desc": "Kinship: +1/+1 per orthogonal neighbour sharing a trait, max +2/+2",
+    "verify": [
+      "unit: traits.test.ts kinship"
+    ],
+    "passes": false
+  },
+  {
+    "id": "TRAIT-004",
+    "area": "traits",
+    "desc": "All 17 traits' tier effects are implemented",
+    "verify": [
+      "unit: traits.test.ts effects"
+    ],
+    "passes": false
+  },
+  {
+    "id": "TRAIT-005",
+    "area": "traits",
+    "desc": "Positional class riders: Guardian shields behind, Marksman back-row Power, Brawler pairs, Chanter diagonal auras",
+    "verify": [
+      "unit: traits.test.ts positional"
+    ],
+    "passes": false
+  },
+  {
+    "id": "TRAIT-006",
+    "area": "traits",
+    "desc": "Sigils add one extra trait to a card for the run, within the data's limits",
+    "verify": [
+      "unit: sigils.test.ts"
+    ],
+    "passes": false
+  },
+  {
+    "id": "CARD-001",
+    "area": "cards",
+    "desc": "Every card's Spark Kindled text and spell are expressed in the effect DSL",
+    "verify": [
+      "unit: effects.test.ts coverage"
+    ],
+    "passes": false
+  },
+  {
+    "id": "CARD-002",
+    "area": "cards",
+    "desc": "Every card's Flame Kindled text and spell are expressed in the effect DSL",
+    "verify": [
+      "unit: effects.test.ts flame"
+    ],
+    "passes": false
+  },
+  {
+    "id": "CARD-003",
+    "area": "cards",
+    "desc": "A test validates each card's rules text against its DSL (keywords, numbers, triggers)",
+    "verify": [
+      "unit: effects.test.ts text"
+    ],
+    "passes": false
+  },
+  {
+    "id": "CARD-004",
+    "area": "cards",
+    "desc": "Fire forms are generated by formula (stats x1.5, spell cost 0) plus the hand-written lines",
+    "verify": [
+      "unit: levels.test.ts"
+    ],
+    "passes": false
+  },
+  {
+    "id": "CARD-005",
+    "area": "cards",
+    "desc": "Enemy-only units (e_*) are data in the same DSL",
+    "verify": [
+      "unit: effects.test.ts enemies"
+    ],
+    "passes": false
+  },
+  {
+    "id": "CARD-006",
+    "area": "cards",
+    "desc": "Rekindling: 3 copies merge into the next level and the deck shrinks by 2; can be postponed",
+    "verify": [
+      "unit: rekindle.test.ts"
+    ],
+    "passes": false
+  },
+  {
+    "id": "RUN-001",
+    "area": "run",
+    "desc": "Warden select offers Lamplighter, Ferryman and Bell-Keeper; Sexton shown locked",
+    "verify": [
+      "e2e: run.spec.ts warden"
+    ],
+    "passes": false
+  },
+  {
+    "id": "RUN-002",
+    "area": "run",
+    "desc": "Opening Drift: 8 cards, 3 takes, normal prices, start with 8 embers",
+    "verify": [
+      "unit: drift.test.ts opening"
+    ],
+    "passes": false
+  },
+  {
+    "id": "RUN-003",
+    "area": "run",
+    "desc": "Post-fight Drift: 6 cards, front 2 free, +1 per place, 1 take (2 after elite), skip for 3",
+    "verify": [
+      "unit: drift.test.ts"
+    ],
+    "passes": false
+  },
+  {
+    "id": "RUN-004",
+    "area": "run",
+    "desc": "Untaken Drift cards advance 2 places per node, front 2 wash away, new cards join",
+    "verify": [
+      "unit: drift.test.ts advance"
+    ],
+    "passes": false
+  },
+  {
+    "id": "RUN-005",
+    "area": "run",
+    "desc": "Echoes (1 in 3, weighted to cards owned twice) and Omens (3 waxing traits at 1.5x)",
+    "verify": [
+      "unit: drift.test.ts echoes"
+    ],
+    "passes": false
+  },
+  {
+    "id": "RUN-006",
+    "area": "run",
+    "desc": "Rarity odds 65/31/4 with rare pity",
+    "verify": [
+      "unit: drift.test.ts rarity"
+    ],
+    "passes": false
+  },
+  {
+    "id": "RUN-007",
+    "area": "run",
+    "desc": "Act I map: 7x15 lattice, 6 non-crossing paths, node rules, Hearth before the boss",
+    "verify": [
+      "unit: map.test.ts"
+    ],
+    "passes": false
+  },
+  {
+    "id": "RUN-008",
+    "area": "run",
+    "desc": "Next node's Drift is previewable before choosing a path",
+    "verify": [
+      "e2e: run.spec.ts preview"
+    ],
+    "passes": false
+  },
+  {
+    "id": "RUN-009",
+    "area": "run",
+    "desc": "Market: 4 cards (one Echo), relic, Sigil; prices 3/5/8; reroll 1 rising; hold a slot; sell for half",
+    "verify": [
+      "unit: market.test.ts"
+    ],
+    "passes": false
+  },
+  {
+    "id": "RUN-010",
+    "area": "run",
+    "desc": "Hearth: heal 30%, Snuff a card, or Temper +1/+1",
+    "verify": [
+      "unit: hearth.test.ts"
+    ],
+    "passes": false
+  },
+  {
+    "id": "RUN-011",
+    "area": "run",
+    "desc": "Shrine events (5) with their options",
+    "verify": [
+      "unit: events.test.ts"
+    ],
+    "passes": false
+  },
+  {
+    "id": "RUN-012",
+    "area": "run",
+    "desc": "Scout reveals the next 3 enemies",
+    "verify": [
+      "unit: map.test.ts scout"
+    ],
+    "passes": false
+  },
+  {
+    "id": "RUN-013",
+    "area": "run",
+    "desc": "Interest +1 per 5 banked capped at 4, then battle pay 5/8/12",
+    "verify": [
+      "unit: economy.test.ts"
+    ],
+    "passes": false
+  },
+  {
+    "id": "RUN-014",
+    "area": "run",
+    "desc": "All 12 relics and the 3 Warden relics are implemented",
+    "verify": [
+      "unit: relics.test.ts"
+    ],
+    "passes": false
+  },
+  {
+    "id": "RUN-015",
+    "area": "run",
+    "desc": "Persist keeps a unit on the board into the next battle",
+    "verify": [
+      "unit: run.test.ts persist"
+    ],
+    "passes": false
+  },
+  {
+    "id": "RUN-016",
+    "area": "run",
+    "desc": "A bot completes a full run headless",
+    "verify": [
+      "sim: npm run sim -- --runs 10"
+    ],
+    "passes": false
+  },
+  {
+    "id": "RUN-017",
+    "area": "run",
+    "desc": "Playwright completes a run on a fixed seed",
+    "verify": [
+      "e2e: run.spec.ts full"
+    ],
+    "passes": false
+  },
+  {
+    "id": "RUN-018",
+    "area": "run",
+    "desc": "Run save and resume (IndexedDB)",
+    "verify": [
+      "e2e: save.spec.ts"
+    ],
+    "passes": false
+  },
+  {
+    "id": "ENEMY-001",
+    "area": "enemies",
+    "desc": "All 8 fights play their data decks with scripted order and lane preferences",
+    "verify": [
+      "unit: ai.test.ts scripted"
+    ],
+    "passes": false
+  },
+  {
+    "id": "ENEMY-002",
+    "area": "enemies",
+    "desc": "Enemy intent markers: next card, aimed cell and preferred lane",
+    "verify": [
+      "e2e: battle.spec.ts intent"
+    ],
+    "passes": false
+  },
+  {
+    "id": "ENEMY-003",
+    "area": "enemies",
+    "desc": "3 elites each break one rule (Choir Abbot, Tide-Caller, Brazier Knight)",
+    "verify": [
+      "unit: elites.test.ts"
+    ],
+    "passes": false
+  },
+  {
+    "id": "ENEMY-004",
+    "area": "enemies",
+    "desc": "Boss: 40 HP, snuffs lanes shown a wave ahead, 3 phases",
+    "verify": [
+      "unit: boss.test.ts"
+    ],
+    "passes": false
+  },
+  {
+    "id": "ENEMY-005",
+    "area": "enemies",
+    "desc": "AI ladder: scripted, greedy 1-ply with Clash lookahead, boss phases; AI uses only applyAction",
+    "verify": [
+      "unit: ai.test.ts greedy"
+    ],
+    "passes": false
+  },
+  {
+    "id": "ENEMY-006",
+    "area": "enemies",
+    "desc": "1000 sim runs per Warden with win rate by Warden and node reported",
+    "verify": [
+      "sim: npm run sim -- --runs 1000"
+    ],
+    "passes": false
+  },
+  {
+    "id": "UI-001",
+    "area": "ui",
+    "desc": "Battle screen: both grids, deck strip with every card, brought bright and spent greyed",
+    "verify": [
+      "e2e: battle.spec.ts",
+      "shot: battle-wave1"
+    ],
+    "passes": false
+  },
+  {
+    "id": "UI-002",
+    "area": "ui",
+    "desc": "Card inspect shows both faces, traits, level frame",
+    "verify": [
+      "shot: card-inspect"
+    ],
+    "passes": false
+  },
+  {
+    "id": "UI-003",
+    "area": "ui",
+    "desc": "Live Clash preview arrows and damage numbers update as the player acts",
+    "verify": [
+      "e2e: battle.spec.ts preview"
+    ],
+    "passes": false
+  },
+  {
+    "id": "UI-004",
+    "area": "ui",
+    "desc": "Event-driven, skippable animations on a fixed tick",
+    "verify": [
+      "e2e: battle.spec.ts skip"
+    ],
+    "passes": false
+  },
+  {
+    "id": "UI-005",
+    "area": "ui",
+    "desc": "Playwright plays a full battle through the UI",
+    "verify": [
+      "e2e: battle.spec.ts full"
+    ],
+    "passes": false
+  },
+  {
+    "id": "UI-006",
+    "area": "ui",
+    "desc": "Map, Drift, Market, Hearth, Shrine, Muster and Rekindling screens",
+    "verify": [
+      "shots: map, drift, market, hearth, shrine, muster, rekindle"
+    ],
+    "passes": false
+  },
+  {
+    "id": "UI-007",
+    "area": "ui",
+    "desc": "Hover tooltips for every keyword and trait",
+    "verify": [
+      "e2e: tooltips.spec.ts"
+    ],
+    "passes": false
+  },
+  {
+    "id": "UI-008",
+    "area": "ui",
+    "desc": "First-battle tutorial (revealed deck, traits, Clash preview) and first-Drift tutorial (free vs paid reach)",
+    "verify": [
+      "e2e: tutorial.spec.ts"
+    ],
+    "passes": false
+  },
+  {
+    "id": "UI-009",
+    "area": "ui",
+    "desc": "Settings: volume, animation speed; defeat screen reads 'The light goes out.'",
+    "verify": [
+      "shot: defeat"
+    ],
+    "passes": false
+  },
+  {
+    "id": "UI-010",
+    "area": "ui",
+    "desc": "Layout holds at 1280x720 with no overflow",
+    "verify": [
+      "shots at 1280x720"
+    ],
+    "passes": false
+  },
+  {
+    "id": "ART-001",
+    "area": "art",
+    "desc": "All 60 card sprites as code, Endesga 32 only, outline and padding rules",
+    "verify": [
+      "unit: sprites.test.ts",
+      "sheet: reports/sprites-sheet.png"
+    ],
+    "passes": false
+  },
+  {
+    "id": "ART-002",
+    "area": "art",
+    "desc": "Tokens and Act I enemy sprites",
+    "verify": [
+      "sheet reviewed"
+    ],
+    "passes": false
+  },
+  {
+    "id": "ART-003",
+    "area": "art",
+    "desc": "Spark, Flame and Fire level effects on cards and in miniature on the board",
+    "verify": [
+      "shot: levels"
+    ],
+    "passes": false
+  },
+  {
+    "id": "ART-004",
+    "area": "art",
+    "desc": "Contact sheet reviewed: every sprite reads at x1, no two cards sharing a trait share a silhouette",
+    "verify": [
+      "review in PROGRESS.md"
+    ],
+    "passes": false
+  },
+  {
+    "id": "ART-005",
+    "area": "art",
+    "desc": "Fonts Pixelify Sans and Silkscreen (OFL) with integer scaling and image-rendering: pixelated",
+    "verify": [
+      "shot: battle-wave1"
+    ],
+    "passes": false
+  },
+  {
+    "id": "AUDIO-001",
+    "area": "audio",
+    "desc": "ZzFX SFX for summon, reach, Shield, Poison and Rekindle",
+    "verify": [
+      "manual + e2e: audio hooks called"
+    ],
+    "passes": false
+  },
+  {
+    "id": "AUDIO-002",
+    "area": "audio",
+    "desc": "Tone.js ambient loop and boss loop, seeded",
+    "verify": [
+      "manual"
+    ],
+    "passes": false
+  },
+  {
+    "id": "BAL-001",
+    "area": "balance",
+    "desc": "npm run balance reports include win-rate, pick rate, first-seat win rate, ember split, run length",
+    "verify": [
+      "report: reports/balance-latest.md"
+    ],
+    "passes": false
+  },
+  {
+    "id": "BAL-002",
+    "area": "balance",
+    "desc": "Bands met: no card above 60% include-win-rate, first seat 45-55%, median run 15-25 min, every 4-tier reachable",
+    "verify": [
+      "report: reports/balance-latest.md"
+    ],
+    "passes": false
+  },
+  {
+    "id": "SHIP-001",
+    "area": "ship",
+    "desc": "Production build runs from a static server; README explains how to run; CREDITS.md complete",
+    "verify": [
+      "build: npm run build; manual: vite preview"
+    ],
+    "passes": false
+  }
+]
