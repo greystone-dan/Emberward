@@ -2,6 +2,7 @@ import { spellCost } from '../../core/battle/battle';
 import { defFor } from '../../core/battle/defs';
 import type { BattleState, Side } from '../../core/types';
 import type { GameStore } from '../store';
+import { Sprite } from '../sprites';
 
 /** Every card a side brought, as chips. Spent cards grey out; the enemy's next play carries an intent marker. */
 export function DeckStrip({ store, state, side }: { store: GameStore; state: BattleState; side: Side }) {
@@ -24,13 +25,16 @@ export function DeckStrip({ store, state, side }: { store: GameStore; state: Bat
         if (onBoard.has(c.uid)) cls.push('fielded');
         return (
           <div key={c.uid} className={cls.join(' ')} data-testid={`card-${c.uid}`} data-name={def.name} onClick={() => store.clickCard(c.uid, side)} title={def.name}>
+            <span className="cart" aria-hidden="true">
+              <Sprite unitKey={c.key} level={c.level} scale={side === 1 ? 1 : 2} />
+            </span>
             {c.level > 1 && <span className="lvl">{c.level === 2 ? '✦✦' : '✦✦✦'}</span>}
             {def.spell && !c.spent && <span className="cost">{spellCost(state, side, c)}✦</span>}
             <span className="cname">{def.name}</span>
             <span className="cstats">
               {def.shape === 'none' && def.atk === 0 ? 'spell' : `${def.atk}/${def.hp}`}
+              {def.shape !== 'none' && <span className="cshape"> · {def.shape}</span>}
             </span>
-            <span className="cshape">{def.shape === 'none' ? '' : def.shape}</span>
             {intentCard === c.uid && <span className="intent">next</span>}
           </div>
         );

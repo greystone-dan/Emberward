@@ -152,3 +152,15 @@ button:disabled { box-shadow: none; }
 .shrine .flavour { margin: 0; font-size: 20px; line-height: 1.4; color: #e4d9c3; }
 .shrine .options button { background: linear-gradient(180deg, #2a2537 0%, #1b1824 100%); border: 1px solid #4a3f5c; color: #e8e0cc; }
 .shrine .options button:hover { border-color: #feae34; color: #fee761; box-shadow: 0 0 18px rgba(254, 174, 52, 0.18); }
+
+/* Deck chips carry their sprite, lit from below, with the text over it. */
+.chip { height: 96px; padding-top: 8px; justify-content: flex-end; overflow: hidden; }
+.strip.enemy .chip { height: 72px; width: 76px; padding-top: 6px; }
+.chip .cart { position: absolute; left: 0; right: 0; top: 4px; display: flex; justify-content: center; pointer-events: none; opacity: 0.95; filter: drop-shadow(0 0 6px rgba(254, 174, 52, 0.25)); }
+.strip.enemy .chip .cart { top: 2px; filter: drop-shadow(0 0 6px rgba(99, 199, 177, 0.25)); }
+.chip .cname, .chip .cstats, .chip .cshape { position: relative; z-index: 1; text-shadow: 0 1px 0 #000, 0 0 6px #000; }
+.chip .cname { font-size: 11px; }
+.chip.spent .cart { opacity: 0.5; }
+.chip .cstats { font-size: 11px; white-space: nowrap; }
+.chip .cshape { color: var(--muted); font-family: inherit; }
+.chip .intent { top: -1px; bottom: auto; z-index: 2; }
