@@ -169,3 +169,4 @@ Daniel: "it looks like a windows menu (cards), I want more of a gloomy theme as 
   a person does better; no tuning from this.
 - Warden select: each card gets a lit portrait (its signature card at 4×), 2× deck sprites in framed cells and a
   one-line hint; the four cards now fill the 720px height. shots/run-warden.png.
+- Market stalls share one height so the Buy and Hold buttons sit on a single counter line (shots/run-market.png).

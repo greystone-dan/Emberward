@@ -180,3 +180,10 @@ button:disabled { box-shadow: none; }
 .wardencard .faces.small .minisprite { width: 72px; height: 72px; display: flex; align-items: center; justify-content: center; background: #0f1118; border: 1px solid #2f2a3a; }
 .wardencard .muted { min-height: 36px; }
 .wardencard .primary { margin-top: auto; }
+
+/* Market stalls: every slot the same height, the Buy row on the counter. */
+.river { align-items: stretch; }
+.river .slot { display: flex; flex-direction: column; gap: 8px; }
+.river .slot .face { flex: 1; }
+.river .slot .row, .river .slot > .primary { margin-top: auto; }
+.river .slot .face.relicface { min-height: 120px; }
