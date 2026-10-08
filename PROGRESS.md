@@ -14,7 +14,7 @@ Append-only. Newest phase summary at the top; the loop log below it.
 - `src/core/run/` is pure: `applyRunAction` is the run's only mutator and forwards battle actions to `applyAction`. A run bot (`playRun`) completes runs headless; `npm run sim:runs -- --runs 60` plays 60 runs in 3.4 s with zero errors (early numbers: Lamplighter 25%, Ferryman 35%, Bell-Keeper 85% wins; most losses at the boss). Not balance yet.
 - Save and resume through localStorage (the features entry asks for IndexedDB, so it stays open until phase 7).
 - Playwright: a run from the title through Warden select, Drift, map, Muster into battle, then finished by the bot; save and resume. 9 run unit tests. Screenshots of every run screen reviewed.
-- Open: elites and the boss use composed decks (phase 5); features.json 81 passing.
+- Open: elites and the boss use composed decks (phase 5); features.json 79 passing.
 
 ## Phase 3: sprites, pass 1 — done (2026-10-08)
 
