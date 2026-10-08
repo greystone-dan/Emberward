@@ -1,7 +1,9 @@
-import { scriptedIntent, type Intent } from '../core/ai/scripted';
+import { enemyIntent } from '../core/ai/greedy';
+import type { Intent } from '../core/ai/scripted';
 import { applyAction, legalActions, newBattle, type BattleConfig } from '../core/battle/battle';
 import { recordReplay, runReplay, type Replay } from '../core/replays/replay';
-import { scenarioFight } from '../core/scenarios';
+import { playerSide, scenarioFight } from '../core/scenarios';
+import { bossConfig, eliteConfig, eliteRule } from '../core/run/encounters';
 import { LANE_NAMES, ROW_NAMES } from '../core/grid';
 import type { Action, BattleEvent, BattleState, Cell, Target, Unit } from '../core/types';
 import { defFor } from '../core/battle/defs';
@@ -195,7 +197,7 @@ export class GameStore {
   private maybeEnemy(): void {
     let guard = 0;
     while (this.state.phase === 'action' && this.state.turn === 1 && this.frames.length === 0 && guard++ < 50) {
-      const intent = scriptedIntent(this.state, 1);
+      const intent = enemyIntent(this.state, 1);
       if (!this.skip) {
         // A short pause so the enemy's move reads as a move, then its action.
         this.frames.push({ view: this.state, pops: [], log: [], ms: ANIM_MS.think });
@@ -214,7 +216,7 @@ export class GameStore {
     const st = this.state;
     if (st.phase !== 'action' || st.passed[1] || st.actionsLeft[1] <= 0) return null;
     const probe: BattleState = st.turn === 1 ? st : { ...st, turn: 1 };
-    const it = scriptedIntent(probe, 1);
+    const it = enemyIntent(probe, 1);
     return it;
   }
 
@@ -574,9 +576,12 @@ export function unitName(key: string, level: 1 | 2 | 3): string {
 /** Builds the battle for a URL scenario name. Unknown names fall back to the first fight. */
 export function scenarioConfig(seed: string, scenario: string): BattleConfig {
   const m = /^fight(\d+)$/.exec(scenario);
+  if (/^boss(-wave\d)?$/.test(scenario)) return { seed, kind: 'boss', boss: true, player: playerSide(0), enemy: bossConfig() };
   if (m) return scenarioFight(seed, 0, Number(m[1]));
   const w = /^warden(\d)-fight(\d+)$/.exec(scenario);
   if (w) return scenarioFight(seed, Number(w[1]), Number(w[2]));
   if (scenario === 'levels') return scenarioFight(seed, 0, 0, [{ key: 'c5', level: 2 }, { key: 'c9', level: 3 }, { key: 'c26', level: 2 }]);
+  const e = /^elite(\d)$/.exec(scenario);
+  if (e) return { seed, kind: 'elite', player: playerSide(0), enemy: eliteConfig(Number(e[1])), elite: eliteRule(Number(e[1])) };
   return scenarioFight(seed, 0, 0);
 }

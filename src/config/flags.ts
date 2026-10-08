@@ -31,6 +31,10 @@ export const FLAGS = {
   rarePityPerDrift: 1,
   // §6-§7 statuses
   burnSpreadDivisor: 2,
+  /** Boss (SPEC §12, cards.json → boss.phases): the HP at which two lanes go dark and Kiln Breath starts, the HP at which its own lane D goes dark too, and Kiln Breath's Burn. */
+  bossPhase2Hp: 26,
+  bossPhase3Hp: 12,
+  kilnBreathBurn: 3,
   poisonDecays: true,
   triggerQueueCap: 200,
   /** When a unit loses derived max HP (Kinship, Brawler, Abyssal), it keeps at least 1 HP rather than dying. */

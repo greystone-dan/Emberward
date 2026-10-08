@@ -666,9 +666,10 @@
     "area": "enemies",
     "desc": "All 8 fights play their data decks with scripted order and lane preferences",
     "verify": [
-      "unit: ai.test.ts scripted"
+      "unit: src/core/ai/ai.test.ts scripted plays all 8 fights from their data decks in order",
+      "src/core/ai/scripted.ts; src/core/scenarios.ts fightSide"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "ENEMY-002",
@@ -685,36 +686,39 @@
     "area": "enemies",
     "desc": "3 elites each break one rule (Choir Abbot, Tide-Caller, Brazier Knight)",
     "verify": [
-      "unit: elites.test.ts"
+      "unit: src/core/battle/enemies.test.ts (Abbot refills, Tide-Caller pulls, Brazier Knight immune and heals)",
+      "content/cards.json e_abbot/e_tideCaller/e_brazierKnight; src/core/battle/clash.ts eliteWaveStart/eliteWaveEnd; shots/elite0-2.png reviewed"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "ENEMY-004",
     "area": "enemies",
     "desc": "Boss: 40 HP, snuffs lanes shown a wave ahead, 3 phases",
     "verify": [
-      "unit: boss.test.ts"
+      "unit: src/core/battle/enemies.test.ts boss (one lane, two at 26 HP with Kiln Breath, own lane at 12 HP)",
+      "src/core/battle/clash.ts startWave boss block + kilnBreath; FLAGS.bossPhase2Hp/bossPhase3Hp/kilnBreathBurn; shots/boss-wave3.png and boss-wave5.png reviewed (dark lane struck through, next lane marked)"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "ENEMY-005",
     "area": "enemies",
     "desc": "AI ladder: scripted, greedy 1-ply with Clash lookahead, boss phases; AI uses only applyAction",
     "verify": [
-      "unit: ai.test.ts greedy"
+      "unit: src/core/ai/ai.test.ts greedy (deterministic, legal, prefers lethal, ladder by battle kind)",
+      "src/core/ai/greedy.ts uses only legalActions/applyAction; enemyIntent picks scripted for fights, greedy for elites and the boss"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "ENEMY-006",
     "area": "enemies",
     "desc": "1000 sim runs per Warden with win rate by Warden and node reported",
     "verify": [
-      "sim: npm run sim -- --runs 1000"
+      "sim: npm run sim:runs -- --runs 1000 --seed 11 --warden 0|1|2 (2026-10-08): Lamplighter 0%, Ferryman 0%, Bell-Keeper 10%; deaths by node in reports/runs-11.json and PROGRESS.md"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "UI-001",

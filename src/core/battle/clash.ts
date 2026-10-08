@@ -289,8 +289,9 @@ export function startWave(ctx: Ctx, wave: number): void {
     st.boss.darkLanes = [...st.boss.nextDarkLanes];
     const hp = st.sides[1].hp;
     const next = wave % 4;
-    st.boss.nextDarkLanes = hp <= 26 ? [next as 0 | 1 | 2 | 3, ((next + 1) % 4) as 0 | 1 | 2 | 3] : [next as 0 | 1 | 2 | 3];
-    st.boss.ownLaneDark = hp <= 12;
+    st.boss.nextDarkLanes = hp <= FLAGS.bossPhase2Hp ? [next as 0 | 1 | 2 | 3, ((next + 1) % 4) as 0 | 1 | 2 | 3] : [next as 0 | 1 | 2 | 3];
+    st.boss.ownLaneDark = hp <= FLAGS.bossPhase3Hp;
+    if (wave > 1 && hp <= FLAGS.bossPhase2Hp) kilnBreath(ctx);
   }
   // Bone Bellwether returns at the next Wave Start.
   for (let i = st.fallen.length - 1; i >= 0; i--) {
@@ -342,6 +343,17 @@ function perWaveShields(ctx: Ctx): void {
 import { aurasOn } from './stats';
 function aurasOnShield(st: BattleState, u: Unit): number {
   return aurasOn(st, u).shieldEachWave;
+}
+
+/** Boss phase 2 (The Long Dark): Kiln Breath burns the player's frontmost unit and the units beside it. Deterministic: lowest row, then lane A first. */
+function kilnBreath(ctx: Ctx): void {
+  const st = ctx.st;
+  const mine = unitsOf(st.units, 0).sort((a, b) => a.row - b.row || a.lane - b.lane);
+  const target = mine[0];
+  if (!target) return;
+  ctx.events.push({ type: 'note', text: `Kiln Breath scorches ${target.name}` });
+  const victims = [target, ...cellsBeside(target).map((c) => unitAt(st.units, 0, c.lane, c.row)).filter((u): u is Unit => !!u)];
+  for (const v of victims) applyStatus(ctx, v, 'burn', FLAGS.kilnBreathBurn, 1);
 }
 
 function eliteWaveStart(ctx: Ctx): void {

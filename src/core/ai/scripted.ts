@@ -18,7 +18,7 @@ export interface Intent {
   cell?: Cell;
 }
 
-function rowFor(shape: string): number[] {
+export function rowFor(shape: string): number[] {
   switch (shape) {
     case 'strike':
     case 'cleave':
@@ -33,7 +33,7 @@ function rowFor(shape: string): number[] {
   }
 }
 
-function laneScore(st: BattleState, side: Side, lane: number, shape: string): number {
+export function laneScore(st: BattleState, side: Side, lane: number, shape: string): number {
   const foe = other(side);
   const mine = unitsOf(st.units, side).filter((u) => u.lane === lane);
   const theirs = laneEnemies(st.units, side, lane);

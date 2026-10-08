@@ -88,7 +88,7 @@ describe('content schema', () => {
   });
 
   it('enemy units, fights, elites and the boss reference real content', () => {
-    expect(content.enemyUnits.length).toBe(9);
+    expect(content.enemyUnits.length).toBe(12);
     for (const e of content.enemyUnits) {
       expect(e.id).toMatch(/^e_/);
       expect(SHAPES).toContain(e.shape);
