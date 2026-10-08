@@ -73,6 +73,7 @@ img, canvas { image-rendering: pixelated; image-rendering: crisp-edges; }
 .lane-label:hover, .lane-label.targetable { color: var(--cyan); border-color: var(--cyan); }
 .lane-label.preferred { color: var(--teal); }
 .lane-label.dark { color: var(--plum); text-decoration: line-through; }
+.lane-label .next-dark { color: var(--plum); font-size: 11px; }
 .cell { position: relative; background: rgba(38, 43, 68, 0.6); border: 2px solid var(--panel2); display: flex; align-items: center; justify-content: center; }
 .cell.enemy { background: rgba(25, 60, 62, 0.55); }
 .cell.empty.playable { border-color: var(--amber); cursor: pointer; }

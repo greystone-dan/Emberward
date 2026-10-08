@@ -1,4 +1,5 @@
 import { cardsById } from '../../content/cards';
+import { enemyIntent } from '../ai/greedy';
 import { scriptedIntent } from '../ai/scripted';
 import { nextInt, type RngState } from '../rng';
 import type { RunAction, RunState } from './types';
@@ -11,7 +12,7 @@ import { applyRunAction, legalRunActions, newRun, priceAt, type RunOptions } fro
  */
 export function botRunAction(run: RunState, rng: RngState, opts: RunOptions = {}): [RunAction | null, RngState] {
   if (run.phase === 'battle' && run.battle) {
-    if (run.battle.turn !== 0) return [{ type: 'battle', action: scriptedIntent(run.battle, 1).action }, rng];
+    if (run.battle.turn !== 0) return [{ type: 'battle', action: enemyIntent(run.battle, 1).action }, rng];
     return [{ type: 'battle', action: scriptedIntent(run.battle, 0).action }, rng];
   }
   const legal = legalRunActions(run, opts);

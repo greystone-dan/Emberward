@@ -353,6 +353,10 @@ export const ENEMY_EFFECTS: Record<string, UnitEffects> = {
   e_waxen: lvl([taunt], [gasp(burn(2, 'acrossAround'))]),
   e_ghoulbell: lvl([taunt], []),
   e_crab: lvl([{ k: 'shieldAtWaveStart', n: 2 }], []),
+  // Elites (SPEC §12). Their rule-breaking is an engine hook keyed on these ids (clash.ts eliteWaveStart/End).
+  e_abbot: lvl([], []),
+  e_tideCaller: lvl([], []),
+  e_brazierKnight: lvl([taunt, { k: 'immune', status: 'burn' }], []),
 };
 
 export interface TokenDef {

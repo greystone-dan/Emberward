@@ -4,12 +4,13 @@ import { waxbornSprites } from './waxborn';
 import { boneSpiritSprites } from './bone-spirit';
 import { drownedSprites } from './drowned';
 import { bellforgedSprites } from './bellforged';
+import { eliteSprites } from './elites';
 
 /**
  * The sprite registry. Phase 3 fills it with one sprite per card, token and enemy unit;
  * until then a card without a sprite falls back to a silhouette by its first trait.
  */
-export const SPRITES: readonly SpriteDef[] = [...placeholders, ...waxbornSprites, ...boneSpiritSprites, ...drownedSprites, ...bellforgedSprites];
+export const SPRITES: readonly SpriteDef[] = [...placeholders, ...waxbornSprites, ...boneSpiritSprites, ...drownedSprites, ...bellforgedSprites, ...eliteSprites];
 
 export const spritesById: ReadonlyMap<string, SpriteDef> = new Map(SPRITES.map((s) => [s.id, s]));
 

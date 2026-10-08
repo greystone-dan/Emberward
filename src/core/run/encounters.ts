@@ -6,7 +6,7 @@ import type { EliteRule } from '../types';
 
 /**
  * Enemy sides for the run. Fights come straight from content; elites and the boss are composed here
- * from content units until phase 5 gives them their own decks (their rules already live in the engine).
+ * here: each elite's signature unit starts on the board (its rule is an engine hook keyed on its id).
  */
 
 export function fightConfig(index: number): BattleSideConfig {
@@ -28,9 +28,9 @@ const ELITE_DECKS: string[][] = [
   ['Lampwick Squire', 'e_waxen', 'Ember Hound', 'e_thief', 'Wickmonger', 'e_waxen', 'Kiln Mortar'],
 ];
 const ELITE_BOARD: { key: string; lane: 0 | 1 | 2 | 3; row: 0 | 1 | 2 }[] = [
-  { key: keyFor('Choir of Bones'), lane: 1, row: 2 },
-  { key: keyFor('Siren of Vael'), lane: 2, row: 2 },
-  { key: keyFor('Brazier Golem'), lane: 1, row: 0 },
+  { key: 'e_abbot', lane: 1, row: 2 },
+  { key: 'e_tideCaller', lane: 2, row: 2 },
+  { key: 'e_brazierKnight', lane: 1, row: 0 },
 ];
 
 export function eliteConfig(index: number): BattleSideConfig {

@@ -28,3 +28,10 @@ SPEC.md (v2), PROMPT.md and ART.md reflect these. The research docs and the pitc
 - **Scout.** Reveals the names of the next three fights, elites or boss reachable ahead on any path; revealed nodes show their enemy on the map.
 - **Shrines.** "Ring it back" makes the next fight's wave-1 enemy summons arrive Stunned. "Fight him" turns the Shrine node into an elite fight (one of the three, seeded) with the elite reward. "Reach in" echoes the first card in the deck. Choir of the Sunk's "Join the song" rekindles two copies (one level), and only if the player owns a pair.
 - **Trait tiers in drafting (Pilgrim 4, Kindler 3)** count distinct cards in the deck carrying the trait (Sigils count).
+
+## Enemy decisions (Claude, 2026-10-08; flagged for Daniel)
+
+- **Elites are units.** Each elite is an enemy unit (`e_abbot` 1/6 Support, `e_tideCaller` 2/6 Shoot, `e_brazierKnight` 3/8 Strike with Taunt) that starts on the board (Abbot and Tide-Caller in the Back row, Knight in the Front); its rule is an engine hook that stops when the unit dies, as the pitch's counters say. The Abbot's refill fills *every* empty cell (SPEC §12) with Choristers (1/1, +1 Power beside), not Wisps as the older line said.
+- **Kiln Breath.** The boss's phase-2 spell is cast at Wave Start from wave 2 on while its HP is 26 or lower: Burn 3 on the player's frontmost unit (lowest row, then lane A first) and the units beside it. No embers, no action; it is a phase rule, not a card.
+- **Dark lanes in wave 1.** Lane A is dark from the first wave (the announcement is the Muster screen's boss description); from then on the next lane is shown a wave ahead with a "dark next" label.
+- **Greedy AI scoring.** Post-Clash state: Warden HP difference ×3, board value (Power ×1.5 + health + shield/2 − Burn − Poison, tokens at half), own embers ×0.5; a win is ±1000. Candidates: the best three cells per distinct card by the scripted lane heuristics, every cast and move, and pass; at most 24. The lookahead passes both sides, so it never models the player's replies (1-ply as SPEC says).

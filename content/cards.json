@@ -2457,6 +2457,33 @@
    "shape": "strike",
    "icon": "crab",
    "text": "Shield 2 each wave."
+  },
+  {
+   "id": "e_abbot",
+   "name": "The Choir Abbot",
+   "atk": 1,
+   "hp": 6,
+   "shape": "none",
+   "icon": "abbot-meeple",
+   "text": "At Wave End, every empty cell on this side fills with a Chorister."
+  },
+  {
+   "id": "e_tideCaller",
+   "name": "The Tide-Caller",
+   "atk": 2,
+   "hp": 6,
+   "shape": "shoot",
+   "icon": "wave-crest",
+   "text": "At Wave Start, pulls the enemy Front row one lane toward lane A."
+  },
+  {
+   "id": "e_brazierKnight",
+   "name": "The Brazier Knight",
+   "atk": 3,
+   "hp": 8,
+   "shape": "strike",
+   "icon": "black-knight-helm",
+   "text": "Taunt. Immune to Burn. At Wave End, heals its Warden one for every Burning unit anywhere."
   }
  ],
  "fights": [

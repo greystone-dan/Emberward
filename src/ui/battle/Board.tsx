@@ -15,6 +15,7 @@ export function Board({ store, view, state }: { store: GameStore; view: BattleSt
   const intent = store.intent();
   const intentCell = intent?.cell;
   const dark = new Set(state.boss?.darkLanes ?? []);
+  const nextDark = new Set(state.boss?.nextDarkLanes ?? []);
   const targetLanes = new Set(next.flatMap((t) => ('lane' in t ? [t.lane] : [])));
   const targetRows = new Set(next.flatMap((t) => ('row' in t ? [t.row] : [])));
   const targetUnits = new Set(next.flatMap((t) => ('unit' in t ? [t.unit] : [])));
@@ -54,8 +55,9 @@ export function Board({ store, view, state }: { store: GameStore; view: BattleSt
     <div className="board" style={{ width: BOARD_W, height: BOARD_H }} data-testid="board">
       <div className="lanes">
         {LANE_NAMES.map((n, i) => (
-          <div key={n} className={`lane-label${targetLanes.has(i as Lane) ? ' targetable' : ''}${intentCell?.lane === i ? ' preferred' : ''}${dark.has(i as Lane) ? ' dark' : ''}`} onClick={() => store.clickLane(i)}>
+          <div key={n} className={`lane-label${targetLanes.has(i as Lane) ? ' targetable' : ''}${intentCell?.lane === i ? ' preferred' : ''}${dark.has(i as Lane) ? ' dark' : ''}`} onClick={() => store.clickLane(i)} title={dark.has(i as Lane) ? 'Dark: your units here cannot attack' : nextDark.has(i as Lane) ? 'Goes dark next wave' : undefined}>
             Lane {n}
+            {state.boss && nextDark.has(i as Lane) && !dark.has(i as Lane) && <span className="next-dark"> · dark next</span>}
           </div>
         ))}
       </div>
