@@ -11,7 +11,9 @@ Pages needs the repository to be public, or a GitHub Pro account, to serve a pri
 
 The build is plain static files with relative paths, so any static host works:
 
-- **GitHub Pages**: `.github/workflows/pages.yml` does it on every push to `main` (repository public or GitHub Pro).
+- **GitHub Pages**: `.github/workflows/pages.yml` builds and deploys `main`. It is manual (Run workflow) until Pages is
+  enabled in Settings → Pages with source "GitHub Actions" (repository public or GitHub Pro); then switch its trigger
+  to pushes to `main`.
 - **Cloudflare Pages** (Git integration, private repositories are fine): framework preset Vite, build command
   `npm run build`, output directory `dist`, environment variable `NODE_VERSION=22`. Then add a custom domain such as
   `play.greystoneinteractive.ca` in the Pages project.

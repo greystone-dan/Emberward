@@ -1,7 +1,7 @@
 name: pages
+# Manual until GitHub Pages is enabled for the repository (Settings → Pages → Source: GitHub Actions),
+# which needs a public repository or GitHub Pro. Switch to `push: branches: [main]` after that.
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read

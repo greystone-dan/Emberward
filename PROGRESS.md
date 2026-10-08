@@ -170,3 +170,5 @@ Daniel: "it looks like a windows menu (cards), I want more of a gloomy theme as 
 - Warden select: each card gets a lit portrait (its signature card at 4×), 2× deck sprites in framed cells and a
   one-line hint; the four cards now fill the 720px height. shots/run-warden.png.
 - Market stalls share one height so the Buy and Hold buttons sit on a single counter line (shots/run-market.png).
+- Production build verified: `vite preview` on the e2e port, full Playwright suite 10/10 against the built bundle
+  (save/resume, tutorials, audio hooks, a whole bot run). The artifact build for Daniel is this bundle.
