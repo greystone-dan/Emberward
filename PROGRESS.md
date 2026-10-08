@@ -210,3 +210,6 @@ Daniel: "it looks like a windows menu (cards), I want more of a gloomy theme as 
 - Daniel chose "Make repo public" on the hosting card. pages.yml deploys on push to main again; the repository
   is still private at this writing, so the first run waits for the visibility change, then
   https://greystone-dan.github.io/Emberward/ is the demo address.
+- 08:04Z: repository public, Pages source set by Daniel, run 7 of pages.yml green. The demo is live at
+  https://greystone-dan.github.io/Emberward/ (Playwright started a run against the live page, no failed requests).
+  SHIP-001 now holds on a public URL.
