@@ -127,3 +127,18 @@ button:disabled { box-shadow: none; }
 .embers-rise i { position: absolute; bottom: -10px; width: 3px; height: 3px; background: var(--amber); box-shadow: 0 0 6px var(--orange); opacity: 0; animation: ember 7s steps(28) infinite; }
 @keyframes ember { 0% { transform: translate(0, 0); opacity: 0; } 10% { opacity: 0.9; } 60% { opacity: 0.6; } 100% { transform: translate(40px, -560px); opacity: 0; } }
 .app.no-anim .embers-rise i { animation: none; opacity: 0.6; transform: translate(10px, -200px); }
+
+/* Reward: one lit tablet in the dark. */
+.reward { align-items: center; justify-content: center; min-height: 520px; }
+.reward-tablet {
+  width: 560px; padding: 26px 30px 24px; display: flex; flex-direction: column; gap: 14px; align-items: center; text-align: center;
+  background: linear-gradient(180deg, #1b1a24 0%, #121219 100%);
+  border: 1px solid #5a4330; outline: 1px solid #0b0b10; box-shadow: 0 0 0 1px #2a2230 inset, 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 90px rgba(254, 174, 52, 0.08);
+}
+.reward-head { font-family: 'Silkscreen', monospace; font-size: 28px; color: #feae34; text-shadow: 0 0 18px rgba(254, 174, 52, 0.55), 0 2px 0 #3a1a08; letter-spacing: 1px; }
+.reward-line { margin: 0; color: #c7b9a3; font-size: 16px; max-width: 460px; }
+.reward-rows { width: 100%; display: flex; flex-direction: column; gap: 6px; margin: 4px 0; }
+.reward-row { display: flex; justify-content: space-between; gap: 16px; padding: 8px 12px; background: rgba(0, 0, 0, 0.35); border: 1px solid #2f2a3a; text-align: left; }
+.reward-k { color: #8b9bb4; font-family: 'Silkscreen', monospace; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; padding-top: 2px; }
+.reward-v { color: #fee761; font-size: 16px; }
+.reward .primary { margin-top: 6px; }

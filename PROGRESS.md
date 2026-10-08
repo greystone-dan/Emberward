@@ -155,3 +155,8 @@ Daniel: "it looks like a windows menu (cards), I want more of a gloomy theme as 
   embers, or a weaker Cracked Bell), measured against the same probe.
 - Bell-Keeper handicaps (40 HP, 35 HP, 5 embers, combined with Shield nerfs and no Bulwark): 94–96% every time.
   Stopped; logged as Question 5. The Warden is the easy one for the demo.
+
+## Loop: reward screen (2026-10-08)
+- The reward screen was one line and a button on an empty page. It is now a lit tablet: a heading, a line that says
+  how the battle ended (kill or wave limit), salvage rows (Pay, Interest, Relic, Sigil), the Anchorstone survivors
+  and the Continue. Evidence: shots/run-reward.png. check + e2e green.
