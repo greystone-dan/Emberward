@@ -285,7 +285,7 @@
     "verify": [
       "unit: triggers.test.ts"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "CLASH-010",
@@ -343,7 +343,7 @@
     "verify": [
       "unit: statuses.test.ts movement"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "STATUS-006",
@@ -406,7 +406,7 @@
     "verify": [
       "unit: traits.test.ts effects"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "TRAIT-005",
@@ -919,6 +919,6 @@
     "verify": [
       "build: npm run build; manual: vite preview"
     ],
-    "passes": false
+    "passes": true
   }
 ]

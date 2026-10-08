@@ -9,6 +9,17 @@ Append-only. Newest phase summary at the top; the loop log below it.
 3. **Tokens and traits.** Wisps, Bats, Rubble and Bone Walls don't count toward trait tiers (they aren't cards). Recommended: keep.
 4. ~~**The boss is a wall (phase 5 numbers).**~~ Resolved 2026-10-08: the boss was playing its Sun Furnaces in wave 1; its phases are now enforced (DECISIONS.md, Balance decisions) and HP stays 40. Daniel left balance to Claude. Original note: With the elites' real units and the greedy enemy AI in, 1,000 bot runs per Warden (seed 11) end: Lamplighter 0% wins, Ferryman 0%, Bell-Keeper 10%. Of the Bell-Keeper's 1,000 runs, 746 reach the boss and die there; the elites take most of the rest (rows 6-7 the worst). In a fixed test the boss goes 20/20 against the bot's deck with the greedy AI and 0/20 with the scripted one, every time on the wave limit: the boss starts at 40 HP, its three Sun Furnaces hit for 7, and the face-damage race at wave 6 is never close. The bot is a weak player (it never casts spells or pays to move), so a person will do better, but not 40 HP better. Phase 6 will tune this; proposals, all flags: (a) `enemyHp.boss` 40 → 30, (b) the boss's deck plays two Sun Furnaces rather than three, (c) Kiln Breath Burn 3 → 2. Recommended: (a) first and re-measure. Until you say, the rule stays as written (SPEC: HP 40).
 
+## Phase 8: ship — done (2026-10-08)
+
+- `npm run build` output (relative paths) verified from a plain static server under a sub-path (`/Emberward/`):
+  title → Warden select in Chromium with no console errors or failed requests.
+- `pages.yml` workflow deploys `main` to GitHub Pages; README explains how to run and play; CREDITS.md lists every
+  licence (Endesga 32, Pixelify Sans and Silkscreen OFL, ZzFX and Tone.js MIT, the toolchain).
+- The three test-named entries CLASH-009, STATUS-005 and TRAIT-004 now pass with evidence: triggers.test.ts (order and
+  the 200 cap), statuses.test.ts (Pull, Persist, Swift, Rooted), traits.test.ts (all 17 traits; Artillery 2, Kindler 2,
+  Martyr 2 and Spirit 2 tests added). Fixing the Martyr test found a real bug (DECISIONS.md, Rules clarifications).
+- features.json 95/96; BAL-002 stays open on the Bell-Keeper's dominance.
+
 ## Phase 7: juice and onboarding — done (2026-10-08)
 
 - Settings (gear, every screen): sound effects and music volume, animation speed Slow/Normal/Fast/Instant; stored per browser.
@@ -123,3 +134,9 @@ Daniel: "it looks like a windows menu (cards), I want more of a gloomy theme as 
   rising embers and a lantern on the title. `run-title` scenario added for screenshots.
 - Evidence: shots/run-title, run-warden, run-drift, battle-wave3, run-market, card-inspect (looked at all six).
 - `npm run check` green (124 tests), Playwright 10/10.
+
+## Loop: phase 8 (2026-10-08)
+- Added traits tests for Artillery 2, Kindler 2, Martyr 2, Spirit 2; Martyr 2 failed because the dying unit had left
+  the board before the tier was read. Fixed in engine.ts (tier read before removal), golden replay `martyr-2-heal`.
+- Static build probe: dist served by `python3 -m http.server` under /Emberward/, Playwright clicked New run, no errors.
+- Pages workflow, README, CREDITS. `npm run check` + `npm run e2e` green before the commit.

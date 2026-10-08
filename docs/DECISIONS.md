@@ -49,3 +49,16 @@ SPEC.md (v2), PROMPT.md and ART.md reflect these. The research docs and the pitc
 - **Enemy HP comes from flags.** `FLAGS.enemyHp` is authoritative for elites and the boss; the numbers in cards.json are the designed values and match.
 - **Cracked Bell** did nothing: the board is empty when a battle starts. It now shields units summoned into the Front row during wave 1 (and persisted Front-row units), `FLAGS.crackedBellShield` 3. The Bell-Keeper's win rate hardly moves with it (89-91%): its strength is the Guardian-and-Marksman starting deck, which the pitch calls the safest first draft, so it stays the easy Warden.
 - **The Lamplighter's starting deck** swaps Drift Lantern for Ember Hound (3/2 Swift, Last Gasp Burn 2): the deck had three bodies with 1 Power or less and died in the first three fights. Bot win rate 22% → 42-44% with the Candlewright aura kept.
+
+## Rules clarifications (Claude, 2026-10-08; flagged for Daniel)
+
+- **A dying Martyr still counts.** Trait tiers are recomputed from the board, so a Martyr's own death used to drop the
+  side below Martyr 2 (or 4) before its Last Gasp fired, which made "Last Gasps also heal 2" need three Martyrs and
+  "trigger twice" need five. The tier is now read just before the unit leaves the board. Golden replay `martyr-2-heal`.
+
+## Shipping (Claude, 2026-10-08)
+
+- **GitHub Pages hosts the demo.** `.github/workflows/pages.yml` builds `main` and deploys `dist/` to
+  https://greystone-dan.github.io/Emberward/ (Vite `base: './'`, so the same build runs from any folder or domain).
+  No Cloudflare credentials are in the build container, so linking or CNAME-ing the demo from greystoneinteractive.ca
+  is Daniel's step.

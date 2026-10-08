@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { activeTiers, effectiveAtk, effectiveMaxHp, hpOf, kinship, traitCounts } from './stats';
 import { act, clash, maybeUnit, setup, unit } from '../test/kit';
+import { planAttack } from './clash';
+import { spellCost } from './battle';
 
 describe('traits (SPEC §8)', () => {
   it('counts different cards: copies and Flames count once, tokens never', () => {
@@ -72,5 +74,37 @@ describe('traits (SPEC §8)', () => {
     let st = setup({ playerCards: ['The Grey Reaper', 'Leviathan Calf'] });
     st = act(st, { type: 'summon', card: 1000, lane: 0, row: 0 });
     expect(st.actionsLeft[0]).toBe(3);
+  });
+  it('Artillery 2: Lob hits splash 1 to the enemies Beside the target', () => {
+    const st = setup({
+      player: [{ name: 'Wickmonger', lane: 1, row: 1 }, { name: 'Belfry Watch', lane: 2, row: 1 }],
+      enemy: [{ name: 'e_crab', lane: 1, row: 2 }, { name: 'e_sentry', lane: 0, row: 2 }, { name: 'e_hook', lane: 2, row: 2 }],
+    });
+    const plan = planAttack(st, unit(st, 'Wickmonger'))!;
+    expect(plan.targets.map((u) => u.name)).toEqual(['Belfry Crab']);
+    expect(plan.splash.map((u) => u.name).sort()).toEqual(['Drowned Sentry', 'Tide Hook']);
+    const solo = setup({ player: [{ name: 'Wickmonger', lane: 1, row: 1 }], enemy: [{ name: 'e_crab', lane: 1, row: 2 }, { name: 'e_hook', lane: 2, row: 2 }] });
+    expect(planAttack(solo, unit(solo, 'Wickmonger'))!.splash).toEqual([]);
+  });
+  it('Kindler 2: the first spell each wave costs 1 less', () => {
+    const st = setup({ player: [{ name: 'Pearl Diver', lane: 0, row: 2 }, { name: "Lamplighter's Ghost", lane: 1, row: 2 }], playerCards: ['Lampwick Squire'] });
+    const flare = st.sides[0].cards[0]!;
+    expect(spellCost(st, 0, flare)).toBe(0);
+    st.sides[0].firstSpellCastThisWave = true;
+    expect(spellCost(st, 0, flare)).toBe(1);
+  });
+  it('Martyr 2: a Last Gasp also heals the Warden 2', () => {
+    const st = setup({ player: [{ name: 'Ember Hound', lane: 0, row: 0 }, { name: 'Gargoyle', lane: 2, row: 0 }], enemy: [{ name: 'e_sentry', lane: 0, row: 0 }] });
+    st.sides[0].hp = 10;
+    const after = clash(st).state;
+    expect(maybeUnit(after, 'Ember Hound')).toBeUndefined();
+    expect(after.sides[0].hp).toBe(12);
+  });
+  it('Spirit 2: Spirits ignore Taunt', () => {
+    const board = { player: [{ name: "Lamplighter's Ghost", lane: 0, row: 2 }], enemy: [{ name: 'e_crab', lane: 0, row: 0 }, { name: 'e_brazierKnight', lane: 0, row: 1 }] };
+    const alone = setup(board);
+    expect(planAttack(alone, unit(alone, "Lamplighter's Ghost"))!.targets[0]!.key).toBe('e_brazierKnight');
+    const pair = setup({ ...board, player: [...board.player, { name: 'Smoke Wraith', lane: 3, row: 2 }] });
+    expect(planAttack(pair, unit(pair, "Lamplighter's Ghost"))!.targets[0]!.name).toBe('Belfry Crab');
   });
 });

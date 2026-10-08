@@ -499,6 +499,9 @@ export function killUnit(ctx: Ctx, u: Unit, killer: Unit | undefined, reason: st
     ctx.events.push({ type: 'note', text: `${u.name} returns` });
     return;
   }
+  // Trait tiers are read before the unit leaves: a Martyr's own death doesn't drop it out of Martyr 2/4 for its own Last Gasp.
+  const martyr2 = unitTraits(u).includes('Martyr') && hasTier(st, u.side, 'Martyr', 2);
+  const martyr4 = unitTraits(u).includes('Martyr') && hasTier(st, u.side, 'Martyr', 4);
   st.units.splice(idx, 1);
   clampDerivedHp(ctx);
   const side = st.sides[u.side];
@@ -511,10 +514,10 @@ export function killUnit(ctx: Ctx, u: Unit, killer: Unit | undefined, reason: st
   // Last Gasp, possibly multiplied (Lich, Martyr 4).
   let times = 1;
   for (const a of unitsOf(st.units, u.side)) for (const p of find(st, a, 'lastGaspMultiplier')) times = Math.max(times, p.times);
-  if (unitTraits(u).includes('Martyr') && hasTier(st, u.side, 'Martyr', 4)) times *= 2;
+  if (martyr4) times *= 2;
   const gasps = defFor(u.key, u.level).triggers.filter((t) => t.on === 'lastGasp');
   for (let i = 0; i < times; i++) for (const t of gasps) fireTrigger(ctx, u, t, scope);
-  if (gasps.length && hasTier(st, u.side, 'Martyr', 2)) healWarden(ctx, u.side, 2);
+  if (gasps.length && martyr2) healWarden(ctx, u.side, 2);
 
   // Bone Bellwether: returns at the next Wave Start (handled in wave start via fallen records + passive).
   // Bonebound 2: the first ally to die each wave leaves a Wisp.
