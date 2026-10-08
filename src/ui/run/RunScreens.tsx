@@ -10,6 +10,7 @@ import { defFor, cardKey } from '../../core/battle/defs';
 import { Sprite } from '../sprites';
 import type { RunStore } from '../runStore';
 import { CardFace } from './CardFace';
+import { Coach, tutorialWanted } from '../tutorial';
 import { eliteConfig, bossConfig, fightConfig } from '../../core/run/encounters';
 
 // ---------- shared ----------
@@ -170,6 +171,7 @@ export function WardenSelect({ store, run }: { store: RunStore; run: RunState })
 export function DriftScreen({ store, run }: { store: RunStore; run: RunState }) {
   const [inspect, setInspect] = useState<number | null>(null);
   const opening = run.visited.length === 0;
+  const [coach, setCoach] = useState(() => tutorialWanted('drift'));
   const canSkip = store.legal().some((a) => a.type === 'driftSkip');
   return (
     <div className="screen" data-testid="drift">
@@ -204,6 +206,7 @@ export function DriftScreen({ store, run }: { store: RunStore; run: RunState }) 
       </div>
       <RekindleModal store={store} run={run} />
       <SigilPicker store={store} run={run} />
+      {coach && run.rekindle.length === 0 && <Coach tour="drift" onDone={() => setCoach(false)} />}
     </div>
   );
 }

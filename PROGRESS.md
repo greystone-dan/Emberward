@@ -9,6 +9,15 @@ Append-only. Newest phase summary at the top; the loop log below it.
 3. **Tokens and traits.** Wisps, Bats, Rubble and Bone Walls don't count toward trait tiers (they aren't cards). Recommended: keep.
 4. ~~**The boss is a wall (phase 5 numbers).**~~ Resolved 2026-10-08: the boss was playing its Sun Furnaces in wave 1; its phases are now enforced (DECISIONS.md, Balance decisions) and HP stays 40. Daniel left balance to Claude. Original note: With the elites' real units and the greedy enemy AI in, 1,000 bot runs per Warden (seed 11) end: Lamplighter 0% wins, Ferryman 0%, Bell-Keeper 10%. Of the Bell-Keeper's 1,000 runs, 746 reach the boss and die there; the elites take most of the rest (rows 6-7 the worst). In a fixed test the boss goes 20/20 against the bot's deck with the greedy AI and 0/20 with the scripted one, every time on the wave limit: the boss starts at 40 HP, its three Sun Furnaces hit for 7, and the face-damage race at wave 6 is never close. The bot is a weak player (it never casts spells or pays to move), so a person will do better, but not 40 HP better. Phase 6 will tune this; proposals, all flags: (a) `enemyHp.boss` 40 → 30, (b) the boss's deck plays two Sun Furnaces rather than three, (c) Kiln Breath Burn 3 → 2. Recommended: (a) first and re-measure. Until you say, the rule stays as written (SPEC: HP 40).
 
+## Phase 7: juice and onboarding — done (2026-10-08)
+
+- Settings (gear, every screen): sound effects and music volume, animation speed Slow/Normal/Fast/Instant; stored per browser.
+- Audio: ZzFX effects (wick-light summon, ember-crackle reach, bronze clang Shield, hiss Poison, the Rekindle whoomph, plus hit, death and a click) fired from the animation frames; Tone.js loops seeded from the run (the Stair: low drone, plucked drips, a distant bell; the boss: FM drone and a membrane pulse). Audio unlocks on the first click; everything is safe without a device and `window.__audio` logs the hooks for tests.
+- Save and resume moved to IndexedDB (`src/ui/save.ts`, localStorage fallback), loaded before the title renders.
+- Tooltips for every keyword, shape, direction and trait on hover (one glossary, `src/ui/tooltip.tsx`).
+- Two coached tours shown once: the first battle (revealed decks, traits, Clash arrows, End Turn) and the first Drift (free front, paid reach, the moving line). `?tutorial=1` replays them; `?debug=1` hides them for tests and screenshots.
+- Evidence: `npm run check` green (124 tests), `npx playwright test` 10 passed, screenshots reviewed. features.json 91/96. Not done by a machine: nobody has listened to the music yet.
+
 ## Balance pass 2 (2026-10-08, after Daniel left balance to Claude)
 
 - Boss phases enforced (`fromWave` on battle cards), Cracked Bell fixed, Lamplighter deck swap: bot win rates 42% / 34% / 88% (1,000 runs, seed 3). The boss is no longer the wall; the Bell-Keeper is now too safe and its drafted rares (Kiln Mortar, Lantern Sentry, Brazier Golem) carry run-level include win rates over 60%, so BAL-002 is back to failing on that band and on Abyssal reach. Next balance loop: trim the Bell-Keeper start (the Guardian-and-Marksman lane coverage is what the bot exploits) and check the Abyssal pool's Drift weight.
@@ -101,3 +110,8 @@ Append-only. Newest phase summary at the top; the loop log below it.
 **Contract.** tools/balance.ts with the five PROMPT metrics and the four bands; ANIM_MS exported for the time model; report to reports/.
 **Evidence.** `npm run balance -- --runs 1000 --seed 2 --mirrors 24` 0 errors, 3 + 1 bands pass (see above); `npm run check` green.
 **Gotchas.** (1) Identical decks under a deterministic AI draw almost every mirror, so first seat is measured on seat-swapped pairings of different comps. (2) Candle Thief's Kindle takes the player's ember on the enemy's turn; a spend split must attribute ember drops to the side that acted. (3) Pay and interest land inside the battle action that ends the battle, not on "continue".
+
+### 2026-10-08 · Phase 7 juice and onboarding
+**Contract.** settings.ts, audio.ts (ZzFX + Tone), save.ts (IndexedDB), tooltip.tsx, tutorial.tsx, SettingsPanel.tsx; store frames carry sfx and the clock scales by the speed setting; e2e onboarding.spec.ts (5 tests).
+**Evidence.** `npm run check` green (124 tests); `npx playwright test` 10 passed; `npm run shoot -- "run-drift?tutorial=1" "run-battle?tutorial=1" run-over` reviewed.
+**Gotchas.** (1) Headless Chromium does run WebAudio: Tone's transport reports 'started', so the music test is real. (2) `page.evaluate` serialises objects, so a debug `state()` method must be called inside the page. (3) ESLint's no-sparse-arrays rejects ZzFX's usual `[,,440,...]` style; write `undefined`. (4) The tutorial must step aside for a Rekindle offer, which can appear on the third take of the opening Drift.

@@ -7,6 +7,8 @@ import { bossConfig, eliteConfig, eliteRule } from '../core/run/encounters';
 import { LANE_NAMES, ROW_NAMES } from '../core/grid';
 import type { Action, BattleEvent, BattleState, Cell, Target, Unit } from '../core/types';
 import { defFor } from '../core/battle/defs';
+import { sfx as playSfx, type Sfx } from './audio';
+import { animationRate } from './settings';
 
 /**
  * The UI store: the committed battle state, a queue of animation frames derived from engine events,
@@ -26,6 +28,7 @@ interface Frame {
   pops: Pop[];
   log: string[];
   ms: number;
+  sfx?: Sfx[];
 }
 
 export type Selection = { kind: 'card'; uid: number; side: 0 | 1 } | { kind: 'unit'; id: number } | null;
@@ -120,7 +123,8 @@ export class GameStore {
       }
       return;
     }
-    this.frameLeft -= ms;
+    const rate = animationRate();
+    this.frameLeft = rate === Infinity ? 0 : this.frameLeft - ms * rate;
     while (this.frameLeft <= 0 && this.frames.length > 0) {
       this.frames.shift();
       const next = this.frames[0];
@@ -152,6 +156,7 @@ export class GameStore {
   private show(f: Frame): void {
     this.view = f.view;
     this.pops = f.pops;
+    for (const name of f.sfx ?? []) playSfx(name);
     this.log.push(...f.log);
     if (this.log.length > 400) this.log.splice(0, this.log.length - 400);
     this.frameLeft = f.ms;
@@ -400,10 +405,23 @@ export function sameTarget(a: Target | undefined, b: Target | undefined): boolea
 
 // ---------- frames from events ----------
 
+/** The sounds one frame's events call for (ART.md): at most one of each, loudest first. */
+function sfxOf(events: BattleEvent[]): Sfx[] {
+  const out = new Set<Sfx>();
+  for (const e of events) {
+    if (e.type === 'summon') out.add('summon');
+    else if (e.type === 'status' && e.status === 'shield' && e.n > 0) out.add('shield');
+    else if (e.type === 'status' && e.status === 'poison' && e.n > 0) out.add('poison');
+    else if (e.type === 'death') out.add('death');
+    else if (e.type === 'attack' || e.type === 'faceDamage') out.add('hit');
+  }
+  return [...out];
+}
+
 /** Splits the events of one action into timed frames: the action, each Clash beat, Wave End, then the new wave. */
 function buildFrames(prev: BattleState, events: BattleEvent[], next: BattleState, popKey: () => number): Frame[] {
   const hasBeat = events.some((e) => e.type === 'beat');
-  if (!hasBeat) return [{ view: next, pops: popsOf(events, next, popKey), log: describe(events, prev, next), ms: ANIM_MS.action }];
+  if (!hasBeat) return [{ view: next, pops: popsOf(events, next, popKey), log: describe(events, prev, next), ms: ANIM_MS.action, sfx: sfxOf(events) }];
   const frames: Frame[] = [];
   let view = structuredClone(prev);
   let seg: BattleEvent[] = [];
@@ -411,7 +429,7 @@ function buildFrames(prev: BattleState, events: BattleEvent[], next: BattleState
   const close = (ms: number) => {
     if (seg.length === 0) return;
     view = advanceView(view, seg, next, true);
-    frames.push({ view, pops: popsOf(seg, view, popKey), log: describe(seg, view, next), ms: segMs });
+    frames.push({ view, pops: popsOf(seg, view, popKey), log: describe(seg, view, next), ms: segMs, sfx: sfxOf(seg) });
     view = advanceView(view, seg, next, false);
     seg = [];
     segMs = ms;

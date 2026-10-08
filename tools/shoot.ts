@@ -35,12 +35,15 @@ try {
   const page = await browser.newPage({ viewport: { width: 1280, height: 720 } });
   mkdirSync('shots', { recursive: true });
   for (const s of scenarios) {
-    await page.goto(`${base}/?seed=1&scenario=${encodeURIComponent(s)}&debug=1`);
+    // A scenario may carry extra query params after a '?', e.g. run-drift?tutorial=1.
+    const [name, extra] = s.split('?');
+    await page.goto(`${base}/?seed=1&scenario=${encodeURIComponent(name!)}&debug=1${extra ? '&' + extra : ''}`);
     await page.waitForSelector('[data-testid="app"]');
     await page.evaluate(() => (window as unknown as { __game?: { skipAnimations?: () => void } }).__game?.skipAnimations?.());
     await page.waitForTimeout(200);
-    await page.screenshot({ path: `shots/${s}.png` });
-    console.log(`shots/${s}.png`);
+    const file = s.replace(/[?=&]/g, '-');
+    await page.screenshot({ path: `shots/${file}.png` });
+    console.log(`shots/${file}.png`);
   }
   await browser.close();
 } finally {

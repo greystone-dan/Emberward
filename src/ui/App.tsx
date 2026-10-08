@@ -3,6 +3,8 @@ import { BattleScreen } from './battle/BattleScreen';
 import type { RunStore } from './runStore';
 import { DriftScreen, HearthScreen, MapScreen, MarketScreen, MusterScreen, RewardScreen, RunOverScreen, ScoutScreen, ShrineScreen, TitleScreen, WardenSelect } from './run/RunScreens';
 import type { GameStore } from './store';
+import { Coach, tutorialWanted } from './tutorial';
+import { useState } from 'react';
 
 /** The whole game: a run store that hands the battle screen a battle store while a battle is on. */
 export function RunApp({ store }: { store: RunStore }) {
@@ -10,7 +12,7 @@ export function RunApp({ store }: { store: RunStore }) {
   const run = store.run;
   const screen = store.screen;
   if (screen === 'title' || !run) return <TitleScreen store={store} />;
-  if (screen === 'battle' && store.battle) return <BattleScreen store={store.battle} onRestart={() => store.leaveBattle()} restartLabel="Continue" />;
+  if (screen === 'battle' && store.battle) return <RunBattle store={store} />;
   switch (run.phase) {
     case 'wardenSelect':
       return <WardenSelect store={store} run={run} />;
@@ -35,6 +37,16 @@ export function RunApp({ store }: { store: RunStore }) {
     case 'battle':
       return <TitleScreen store={store} />;
   }
+}
+
+function RunBattle({ store }: { store: RunStore }) {
+  const [coach, setCoach] = useState(() => tutorialWanted('battle'));
+  return (
+    <>
+      <BattleScreen store={store.battle!} onRestart={() => store.leaveBattle()} restartLabel="Continue" />
+      {coach && <Coach tour="battle" onDone={() => setCoach(false)} />}
+    </>
+  );
 }
 
 /** The standalone battle sandbox (`?scenario=battle-*`), kept for tests and screenshots. */

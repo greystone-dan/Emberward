@@ -2,6 +2,7 @@ import { cardsById, content } from '../../content/cards';
 import { defFor, cardKey } from '../../core/battle/defs';
 import type { Level } from '../../core/types';
 import { Sprite } from '../sprites';
+import { Keywords, traitTip } from '../tooltip';
 
 /** A card outside battle: sprite, name, traits, both halves. `size` 'mini' for lines and decks, 'full' for detail. */
 export function CardFace({
@@ -54,7 +55,7 @@ export function CardFace({
       </div>
       <div className="ftraits">
         {traits.map((t) => (
-          <span key={t} className="tchip" style={{ color: content.traits[t as keyof typeof content.traits].col, borderColor: content.traits[t as keyof typeof content.traits].col }}>
+          <span key={t} className="tchip" style={{ color: content.traits[t as keyof typeof content.traits].col, borderColor: content.traits[t as keyof typeof content.traits].col }} data-tip={traitTip(t)}>
             {t}
           </span>
         ))}
@@ -65,13 +66,15 @@ export function CardFace({
       </div>
       {size === 'full' && (
         <>
-          <div className="half">{def.text}</div>
+          <div className="half">
+            <Keywords text={def.text} />
+          </div>
           <div className="half spell">
             <div className="head">
               <span>{def.spellName}</span>
               <span>{def.spellCost}✦</span>
             </div>
-            {def.spellText}
+            <Keywords text={def.spellText} />
           </div>
         </>
       )}
