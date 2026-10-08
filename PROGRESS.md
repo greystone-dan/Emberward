@@ -172,3 +172,4 @@ Daniel: "it looks like a windows menu (cards), I want more of a gloomy theme as 
 - Market stalls share one height so the Buy and Hold buttons sit on a single counter line (shots/run-market.png).
 - Production build verified: `vite preview` on the e2e port, full Playwright suite 10/10 against the built bundle
   (save/resume, tutorials, audio hooks, a whole bot run). The artifact build for Daniel is this bundle.
+- Drift inspect card no longer runs off the bottom of a 720px window (top-aligned, sticky); shots/run-drift-inspect.png.
