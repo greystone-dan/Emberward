@@ -160,3 +160,4 @@ Daniel: "it looks like a windows menu (cards), I want more of a gloomy theme as 
 - The reward screen was one line and a button on an empty page. It is now a lit tablet: a heading, a line that says
   how the battle ended (kill or wave limit), salvage rows (Pay, Interest, Relic, Sigil), the Anchorstone survivors
   and the Continue. Evidence: shots/run-reward.png. check + e2e green.
+- Shrine events sit on the same tablet (shots/run-shrine.png).

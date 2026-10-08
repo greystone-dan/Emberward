@@ -142,3 +142,13 @@ button:disabled { box-shadow: none; }
 .reward-k { color: #8b9bb4; font-family: 'Silkscreen', monospace; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; padding-top: 2px; }
 .reward-v { color: #fee761; font-size: 16px; }
 .reward .primary { margin-top: 6px; }
+
+/* Shrine: the event reads like a tablet at a lantern-shrine. */
+.shrine {
+  margin: 36px auto 0; width: 720px; max-width: 720px; padding: 26px 30px 24px; gap: 16px;
+  background: linear-gradient(180deg, #1b1a24 0%, #121219 100%);
+  border: 1px solid #5a4330; outline: 1px solid #0b0b10; box-shadow: 0 0 0 1px #2a2230 inset, 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 90px rgba(99, 199, 177, 0.06);
+}
+.shrine .flavour { margin: 0; font-size: 20px; line-height: 1.4; color: #e4d9c3; }
+.shrine .options button { background: linear-gradient(180deg, #2a2537 0%, #1b1824 100%); border: 1px solid #4a3f5c; color: #e8e0cc; }
+.shrine .options button:hover { border-color: #feae34; color: #fee761; box-shadow: 0 0 18px rgba(254, 174, 52, 0.18); }
