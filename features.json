@@ -61,7 +61,9 @@
     "verify": [
       "e2e: debug-api.spec.ts"
     ],
-    "passes": false
+    "passes": false,
+    "status": "passing",
+    "evidence": "src/ui/debug.ts; e2e/battle.spec.ts drives a whole battle through it"
   },
   {
     "id": "FOUND-008",
@@ -70,7 +72,9 @@
     "verify": [
       "e2e: debug-api.spec.ts"
     ],
-    "passes": false
+    "passes": false,
+    "status": "passing",
+    "evidence": "src/ui/debug.ts readParams; src/ui/store.ts scenarioConfig; src/ui/scenarios.ts"
   },
   {
     "id": "BATTLE-001",
@@ -655,7 +659,9 @@
     "verify": [
       "e2e: battle.spec.ts intent"
     ],
-    "passes": false
+    "passes": false,
+    "status": "passing",
+    "evidence": "src/ui/store.ts intent(); DeckStrip \"next\" chip, Board intent cell and preferred lane; e2e asserts the marker"
   },
   {
     "id": "ENEMY-003",
@@ -701,7 +707,9 @@
       "e2e: battle.spec.ts",
       "shot: battle-wave1"
     ],
-    "passes": false
+    "passes": false,
+    "status": "passing",
+    "evidence": "src/ui/battle/BattleScreen.tsx, DeckStrip.tsx; shots/battle-wave3.png"
   },
   {
     "id": "UI-002",
@@ -710,7 +718,9 @@
     "verify": [
       "shot: card-inspect"
     ],
-    "passes": false
+    "passes": false,
+    "status": "passing",
+    "evidence": "src/ui/battle/CardPanel.tsx; shots/card-inspect.png"
   },
   {
     "id": "UI-003",
@@ -719,7 +729,9 @@
     "verify": [
       "e2e: battle.spec.ts preview"
     ],
-    "passes": false
+    "passes": false,
+    "status": "passing",
+    "evidence": "src/ui/battle/Board.tsx Arrows (previewClash); e2e asserts arrows after a summon"
   },
   {
     "id": "UI-004",
@@ -728,7 +740,9 @@
     "verify": [
       "e2e: battle.spec.ts skip"
     ],
-    "passes": false
+    "passes": false,
+    "status": "passing",
+    "evidence": "src/ui/store.ts frames + advanceTime/skipAnimations; e2e skips them"
   },
   {
     "id": "UI-005",
@@ -737,7 +751,9 @@
     "verify": [
       "e2e: battle.spec.ts full"
     ],
-    "passes": false
+    "passes": false,
+    "status": "passing",
+    "evidence": "e2e/battle.spec.ts"
   },
   {
     "id": "UI-006",
@@ -782,7 +798,9 @@
     "verify": [
       "shots at 1280x720"
     ],
-    "passes": false
+    "passes": false,
+    "status": "passing",
+    "evidence": "shots/battle-wave1.png, battle-wave3.png, card-inspect.png at 1280x720"
   },
   {
     "id": "ART-001",
