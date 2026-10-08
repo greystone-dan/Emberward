@@ -147,3 +147,8 @@ Daniel: "it looks like a windows menu (cards), I want more of a gloomy theme as 
 - Abbot refill capped at two cells (flag), Abbot 6→4 HP; Knight 3/8→2/6, heal capped at 2 (flag). Elite rule texts
   updated; tests updated (refill order and count, heal cap). Numbers and the ten rejected Bell-Keeper nerfs in
   DECISIONS.md, Elite tuning. `npm run check` green (129 tests). Balance report re-run follows.
+- Balance report after the elite tuning (1,000 runs, seed 4): wins Lamplighter 46%, Ferryman 43%, Bell-Keeper 94%;
+  first seat 50% PASS; median 17.5 min PASS; include-win FAIL (Bell-Keeper cards dominate the list because the
+  Bell-Keeper wins); Abyssal 4-tier FAIL. The elites were the only thing the Bell-Keeper lost to, so softening them
+  raised it further: the next loop must take something from the Bell-Keeper itself (candidates: starting HP, starting
+  embers, or a weaker Cracked Bell), measured against the same probe.
