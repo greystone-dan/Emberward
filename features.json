@@ -799,45 +799,50 @@
     "desc": "All 60 card sprites as code, Endesga 32 only, outline and padding rules",
     "verify": [
       "unit: sprites.test.ts",
-      "sheet: reports/sprites-sheet.png"
+      "sheet: reports/sprites-sheet.png",
+      "src/content/sprites/{waxborn,bone-spirit,drowned,bellforged}.ts; sprites.test.ts coverage + validateSprite"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "ART-002",
     "area": "art",
     "desc": "Tokens and Act I enemy sprites",
     "verify": [
-      "sheet reviewed"
+      "sheet reviewed",
+      "src/content/sprites/drowned.ts (tokens), bellforged.ts (e_ units); sprites.test.ts"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "ART-003",
     "area": "art",
     "desc": "Spark, Flame and Fire level effects on cards and in miniature on the board",
     "verify": [
-      "shot: levels"
+      "shot: levels",
+      "src/ui/sprites.tsx rimLight; theme.css mote/crest/aura; shots/levels.png"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "ART-004",
     "area": "art",
     "desc": "Contact sheet reviewed: every sprite reads at x1, no two cards sharing a trait share a silhouette",
     "verify": [
-      "review in PROGRESS.md"
+      "review in PROGRESS.md",
+      "reports/sprites-sheet.png reviewed 2026-10-08 (75 sprites)"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "ART-005",
     "area": "art",
     "desc": "Fonts Pixelify Sans and Silkscreen (OFL) with integer scaling and image-rendering: pixelated",
     "verify": [
-      "shot: battle-wave1"
+      "shot: battle-wave1",
+      "src/main.tsx fontsource imports; theme.css image-rendering; board sprites at x2, card at x4, chips text-only"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "AUDIO-001",
