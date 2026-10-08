@@ -902,10 +902,9 @@
     "area": "balance",
     "desc": "Bands met: no card above 60% include-win-rate, first seat 45-55%, median run 15-25 min, every 4-tier reachable",
     "verify": [
-      "report: reports/balance-latest.md 2026-10-08: include win (run level) PASS, first seat 50% scripted / 54% random PASS, median run to the boss 17.4 min PASS, every 4-tier reached by at least one bot deck PASS",
-      "Caveat logged in PROGRESS.md: overall win rates are 1-9% because the boss is overtuned (Question 4), so the include-win band is weak evidence until the boss is retuned"
+      "report: reports/balance-latest.md 2026-10-08 (seed 3, after the boss fix): first seat 50% PASS, median run to the boss 17.3 min PASS; include win FAIL (Kiln Mortar 79%, Lantern Sentry 72%, Brazier Golem 87%: cards the 88%-winning Bell-Keeper drafts), 4-tiers FAIL (Abyssal never reached by a bot deck). Open until the Bell-Keeper's dominance is tuned."
     ],
-    "passes": true
+    "passes": false
   },
   {
     "id": "SHIP-001",
