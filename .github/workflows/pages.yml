@@ -1,7 +1,9 @@
 name: pages
-# Manual until GitHub Pages is enabled for the repository (Settings → Pages → Source: GitHub Actions),
-# which needs a public repository or GitHub Pro. Switch to `push: branches: [main]` after that.
+# Deploys the demo to GitHub Pages on every push to main (and by hand). Needs a public repository
+# (or GitHub Pro); configure-pages enables Pages itself the first time it runs.
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
