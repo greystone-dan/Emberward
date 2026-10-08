@@ -78,3 +78,6 @@ SPEC.md (v2), PROMPT.md and ART.md reflect these. The research docs and the pitc
 - **The Tide-Caller** is unchanged (43% / 60% / 88%). The greedy AI stays on elites and the boss: with the scripted AI
   on elites the bot's elite rates jump to 51–69%, and elites should feel smarter than fights.
 - Elite rule texts in cards.json changed accordingly (content meaning change, logged here as CLAUDE.md asks).
+- **The Bell-Keeper stays as it is for the demo.** Starting HP 40 or 35, 5 starting embers, and every shield nerf
+  combined (Bellforged 2 → Shield 1, Cracked Bell 2, no Tallow Bulwark) leave the bot at 94–96%: it loses no HP in
+  fights or at the boss, so handicaps that cost HP never bind. Logged as Question 5 for Daniel.
