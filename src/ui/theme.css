@@ -67,7 +67,7 @@ img, canvas { image-rendering: pixelated; image-rendering: crisp-edges; }
 
 /* Board */
 .board { position: relative; }
-.grid { display: grid; grid-template-columns: repeat(4, 112px); grid-template-rows: repeat(3, 70px); gap: 4px; }
+.grid { display: grid; grid-template-columns: repeat(4, 112px); grid-template-rows: repeat(3, 72px); gap: 4px; }
 .lanes { display: grid; grid-template-columns: repeat(4, 112px); gap: 4px; margin: 0; height: 20px; }
 .lane-label { text-align: center; color: var(--muted); font-size: 14px; line-height: 16px; height: 20px; cursor: pointer; border: 2px solid transparent; }
 .lane-label:hover, .lane-label.targetable { color: var(--cyan); border-color: var(--cyan); }
@@ -82,9 +82,9 @@ img, canvas { image-rendering: pixelated; image-rendering: crisp-edges; }
 .cell.dark { background: rgba(104, 56, 108, 0.35); }
 .rowlabel { position: absolute; left: -58px; width: 50px; text-align: right; color: var(--muted); font-size: 13px; cursor: pointer; }
 .rowlabel.targetable { color: var(--cyan); }
-.unit { display: flex; align-items: center; gap: 4px; cursor: pointer; width: 104px; height: 62px; padding: 2px; position: relative; }
+.unit { display: flex; align-items: center; gap: 2px; cursor: pointer; width: 104px; height: 66px; padding: 2px; position: relative; }
 .unit.mine.selected { outline: 2px solid var(--amber); }
-.unit .sprite { width: 48px; height: 48px; flex: none; }
+.unit .sprite { width: 64px; height: 64px; flex: none; }
 .unit .ustats { display: flex; flex-direction: column; font-family: var(--font-num); font-size: 12px; line-height: 14px; }
 .unit .ustats .atk { color: var(--orange); }
 .unit .ustats .hp { color: var(--green); }
@@ -164,8 +164,8 @@ img, canvas { image-rendering: pixelated; image-rendering: crisp-edges; }
 .app.no-anim * { transition: none !important; animation: none !important; }
 
 /* Level effects (ART.md §6): Spark mote, Flame crest and rim, Fire aura. All on a fixed 8fps step. */
-.unit .sprite-wrap { position: relative; width: 48px; height: 48px; flex: none; }
-.unit .sprite-wrap .sprite { width: 48px; height: 48px; display: block; }
+.unit .sprite-wrap { position: relative; width: 64px; height: 64px; flex: none; }
+.unit .sprite-wrap .sprite { width: 64px; height: 64px; display: block; }
 .unit .mote { position: absolute; width: 3px; height: 3px; background: var(--amber); left: 6px; bottom: 4px; animation: mote 1.5s steps(6) infinite; }
 .unit .crest { position: absolute; left: 10px; right: 10px; top: -4px; height: 4px; background: linear-gradient(90deg, transparent 0 20%, var(--orange) 20% 40%, var(--gold) 40% 60%, var(--orange) 60% 80%, transparent 80%); animation: crest 0.5s steps(2) infinite; }
 .unit .aura { position: absolute; inset: -3px; border: 2px solid var(--gold); box-shadow: 0 0 6px 2px rgba(254, 231, 97, 0.5); animation: aura 0.75s steps(3) infinite; pointer-events: none; }

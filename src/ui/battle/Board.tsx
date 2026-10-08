@@ -85,7 +85,7 @@ function UnitView({ st, u, selected, targetable, onClick }: { st: BattleState; u
       title={`${u.name} ${atk}/${hp}`}
     >
       <span className="sprite-wrap">
-        <Sprite unitKey={u.key} level={u.level} scale={1} />
+        <Sprite unitKey={u.key} level={u.level} scale={2} />
         {u.level === 1 && !u.token && <i className="mote" />}
         {u.level === 2 && <i className="crest" />}
         {u.level === 3 && <i className="aura" />}

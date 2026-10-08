@@ -2,7 +2,7 @@ import type { Cell } from '../../core/types';
 
 /** Pixel layout of the board (see theme.css .grid / .lanes / .divider). Arrows and pops use these. */
 export const CELL_W = 112;
-export const CELL_H = 70;
+export const CELL_H = 72;
 export const GAP = 4;
 export const LANE_H = 20;
 export const DIV_H = 14;

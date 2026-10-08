@@ -8,6 +8,13 @@ Append-only. Newest phase summary at the top; the loop log below it.
 2. **Fire level.** Fire is in (stats ×1.5, free spell, the six hand-written lines work). The other 54 Fire lines are not written: reaching Fire needs 9 copies of a card, which a 15-minute Act I run can't do. Recommended: leave Fire by formula for the demo and write the lines for Act II.
 3. **Tokens and traits.** Wisps, Bats, Rubble and Bone Walls don't count toward trait tiers (they aren't cards). Recommended: keep.
 
+## Phase 3: sprites, pass 1 — done (2026-10-08)
+
+- 75 code-authored 32×32 sprites in Endesga 32: all 60 cards, 5 tokens, 9 enemy units and the placeholder, split by Origin in `src/content/sprites/*.ts`. A test checks every card, token and enemy key has a valid sprite (outline, padding, palette, unique ids).
+- `reports/sprites-sheet.png` reviewed at ×1 and ×4: every sprite reads at ×1; Origins have distinct silhouettes (nine Bonebound, fourteen Drowned, twelve Bellforged, seventeen Waxborn checked pairwise by eye). Weakest reads noted for a later pass: Gloomshot's wings, Bone Gnawer's face, Crypt Keeper's spade, Pearl Diver's head, Bell Warden's shield at ×1, Scalding Font's steam.
+- Level effects: Flame and Fire get a pixel rim-light (amber, gold); board units show a Spark mote, Flame crest or Fire aura; card frames iron, bronze, gold. Board sprites now draw at ×2 (integer scaling only), cards at ×4.
+- features.json: 58 passing.
+
 ## Phase 2: playable battle — done (2026-10-08)
 
 - The battle screen is playable with the mouse: both grids, every card of both decks in strips (spent greyed, fielded dashed, the enemy's next play marked "next" with its aimed cell and lane), card inspect with art, traits, both halves and the level frame, Summon by clicking a highlighted cell, Cast with step-by-step targeting (units, lanes, rows, cells, cards), free or paid moves that keep the turn, End Turn (E), trait tiers for both sides, a log, floating damage numbers, and a victory/defeat overlay.
@@ -48,3 +55,8 @@ Append-only. Newest phase summary at the top; the loop log below it.
 **Contract.** UI store (committed state + frame queue from events, selection and targeting, scripted enemy turns, replays), battle screen components (Board with arrows and pops, DeckStrip, CardPanel, SidePanel, HUD), debug API and URL scenarios, fonts, a full-battle Playwright test, screenshot scenarios.
 **Evidence.** `npm run check` green (101 tests); `npx playwright test` 3 passed; `npm run shoot -- battle-wave1 battle-wave3 card-inspect` opened and reviewed (layout holds at 1280×720, arrows land on cells, intent marker reads).
 **Gotchas.** (1) The engine returns only the final state, so beat-by-beat frames project damage and deaths onto a clone of the previous state and the last frame snaps to the true state. (2) `new ImageData(Uint8ClampedArray)` fails TS strict typing with shared buffers; use `ctx.createImageData` and `set`. (3) The enemy's intent is computed on a shallow copy with `turn` forced to the enemy, since `legalActions` returns nothing off-turn. (4) Chip cost badges overlapped names until the chip got top padding.
+
+### 2026-10-08 · Phase 3 sprites pass 1
+**Contract.** One sprite per card, token and enemy as code; registry wired behind ArtProvider; coverage test; contact sheet reviewed; level effects; integer scaling on the board.
+**Evidence.** `npm run check` green (105 tests); `npm run sprites:sheet` → reports/sprites-sheet.png opened and reviewed; `npm run shoot -- battle-wave3 levels` reviewed.
+**Gotchas.** (1) The board drew 32px canvases at 48px CSS, a ×1.5 scale that ART.md forbids; cells grew to 72px so sprites draw at an exact ×2. (2) Drawing 74 sprites in one pass is parallel work: four artists, one file per Origin group, each with its own validate-and-look loop before registering.
