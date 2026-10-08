@@ -247,11 +247,12 @@ function eliteWaveEnd(ctx: Ctx): void {
   const st = ctx.st;
   if (!st.elite) return;
   if (st.elite.kind === 'choirAbbot' && st.units.some((u) => u.side === 1 && u.key === 'e_abbot')) {
-    for (const c of [...unitsOf(st.units, 1)].length < 12 ? emptyCellsOf(st, 1) : []) summonToken(ctx, 1, 'chorister', c);
+    // Lane A first, Front first: the first empty cells in trigger order.
+    for (const c of emptyCellsOf(st, 1).slice(0, FLAGS.abbotRefill)) summonToken(ctx, 1, 'chorister', c);
   }
   if (st.elite.kind === 'brazierKnight' && st.units.some((u) => u.side === 1 && u.key === 'e_brazierKnight')) {
     const burning = st.units.filter((u) => u.burn > 0).length;
-    if (burning > 0) healWarden(ctx, 1, burning);
+    if (burning > 0) healWarden(ctx, 1, Math.min(FLAGS.knightHealCap, burning));
   }
 }
 function emptyCellsOf(st: BattleState, side: Side) {

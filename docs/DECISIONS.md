@@ -62,3 +62,19 @@ SPEC.md (v2), PROMPT.md and ART.md reflect these. The research docs and the pitc
   https://greystone-dan.github.io/Emberward/ (Vite `base: './'`, so the same build runs from any folder or domain).
   No Cloudflare credentials are in the build container, so linking or CNAME-ing the demo from greystoneinteractive.ca
   is Daniel's step.
+
+## Elite tuning (Claude, 2026-10-08; Daniel left balance to Claude's judgement)
+
+- **Where runs are decided.** With the bot playing, every Warden wins 91–100% of ordinary fights and 88–100% of boss
+  fights, so the elites alone separate them: elite win rates were Lamplighter 17%, Ferryman 26%, Bell-Keeper 55%.
+  Ten Bell-Keeper nerfs (Cracked Bell 2, Bulwark 5 HP, deck swaps, Bellforged tiers weakened or moved to 5) each moved
+  its run win rate by 1–4 points, so the Bell-Keeper was left alone and the elites were tuned instead.
+- **The Choir Abbot** was unbeatable for everyone (5% / 3% / 8% of elite fights): a board refilled to 12 units every
+  Wave End can't be reached for face damage without Pierce or Cleave, and buffed Shamblers behind the wall do the rest.
+  It now fills **two** empty cells per Wave End (lane A first, Front first; `FLAGS.abbotRefill`) and has 4 HP so the
+  stated counter (kill the Abbot) is real. Bot elite win rates against it: 16% / 25% / 44%.
+- **The Brazier Knight** was 3/8 and healed one per Burning unit without limit; it killed the non-Burn Ferryman 81% of
+  the time. Now 2/6 and the heal is capped at two per Wave End (`FLAGS.knightHealCap`). Against it: 24% / 24% / 81%.
+- **The Tide-Caller** is unchanged (43% / 60% / 88%). The greedy AI stays on elites and the boss: with the scripted AI
+  on elites the bot's elite rates jump to 51–69%, and elites should feel smarter than fights.
+- Elite rule texts in cards.json changed accordingly (content meaning change, logged here as CLAUDE.md asks).
