@@ -1,15 +1,15 @@
 import { createRoot } from 'react-dom/client';
-import { applyAction, newGame } from './core/state';
 import { cards } from './content/cards';
+import { installDebugApi } from './ui/debug';
 
 function App() {
-  const { state } = applyAction(newGame('dev'), { type: 'gainEmbers', amount: 3 });
   return (
-    <main>
+    <main data-testid="app">
       <h1>Emberward</h1>
-      <p>{cards.length} cards loaded. Embers: {state.embers}</p>
+      <p>{cards.length} cards loaded.</p>
     </main>
   );
 }
 
+installDebugApi();
 createRoot(document.getElementById('root')!).render(<App />);

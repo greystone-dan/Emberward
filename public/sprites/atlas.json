@@ -1,0 +1,10 @@
+{
+  "size": 32,
+  "perRow": 16,
+  "sprites": {
+    "placeholder": {
+      "x": 0,
+      "y": 0
+    }
+  }
+}
