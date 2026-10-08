@@ -59,18 +59,20 @@
     "area": "foundation",
     "desc": "window.__game exposes getState, renderToText, dispatch, legalActions, advanceTime, skipAnimations, loadScenario, exportReplay, importReplay",
     "verify": [
-      "e2e: debug-api.spec.ts"
+      "e2e: debug-api.spec.ts",
+      "src/ui/debug.ts; e2e/battle.spec.ts drives a whole battle through it"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "FOUND-008",
     "area": "foundation",
     "desc": "URL params ?seed=&scenario=&debug=1 are honoured",
     "verify": [
-      "e2e: debug-api.spec.ts"
+      "e2e: debug-api.spec.ts",
+      "src/ui/debug.ts readParams; src/ui/store.ts scenarioConfig; src/ui/scenarios.ts"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "BATTLE-001",
@@ -653,9 +655,10 @@
     "area": "enemies",
     "desc": "Enemy intent markers: next card, aimed cell and preferred lane",
     "verify": [
-      "e2e: battle.spec.ts intent"
+      "e2e: battle.spec.ts intent",
+      "src/ui/store.ts intent(); DeckStrip \"next\" chip, Board intent cell and preferred lane; e2e asserts the marker"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "ENEMY-003",
@@ -699,45 +702,50 @@
     "desc": "Battle screen: both grids, deck strip with every card, brought bright and spent greyed",
     "verify": [
       "e2e: battle.spec.ts",
-      "shot: battle-wave1"
+      "shot: battle-wave1",
+      "src/ui/battle/BattleScreen.tsx, DeckStrip.tsx; shots/battle-wave3.png"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "UI-002",
     "area": "ui",
     "desc": "Card inspect shows both faces, traits, level frame",
     "verify": [
-      "shot: card-inspect"
+      "shot: card-inspect",
+      "src/ui/battle/CardPanel.tsx; shots/card-inspect.png"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "UI-003",
     "area": "ui",
     "desc": "Live Clash preview arrows and damage numbers update as the player acts",
     "verify": [
-      "e2e: battle.spec.ts preview"
+      "e2e: battle.spec.ts preview",
+      "src/ui/battle/Board.tsx Arrows (previewClash); e2e asserts arrows after a summon"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "UI-004",
     "area": "ui",
     "desc": "Event-driven, skippable animations on a fixed tick",
     "verify": [
-      "e2e: battle.spec.ts skip"
+      "e2e: battle.spec.ts skip",
+      "src/ui/store.ts frames + advanceTime/skipAnimations; e2e skips them"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "UI-005",
     "area": "ui",
     "desc": "Playwright plays a full battle through the UI",
     "verify": [
-      "e2e: battle.spec.ts full"
+      "e2e: battle.spec.ts full",
+      "e2e/battle.spec.ts"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "UI-006",
@@ -780,9 +788,10 @@
     "area": "ui",
     "desc": "Layout holds at 1280x720 with no overflow",
     "verify": [
-      "shots at 1280x720"
+      "shots at 1280x720",
+      "shots/battle-wave1.png, battle-wave3.png, card-inspect.png at 1280x720"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "ART-001",

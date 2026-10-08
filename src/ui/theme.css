@@ -1,0 +1,178 @@
+/* Emberward UI theme. Every colour is from Endesga 32 (see src/content/sprites/palette.ts). */
+:root {
+  --bg: #181425;
+  --bg2: #193c3e;
+  --panel: #262b44;
+  --panel2: #3a4466;
+  --line: #5a6988;
+  --text: #ead4aa;
+  --muted: #8b9bb4;
+  --amber: #feae34;
+  --gold: #fee761;
+  --orange: #f77622;
+  --red: #e43b44;
+  --teal: #0099db;
+  --cyan: #2ce8f5;
+  --green: #63c74d;
+  --bone: #c0cbdc;
+  --bronze: #e4a672;
+  --plum: #68386c;
+  --white: #ffffff;
+  --font-ui: 'Pixelify Sans', sans-serif;
+  --font-num: 'Silkscreen', monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font-ui); font-size: 16px; }
+body { min-width: 1280px; min-height: 720px; overflow: hidden; }
+button { font-family: var(--font-ui); font-size: 16px; color: var(--text); background: var(--panel2); border: 2px solid var(--line); padding: 6px 14px; cursor: pointer; }
+button:hover { border-color: var(--amber); }
+button:disabled { opacity: 0.4; cursor: default; }
+button.primary { background: var(--amber); color: var(--bg); border-color: var(--gold); font-weight: 600; }
+img, canvas { image-rendering: pixelated; image-rendering: crisp-edges; }
+
+.app { width: 1280px; height: 720px; margin: 0 auto; position: relative; background: radial-gradient(ellipse at 50% 55%, var(--bg2) 0%, var(--bg) 70%); overflow: hidden; }
+
+/* Battle layout: a 3-column grid, board in the centre. */
+.battle { display: grid; grid-template-columns: 300px 1fr 300px; grid-template-rows: 92px 1fr 118px; width: 1280px; height: 720px; }
+.battle .hud-top { grid-column: 1 / 4; display: flex; align-items: center; gap: 12px; padding: 6px 12px; border-bottom: 2px solid var(--panel2); }
+.battle .hud-bottom { grid-column: 1 / 4; display: flex; align-items: center; gap: 12px; padding: 6px 12px; border-top: 2px solid var(--panel2); }
+.battle .left { padding: 8px; overflow: hidden; }
+.battle .right { padding: 8px; overflow: hidden; border-left: 2px solid var(--panel2); }
+.battle .centre { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+.warden { display: flex; flex-direction: column; min-width: 180px; }
+.warden .name { font-size: 18px; }
+.warden .hp { font-family: var(--font-num); font-size: 14px; }
+.hpbar { height: 10px; width: 180px; background: var(--panel); border: 2px solid var(--line); }
+.hpbar > div { height: 100%; background: var(--red); }
+.hpbar.player > div { background: var(--amber); }
+.embers { font-family: var(--font-num); font-size: 18px; color: var(--amber); white-space: nowrap; }
+.wave { font-size: 20px; color: var(--gold); }
+.turn { font-size: 16px; color: var(--muted); }
+.turn.mine { color: var(--amber); }
+
+/* Deck strip: every card in the battle, as chips. */
+.strip { display: flex; gap: 6px; flex-wrap: nowrap; overflow: hidden; flex: 1; }
+.chip { width: 84px; height: 78px; background: var(--panel); border: 2px solid var(--line); display: flex; flex-direction: column; align-items: center; cursor: pointer; position: relative; padding: 14px 2px 2px; }
+.chip:hover { border-color: var(--gold); }
+.chip.selected { border-color: var(--amber); box-shadow: 0 0 0 2px var(--amber); }
+.chip.spent { opacity: 0.35; cursor: default; filter: grayscale(1); }
+.chip.targetable { border-color: var(--cyan); box-shadow: 0 0 0 2px var(--cyan); }
+.chip .cname { font-size: 11px; line-height: 12px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+.chip .cstats { font-family: var(--font-num); font-size: 10px; color: var(--bone); }
+.chip .cost { position: absolute; top: 2px; right: 3px; font-family: var(--font-num); font-size: 10px; color: var(--amber); }
+.chip .lvl { position: absolute; top: 2px; left: 3px; font-size: 10px; color: var(--gold); }
+.chip.enemy { cursor: default; }
+.chip .intent { position: absolute; bottom: -2px; left: 50%; transform: translateX(-50%); background: var(--teal); color: var(--bg); font-size: 10px; padding: 0 4px; }
+
+/* Board */
+.board { position: relative; }
+.grid { display: grid; grid-template-columns: repeat(4, 112px); grid-template-rows: repeat(3, 70px); gap: 4px; }
+.lanes { display: grid; grid-template-columns: repeat(4, 112px); gap: 4px; margin: 0; height: 20px; }
+.lane-label { text-align: center; color: var(--muted); font-size: 14px; line-height: 16px; height: 20px; cursor: pointer; border: 2px solid transparent; }
+.lane-label:hover, .lane-label.targetable { color: var(--cyan); border-color: var(--cyan); }
+.lane-label.preferred { color: var(--teal); }
+.lane-label.dark { color: var(--plum); text-decoration: line-through; }
+.cell { position: relative; background: rgba(38, 43, 68, 0.6); border: 2px solid var(--panel2); display: flex; align-items: center; justify-content: center; }
+.cell.enemy { background: rgba(25, 60, 62, 0.55); }
+.cell.empty.playable { border-color: var(--amber); cursor: pointer; }
+.cell.empty.playable:hover { background: rgba(254, 174, 52, 0.15); }
+.cell.targetable { border-color: var(--cyan); cursor: pointer; box-shadow: inset 0 0 0 2px var(--cyan); }
+.cell.intent { border-color: var(--teal); box-shadow: inset 0 0 0 2px var(--teal); }
+.cell.dark { background: rgba(104, 56, 108, 0.35); }
+.rowlabel { position: absolute; left: -58px; width: 50px; text-align: right; color: var(--muted); font-size: 13px; cursor: pointer; }
+.rowlabel.targetable { color: var(--cyan); }
+.unit { display: flex; align-items: center; gap: 4px; cursor: pointer; width: 104px; height: 62px; padding: 2px; position: relative; }
+.unit.mine.selected { outline: 2px solid var(--amber); }
+.unit .sprite { width: 48px; height: 48px; flex: none; }
+.unit .ustats { display: flex; flex-direction: column; font-family: var(--font-num); font-size: 12px; line-height: 14px; }
+.unit .ustats .atk { color: var(--orange); }
+.unit .ustats .hp { color: var(--green); }
+.unit .ustats .hp.hurt { color: var(--red); }
+.unit .uname { position: absolute; bottom: 0; left: 2px; right: 2px; font-size: 10px; line-height: 11px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.unit .badges { position: absolute; top: 0; right: 2px; display: flex; gap: 2px; font-family: var(--font-num); font-size: 9px; }
+.badge { padding: 0 2px; color: var(--bg); }
+.badge.shield { background: var(--bronze); }
+.badge.burn { background: var(--orange); }
+.badge.poison { background: var(--green); }
+.badge.stun { background: var(--bone); }
+.badge.taunt { background: var(--cyan); }
+.level-mark { position: absolute; top: 0; left: 2px; font-size: 10px; }
+.level-mark.l2 { color: var(--bronze); }
+.level-mark.l3 { color: var(--gold); }
+
+.arrows { position: absolute; left: 0; top: 0; pointer-events: none; overflow: visible; }
+.arrows text { font-family: var(--font-num); font-size: 11px; }
+.divider { width: 460px; height: 2px; background: var(--line); margin: 6px 0; position: relative; }
+.divider .face { position: absolute; right: -6px; top: -9px; font-size: 12px; color: var(--muted); }
+
+/* Right panel: the inspected card. */
+.card { width: 272px; background: var(--panel); border: 3px solid var(--line); padding: 6px; display: flex; flex-direction: column; gap: 4px; }
+.card.l2 { border-color: var(--bronze); }
+.card.l3 { border-color: var(--gold); }
+.card .title { display: flex; justify-content: space-between; align-items: baseline; font-size: 17px; }
+.card .title .rar { font-size: 11px; color: var(--muted); }
+.card .art { width: 128px; height: 128px; margin: 0 auto; background: var(--bg); display: flex; align-items: center; justify-content: center; border: 2px solid var(--panel2); }
+.card .traits { display: flex; flex-wrap: wrap; gap: 4px; }
+.tchip { font-size: 11px; padding: 0 5px; border: 1px solid; }
+.card .half { border: 2px solid var(--panel2); padding: 4px; font-size: 13px; line-height: 16px; }
+.card .half .head { display: flex; justify-content: space-between; font-family: var(--font-num); font-size: 12px; margin-bottom: 2px; }
+.card .half.spell { border-style: dashed; }
+.card .half.spell .head { color: var(--amber); }
+.card .shape { display: inline-grid; grid-template-columns: repeat(3, 5px); gap: 1px; vertical-align: middle; margin-left: 6px; }
+.card .shape i { width: 5px; height: 5px; background: var(--panel2); display: block; }
+.card .shape i.on { background: var(--cyan); }
+.card .actions { display: flex; gap: 6px; }
+.card .actions button { flex: 1; font-size: 14px; padding: 4px; }
+
+/* Left panel: tiers and the log. */
+.tiers { display: flex; flex-direction: column; gap: 3px; margin-bottom: 8px; }
+.tier { font-size: 13px; display: flex; gap: 6px; align-items: baseline; }
+.tier .n { font-family: var(--font-num); font-size: 11px; }
+.tier .t { color: var(--muted); font-size: 11px; }
+.panel-title { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin: 4px 0; }
+.log { font-size: 12px; line-height: 15px; color: var(--muted); max-height: 190px; overflow: hidden; }
+.log .hot { color: var(--text); }
+.hint { font-size: 14px; color: var(--amber); min-height: 20px; }
+
+/* Floating effects */
+.pop { position: absolute; font-family: var(--font-num); font-size: 16px; pointer-events: none; animation: rise 700ms linear forwards; }
+.pop.dmg { color: var(--red); }
+.pop.heal { color: var(--green); }
+.pop.face { color: var(--gold); font-size: 20px; }
+@keyframes rise { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-28px); opacity: 0; } }
+.app.no-anim .pop { animation: none; display: none; }
+
+.overlay { position: absolute; inset: 0; background: rgba(24, 20, 37, 0.86); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; z-index: 5; }
+.overlay h1 { font-size: 40px; margin: 0; color: var(--gold); }
+.overlay h1.lost { color: var(--red); }
+.overlay p { color: var(--muted); }
+
+/* Additions for the battle screen components. */
+.battle .hud-top .turn { min-width: 220px; max-width: 300px; font-size: 13px; text-align: right; color: var(--teal); }
+.chip .cshape { font-size: 10px; color: var(--muted); }
+.chip.fielded { border-style: dashed; }
+.cell .intent-mark { color: var(--teal); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.unit.targetable { outline: 2px solid var(--cyan); }
+.unit.theirs .uname { color: var(--bone); }
+.card .shape i.me { background: var(--amber); }
+.card .muted { color: var(--muted); font-size: 12px; }
+.battle .end { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; min-width: 240px; }
+.battle .end .hint { text-align: right; font-size: 13px; }
+.battle .end button { font-size: 18px; padding: 8px 18px; }
+.strip.enemy .chip { height: 70px; width: 76px; padding-top: 12px; }
+.app.no-anim * { transition: none !important; animation: none !important; }
+
+/* Level effects (ART.md §6): Spark mote, Flame crest and rim, Fire aura. All on a fixed 8fps step. */
+.unit .sprite-wrap { position: relative; width: 48px; height: 48px; flex: none; }
+.unit .sprite-wrap .sprite { width: 48px; height: 48px; display: block; }
+.unit .mote { position: absolute; width: 3px; height: 3px; background: var(--amber); left: 6px; bottom: 4px; animation: mote 1.5s steps(6) infinite; }
+.unit .crest { position: absolute; left: 10px; right: 10px; top: -4px; height: 4px; background: linear-gradient(90deg, transparent 0 20%, var(--orange) 20% 40%, var(--gold) 40% 60%, var(--orange) 60% 80%, transparent 80%); animation: crest 0.5s steps(2) infinite; }
+.unit .aura { position: absolute; inset: -3px; border: 2px solid var(--gold); box-shadow: 0 0 6px 2px rgba(254, 231, 97, 0.5); animation: aura 0.75s steps(3) infinite; pointer-events: none; }
+@keyframes mote { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-22px); opacity: 0; } }
+@keyframes crest { from { transform: translateX(-2px); } to { transform: translateX(2px); } }
+@keyframes aura { 0% { border-color: var(--orange); } 50% { border-color: var(--gold); } 100% { border-color: var(--orange); } }
+.card.l2 { box-shadow: 0 -3px 0 0 var(--orange); }
+.card.l2 .art { box-shadow: inset 0 0 0 1px var(--amber); }
+.card.l3 { box-shadow: 0 0 0 2px var(--orange), 0 0 10px 2px rgba(254, 231, 97, 0.45); animation: aura 0.75s steps(3) infinite; }
+.card.l3 .art { box-shadow: inset 0 0 0 1px var(--gold); }
