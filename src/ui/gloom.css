@@ -196,3 +196,10 @@ button:disabled { box-shadow: none; }
 .scout .scoutlist { margin: 4px 0 8px; padding-left: 22px; font-size: 20px; line-height: 1.6; }
 .scout .scoutlist li::marker { color: #feae34; }
 .scout .primary { align-self: flex-start; }
+
+/* Crash panel (ErrorBoundary). */
+.crash { position: relative; min-height: 100vh; }
+.crash-panel { padding: 40px; text-align: center; }
+.crash-panel p { max-width: 560px; }
+.crash-panel .crash-detail { font-family: Silkscreen, monospace; font-size: 11px; color: #8b7d6b; }
+.crash-panel .row { display: flex; gap: 12px; }

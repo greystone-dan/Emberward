@@ -187,3 +187,10 @@ Daniel: "it looks like a windows menu (cards), I want more of a gloomy theme as 
 - Fixed from its screenshots: the battle-over line read "A Warden fell. You 50♥ · Enemy -8♥" on a win; it now says
   whose Warden fell and clamps HP at 0. The Scout screen was a bare list over a full-width button; it sits on the
   shrine tablet (shots/run-scout.png, scenario run-scout). Added a pixel-ember favicon (public/favicon.svg).
+
+## Loop: crash safety (2026-10-08)
+- There was no error boundary: a render error would have left Daniel a blank page. `ErrorBoundary` now shows a lit
+  panel ("The lantern gutters.") with Reload and Start fresh (drops the saved run). Debug builds expose
+  `__game.crash()`; e2e covers panel → Start fresh → title (shots/crash.png).
+- A saved run that does not look like a RunState (older build, damaged store) is ignored at boot instead of being
+  resumed; `looksLikeRun` unit-tested.
