@@ -179,7 +179,7 @@ export class GameStore {
     const { state, events } = applyAction(prev, action);
     this.actions.push(action);
     this.state = state;
-    this.enqueue(this.skip ? [{ view: state, pops: [], log: describe(events, prev), ms: 0 }] : buildFrames(prev, events, state, this.nextPop));
+    this.enqueue(this.skip ? [{ view: state, pops: [], log: describe(events, prev, state), ms: 0 }] : buildFrames(prev, events, state, this.nextPop));
   }
   private nextPop = (): number => this.popKey++;
 
@@ -393,15 +393,16 @@ export function sameTarget(a: Target | undefined, b: Target | undefined): boolea
 /** Splits the events of one action into timed frames: the action, each Clash beat, Wave End, then the new wave. */
 function buildFrames(prev: BattleState, events: BattleEvent[], next: BattleState, popKey: () => number): Frame[] {
   const hasBeat = events.some((e) => e.type === 'beat');
-  if (!hasBeat) return [{ view: next, pops: popsOf(events, next, popKey), log: describe(events, prev), ms: ANIM_MS.action }];
+  if (!hasBeat) return [{ view: next, pops: popsOf(events, next, popKey), log: describe(events, prev, next), ms: ANIM_MS.action }];
   const frames: Frame[] = [];
   let view = structuredClone(prev);
   let seg: BattleEvent[] = [];
   let segMs = ANIM_MS.action;
   const close = (ms: number) => {
     if (seg.length === 0) return;
-    frames.push({ view, pops: popsOf(seg, view, popKey), log: describe(seg, view), ms: segMs });
-    view = advanceView(view, seg);
+    view = advanceView(view, seg, next, true);
+    frames.push({ view, pops: popsOf(seg, view, popKey), log: describe(seg, view, next), ms: segMs });
+    view = advanceView(view, seg, next, false);
     seg = [];
     segMs = ms;
   };
@@ -419,9 +420,19 @@ function buildFrames(prev: BattleState, events: BattleEvent[], next: BattleState
   return frames;
 }
 
-/** A rough projection of the board after a segment: damage marks and deaths, so beats read in order. */
-function advanceView(view: BattleState, seg: BattleEvent[]): BattleState {
+/**
+ * A rough projection of the board after a segment: damage marks and deaths, so beats read in order.
+ * With summonsOnly, only units that appear during the segment are added (so the frame can show them).
+ */
+function advanceView(view: BattleState, seg: BattleEvent[], next: BattleState, summonsOnly: boolean): BattleState {
   const v = structuredClone(view);
+  for (const e of seg) {
+    if (e.type === 'summon' && !v.units.some((u) => u.id === e.unit)) {
+      const u = next.units.find((x) => x.id === e.unit);
+      if (u) v.units.push({ ...structuredClone(u), damage: 0, lane: e.cell.lane, row: e.cell.row });
+    }
+  }
+  if (summonsOnly) return v;
   for (const e of seg) {
     if (e.type === 'damage') {
       const u = v.units.find((x) => x.id === e.unit);
@@ -480,8 +491,12 @@ function popsOf(seg: BattleEvent[], view: BattleState, popKey: () => number): Po
 const SIDE_NAME = ['You', 'Enemy'] as const;
 
 /** Human-readable log lines for events. The state is only used to name units. */
-export function describe(events: BattleEvent[], st: BattleState): string[] {
-  const name = (id: number) => st.units.find((u) => u.id === id)?.name ?? `#${id}`;
+export function describe(events: BattleEvent[], st: BattleState, after?: BattleState): string[] {
+  const names = new Map<number, string>();
+  for (const u of st.units) names.set(u.id, u.name);
+  for (const u of after?.units ?? []) names.set(u.id, u.name);
+  for (const e of events) if (e.type === 'summon') names.set(e.unit, e.name);
+  const name = (id: number) => names.get(id) ?? `#${id}`;
   const cell = (c: Cell) => `${LANE_NAMES[c.lane]}-${ROW_NAMES[c.row]}`;
   const out: string[] = [];
   for (const e of events) {
@@ -554,5 +569,6 @@ export function scenarioConfig(seed: string, scenario: string): BattleConfig {
   if (m) return scenarioFight(seed, 0, Number(m[1]));
   const w = /^warden(\d)-fight(\d+)$/.exec(scenario);
   if (w) return scenarioFight(seed, Number(w[1]), Number(w[2]));
+  if (scenario === 'levels') return scenarioFight(seed, 0, 0, [{ key: 'c5', level: 2 }, { key: 'c9', level: 3 }, { key: 'c26', level: 2 }]);
   return scenarioFight(seed, 0, 0);
 }

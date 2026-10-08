@@ -19,6 +19,17 @@ export function applyScenarioSetup(store: GameStore, name: string): void {
     }
     store.skip = wasSkip;
   }
+  if (name === 'levels') {
+    // Put the levelled cards on the board so Spark, Flame and Fire sit side by side.
+    const wasSkip = store.skip;
+    store.skip = true;
+    const cards = store.state.sides[0].cards;
+    const lanes = [0, 1, 2, 3] as const;
+    cards.slice(-3).forEach((c, i) => store.dispatch({ type: 'summon', card: c.uid, lane: lanes[i]!, row: 0 }));
+    store.skip = wasSkip;
+    const last = store.state.sides[0].cards[store.state.sides[0].cards.length - 1];
+    if (last) store.select({ kind: 'card', uid: last.uid, side: 0 });
+  }
   if (name === 'card-inspect') {
     const first = store.state.sides[0].cards[0];
     if (first) store.select({ kind: 'card', uid: first.uid, side: 0 });

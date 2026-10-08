@@ -78,13 +78,18 @@ function UnitView({ st, u, selected, targetable, onClick }: { st: BattleState; u
   const taunt = tauntLanes(st, u).length > 0;
   return (
     <div
-      className={`unit${u.side === 0 ? ' mine' : ' theirs'}${selected ? ' selected' : ''}${targetable ? ' targetable' : ''}`}
+      className={`unit l${u.level}${u.side === 0 ? ' mine' : ' theirs'}${selected ? ' selected' : ''}${targetable ? ' targetable' : ''}`}
       data-testid={`unit-${u.id}`}
       data-name={u.name}
       onClick={(e) => (e.stopPropagation(), onClick())}
       title={`${u.name} ${atk}/${hp}`}
     >
-      <Sprite unitKey={u.key} level={u.level} scale={1} />
+      <span className="sprite-wrap">
+        <Sprite unitKey={u.key} level={u.level} scale={1} />
+        {u.level === 1 && !u.token && <i className="mote" />}
+        {u.level === 2 && <i className="crest" />}
+        {u.level === 3 && <i className="aura" />}
+      </span>
       <div className="ustats">
         <span className="atk">{atk}⚔</span>
         <span className={`hp${hp < max ? ' hurt' : ''}`}>{hp}♥</span>
