@@ -187,3 +187,7 @@ button:disabled { box-shadow: none; }
 .river .slot .face { flex: 1; }
 .river .slot .row, .river .slot > .primary { margin-top: auto; }
 .river .slot .face.relicface { min-height: 120px; }
+
+/* The inspected card in the Drift stays fully on screen, top-aligned beside the deck. */
+.split { align-items: flex-start; }
+.split .face.full { position: sticky; top: 8px; flex: none; }
