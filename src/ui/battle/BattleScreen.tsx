@@ -33,12 +33,17 @@ export function BattleScreen({ store, onRestart, restartLabel = 'Fight again' }:
     if (store.ui.mode === 'summon') return 'Pick a highlighted cell to summon.';
     if (store.ui.mode === 'cast') return 'Pick a target for the spell.';
     if (store.ui.mode === 'move') return 'Pick a highlighted cell to move, or click elsewhere.';
-    return `Your turn: ${n} action${n === 1 ? '' : 's'} left this wave. Summon, cast, or End Turn.`;
+    return `Your turn: ${n} action${n === 1 ? '' : 's'} left this wave. Summon, cast, or End Turn (1-9 picks a card, E ends the turn).`;
   })();
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') store.clearSelection();
       if ((e.key === 'e' || e.key === 'Enter') && myTurn && !store.busy) store.pass();
+      // 1-9 pick the nth unspent card in your deck strip.
+      if (/^[1-9]$/.test(e.key) && myTurn && !store.busy) {
+        const card = store.state.sides[0].cards.filter((c) => !c.spent)[Number(e.key) - 1];
+        if (card) store.clickCard(card.uid, 0);
+      }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);

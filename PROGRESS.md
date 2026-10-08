@@ -175,3 +175,7 @@ Daniel: "it looks like a windows menu (cards), I want more of a gloomy theme as 
 - Drift inspect card no longer runs off the bottom of a 720px window (top-aligned, sticky); shots/run-drift-inspect.png.
 - Balance report seed 5 (1,000 runs): wins 49% / 44% / 95%; first seat 50% PASS; 17.4 min PASS; 4-tiers reachable PASS
   this time (Abyssal reached); include-win FAIL on the Bell-Keeper's cards as before.
+
+## Loop: keyboard (2026-10-08)
+- Battle: 1-9 select the nth unspent card in your strip (then the board highlights cells as with a click); E or
+  Enter ends the turn; Escape clears. The turn hint says so.
