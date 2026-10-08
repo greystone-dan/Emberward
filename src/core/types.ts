@@ -24,6 +24,8 @@ export interface BattleCard {
   sigil?: Trait;
   /** Permanent Hearth upgrades (Temper). */
   temper?: number;
+  /** Scripted phases (the boss): the card can't be played before this wave. */
+  fromWave?: number;
 }
 
 export interface Grant {

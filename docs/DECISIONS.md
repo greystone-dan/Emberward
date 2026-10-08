@@ -42,3 +42,10 @@ SPEC.md (v2), PROMPT.md and ART.md reflect these. The research docs and the pitc
 - **First seat** is side 0 (acts first in wave 1; initiative alternates after) over seat-swapped pairings of the eight designed comps with the scripted AI on both sides, draws excluded; random mirrors are the control.
 - **Median run length** is judged on runs that reach the boss, with measured animation time plus stated human decision times (in the report). A run that dies at node 3 is short by design.
 - **4-tier reachable** means at least one bot deck in 1,000 runs held four cards with the trait; the pool count per trait is reported beside it.
+
+## Balance decisions (Claude, 2026-10-08; Daniel left balance to Claude's judgement)
+
+- **The boss plays its phases.** Battle cards carry an optional `fromWave`; the boss's Kiln Mortar and Lantern Sentry wait for wave 3 and its three Sun Furnaces for wave 5, as cards.json's phase text says. Before this the greedy AI opened with three 5/8 Furnaces and won 99% of boss fights against the bot; after it, bot win rates are Lamplighter 20%, Ferryman 43%, Bell-Keeper 84% (300 runs each, seed 21). Boss HP stays at SPEC's 40 (30 made no measurable difference once phased).
+- **Enemy HP comes from flags.** `FLAGS.enemyHp` is authoritative for elites and the boss; the numbers in cards.json are the designed values and match.
+- **Cracked Bell** did nothing: the board is empty when a battle starts. It now shields units summoned into the Front row during wave 1 (and persisted Front-row units), `FLAGS.crackedBellShield` 3. The Bell-Keeper's win rate hardly moves with it (89-91%): its strength is the Guardian-and-Marksman starting deck, which the pitch calls the safest first draft, so it stays the easy Warden.
+- **The Lamplighter's starting deck** swaps Drift Lantern for Ember Hound (3/2 Swift, Last Gasp Burn 2): the deck had three bodies with 1 Power or less and died in the first three fights. Bot win rate 22% → 42-44% with the Candlewright aura kept.
