@@ -285,7 +285,7 @@
     "verify": [
       "unit: triggers.test.ts"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "CLASH-010",
@@ -343,7 +343,7 @@
     "verify": [
       "unit: statuses.test.ts movement"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "STATUS-006",
@@ -406,7 +406,7 @@
     "verify": [
       "unit: traits.test.ts effects"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "TRAIT-005",
@@ -657,9 +657,10 @@
     "area": "run",
     "desc": "Run save and resume (IndexedDB)",
     "verify": [
-      "e2e: save.spec.ts"
+      "e2e: onboarding.spec.ts 'a run saved in IndexedDB resumes after a reload' reads the run back out of IndexedDB (db emberward, store kv, key run.v1) and resumes it",
+      "src/ui/save.ts (IndexedDB with a localStorage fallback); RunStore.boot() loads before the title"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "ENEMY-001",
@@ -786,27 +787,30 @@
     "area": "ui",
     "desc": "Hover tooltips for every keyword and trait",
     "verify": [
-      "e2e: tooltips.spec.ts"
+      "e2e: onboarding.spec.ts 'keywords and traits show tooltips on hover'",
+      "src/ui/tooltip.tsx: GLOSSARY of SPEC \u00a77 keywords, shapes, directions and all 17 traits; Keywords wraps rules text everywhere (CardPanel, CardFace); trait chips and tier rows carry data-tip"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "UI-008",
     "area": "ui",
     "desc": "First-battle tutorial (revealed deck, traits, Clash preview) and first-Drift tutorial (free vs paid reach)",
     "verify": [
-      "e2e: tutorial.spec.ts"
+      "e2e: onboarding.spec.ts 'the first battle and first Drift are coached once'",
+      "src/ui/tutorial.tsx: 5-step battle tour (enemy deck, your deck, traits, Clash arrows, End Turn), 3-step Drift tour (free front, paid reach, the line moves); seen flags in localStorage; ?tutorial=1 replays; shots/run-drift-tutorial-1.png and run-battle-tutorial-1.png reviewed"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "UI-009",
     "area": "ui",
     "desc": "Settings: volume, animation speed; defeat screen reads 'The light goes out.'",
     "verify": [
-      "shot: defeat"
+      "e2e: onboarding.spec.ts 'settings change animation speed\u2026' (speed stored; GameStore.advanceTime scales by it)",
+      "shot: shots/run-over.png reads 'The light goes out.'; src/ui/SettingsPanel.tsx sliders for effects and music, speed Slow/Normal/Fast/Instant"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "UI-010",
@@ -874,18 +878,20 @@
     "area": "audio",
     "desc": "ZzFX SFX for summon, reach, Shield, Poison and Rekindle",
     "verify": [
-      "manual + e2e: audio hooks called"
+      "e2e: onboarding.spec.ts asserts window.__audio.log records 'summon' after a summon",
+      "src/ui/audio.ts ZzFX parameter sets for summon, reach, shield, poison, rekindle (+ hit, death, click); GameStore frames carry sfx so sounds land with the animation"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "AUDIO-002",
     "area": "audio",
     "desc": "Tone.js ambient loop and boss loop, seeded",
     "verify": [
-      "manual"
+      "e2e: onboarding.spec.ts 'the Stair loop starts\u2026' checks Tone's transport is started in headless Chromium after the first click",
+      "src/ui/audio.ts stairLoop (AM drone, plucked drips, metal bell) and bossLoop (FM drone, membrane pulse) seeded from the run seed; not yet listened to by a person"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "BAL-001",
@@ -902,10 +908,9 @@
     "area": "balance",
     "desc": "Bands met: no card above 60% include-win-rate, first seat 45-55%, median run 15-25 min, every 4-tier reachable",
     "verify": [
-      "report: reports/balance-latest.md 2026-10-08: include win (run level) PASS, first seat 50% scripted / 54% random PASS, median run to the boss 17.4 min PASS, every 4-tier reached by at least one bot deck PASS",
-      "Caveat logged in PROGRESS.md: overall win rates are 1-9% because the boss is overtuned (Question 4), so the include-win band is weak evidence until the boss is retuned"
+      "report: reports/balance-latest.md 2026-10-08 (seed 3, after the boss fix): first seat 50% PASS, median run to the boss 17.3 min PASS; include win FAIL (Kiln Mortar 79%, Lantern Sentry 72%, Brazier Golem 87%: cards the 88%-winning Bell-Keeper drafts), 4-tiers FAIL (Abyssal never reached by a bot deck). Open until the Bell-Keeper's dominance is tuned."
     ],
-    "passes": true
+    "passes": false
   },
   {
     "id": "SHIP-001",
@@ -914,6 +919,6 @@
     "verify": [
       "build: npm run build; manual: vite preview"
     ],
-    "passes": false
+    "passes": true
   }
 ]

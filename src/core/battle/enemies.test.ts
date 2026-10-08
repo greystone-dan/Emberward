@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { FLAGS } from '../../config/flags';
-import { applyAction, newBattle, type BattleConfig } from './battle';
+import { applyAction, legalActions, newBattle, type BattleConfig } from './battle';
+import { bossConfig } from '../run/encounters';
 import { at, card, clash, setup, unit } from '../test/kit';
 import type { BattleState } from '../types';
 
@@ -79,5 +80,26 @@ describe('boss', () => {
     st.sides[1].hp = FLAGS.bossPhase3Hp;
     st = clash(st).state;
     expect(st.boss?.ownLaneDark).toBe(true);
+  });
+});
+
+describe('boss phases and relics', () => {
+  it('a card with fromWave is not playable before that wave', () => {
+    const st = newBattle({ seed: 'p', kind: 'boss', boss: true, player: { hp: FLAGS.playerHp, embers: 10, cards: [] }, enemy: bossConfig() }).state;
+    st.turn = 1;
+    const furnace = st.sides[1].cards.find((c) => c.fromWave === 5)!;
+    expect(legalActions(st, 1).some((a) => a.type === 'summon' && a.card === furnace.uid)).toBe(false);
+    const r = applyAction(st, { type: 'summon', card: furnace.uid, lane: 0, row: 2 });
+    expect(r.state.errors[0]).toMatch(/NOT_YET/);
+    const effigy = st.sides[1].cards.find((c) => c.fromWave === undefined)!;
+    expect(legalActions(st, 1).some((a) => a.type === 'summon' && a.card === effigy.uid)).toBe(true);
+  });
+  it('Cracked Bell shields units summoned into the Front row in wave 1', () => {
+    let st = setup({ playerCards: ['Wandering Squire', 'Wandering Squire'], relics: ['Cracked Bell'] });
+    st = applyAction(st, { type: 'summon', card: card(st, 'Wandering Squire'), lane: 0, row: 0 }).state;
+    expect(at(st, 0, 0, 0)?.shield).toBe(FLAGS.crackedBellShield);
+    st = applyAction(st, { type: 'pass' }).state; // enemy
+    st = applyAction(st, { type: 'summon', card: card(st, 'Wandering Squire'), lane: 1, row: 1 }).state;
+    expect(at(st, 0, 1, 1)?.shield).toBe(0);
   });
 });

@@ -1,0 +1,129 @@
+/*
+ * The gloom pass (Daniel, 2026-10-08): a drowned stair lit by one lantern. Near-black wet stone, warm
+ * torchlight from below, cold light from the enemy's side, deep shadows at the edges, and cards that read
+ * as slate tablets with a lit art window rather than flat boxes. Loaded after theme.css and run.css.
+ * Palette stays Endesga 32; the only new values are alpha blends of it.
+ */
+:root {
+  --ink: #0d0b14;
+  --slate: #141224;
+  --slate2: #1c1a2e;
+  --hair: rgba(228, 166, 114, 0.28);
+  --hair-bright: rgba(228, 166, 114, 0.6);
+  --glow: rgba(254, 174, 52, 0.35);
+}
+html, body { background: var(--ink); }
+
+/* The room: stone, a lantern below, drowned light above, shadow at the edges. */
+.app {
+  background:
+    radial-gradient(ellipse 60% 45% at 50% 108%, rgba(247, 118, 34, 0.22) 0%, rgba(254, 174, 52, 0.08) 35%, transparent 70%),
+    radial-gradient(ellipse 70% 40% at 50% -10%, rgba(18, 78, 137, 0.28) 0%, rgba(25, 60, 62, 0.12) 45%, transparent 75%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.012) 0 2px, transparent 2px 7px),
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.08) 0 1px, transparent 1px 64px),
+    linear-gradient(180deg, #100e1a 0%, var(--ink) 55%, #120f1c 100%);
+}
+.gloom { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.gloom .torch { position: absolute; width: 520px; height: 420px; border-radius: 50%; filter: blur(40px); mix-blend-mode: screen; opacity: 0.55; background: radial-gradient(circle, rgba(254, 174, 52, 0.55) 0%, rgba(247, 118, 34, 0.25) 35%, transparent 70%); animation: flicker 3.1s steps(7) infinite; }
+.gloom .torch.l { left: -120px; bottom: -200px; animation-delay: -1.3s; }
+.gloom .torch.r { right: -120px; bottom: -200px; animation-duration: 3.7s; }
+.gloom .drown { position: absolute; left: 25%; right: 25%; top: -160px; height: 320px; filter: blur(50px); background: radial-gradient(ellipse, rgba(44, 232, 245, 0.16) 0%, rgba(18, 78, 137, 0.12) 40%, transparent 70%); animation: flicker 6s steps(9) infinite reverse; }
+.vignette { position: absolute; inset: 0; pointer-events: none; z-index: 20; background: radial-gradient(ellipse 75% 70% at 50% 50%, transparent 55%, rgba(0, 0, 0, 0.55) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, transparent 12%, transparent 90%, rgba(0, 0, 0, 0.35) 100%); }
+@keyframes flicker { 0% { opacity: 0.5; transform: scale(1); } 30% { opacity: 0.62; transform: scale(1.04); } 55% { opacity: 0.48; transform: scale(0.98); } 80% { opacity: 0.6; transform: scale(1.02); } 100% { opacity: 0.5; transform: scale(1); } }
+.app.no-anim .torch, .app.no-anim .drown { animation: none; }
+.app > .screen, .app > .battle, .app > .overlay { position: relative; z-index: 1; }
+
+/* Type: gold catches the light. */
+.screen h1, .overlay h1, .runbar .rtitle, .wave { text-shadow: 0 0 14px rgba(254, 231, 97, 0.35), 0 2px 0 rgba(0, 0, 0, 0.8); }
+.screen h1.lost, .overlay h1.lost { text-shadow: 0 0 18px rgba(228, 59, 68, 0.5), 0 2px 0 rgba(0, 0, 0, 0.8); }
+
+/* Iron and ember buttons. */
+button { background: linear-gradient(180deg, #2a2640 0%, #181425 100%); border: 2px solid #3a3350; border-top-color: #4a4466; color: var(--bone); box-shadow: 0 3px 0 #0a0810, 0 6px 12px rgba(0, 0, 0, 0.5); }
+button:hover { border-color: var(--bronze); color: var(--text); }
+button:active { transform: translateY(2px); box-shadow: 0 1px 0 #0a0810; }
+button.primary { background: linear-gradient(180deg, var(--gold) 0%, var(--amber) 45%, var(--orange) 100%); color: var(--ink); border-color: #b86f1a; border-top-color: #ffe9a0; box-shadow: 0 3px 0 #7a3f0e, 0 0 16px var(--glow); text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35); }
+button.primary:hover { border-color: var(--gold); box-shadow: 0 3px 0 #7a3f0e, 0 0 24px rgba(254, 174, 52, 0.6); }
+button:disabled { box-shadow: none; }
+
+/* Panels: slate with a bronze hairline, not window chrome. */
+.runbar { border-bottom: 1px solid var(--hair); background: linear-gradient(180deg, rgba(0, 0, 0, 0.35), transparent); padding: 6px 4px 8px; }
+.battle .hud-top { border-bottom: 1px solid var(--hair); background: linear-gradient(180deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.1)); }
+.battle .hud-bottom { border-top: 1px solid var(--hair); background: linear-gradient(0deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.1)); }
+.battle .right { border-left: 1px solid rgba(228, 166, 114, 0.15); }
+.hpbar { background: var(--ink); border: 1px solid #3a3350; box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.8); height: 12px; }
+.hpbar > div { background: linear-gradient(180deg, #ff6b6b, var(--red) 60%, #9c2a32); box-shadow: 0 0 8px rgba(228, 59, 68, 0.5); }
+.hpbar.player > div { background: linear-gradient(180deg, var(--gold), var(--amber) 60%, var(--orange)); box-shadow: 0 0 8px var(--glow); }
+.panel-title { color: var(--bronze); opacity: 0.8; border-bottom: 1px solid rgba(228, 166, 114, 0.15); padding-bottom: 2px; }
+
+/* Cards: slate tablets, lit art window, bronze edge. */
+.face, .card, .chip, .wardencard, .modal, .coach-card, .tooltip {
+  background: linear-gradient(170deg, var(--slate2) 0%, var(--slate) 55%, #0f0d19 100%);
+  border: 1px solid var(--hair);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), inset 0 0 0 1px rgba(0, 0, 0, 0.6), 0 8px 18px rgba(0, 0, 0, 0.55);
+}
+.face { padding: 4px; border-radius: 2px; }
+.face.full { padding: 7px; }
+.face .fhead { padding: 1px 3px; background: linear-gradient(90deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.15)); border-bottom: 1px solid rgba(228, 166, 114, 0.2); }
+.face .fname { color: var(--gold); }
+.face .frar { color: var(--bronze); font-family: var(--font-num); font-size: 10px; }
+.face .fart, .card .art, .minisprite {
+  background: radial-gradient(ellipse at 50% 60%, #1f3a3c 0%, #122225 45%, var(--ink) 100%);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.9), inset 0 -10px 16px rgba(247, 118, 34, 0.08);
+}
+.face .ftraits, .card .traits { padding: 0 2px; }
+.tchip { border-radius: 1px; background: rgba(0, 0, 0, 0.45); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5); }
+.face .fstats, .chip .cstats { color: var(--text); padding: 0 3px; }
+.face .half, .card .half { border: 1px solid rgba(228, 166, 114, 0.18); background: rgba(0, 0, 0, 0.3); }
+.face .half.spell, .card .half.spell { border-style: solid; border-color: rgba(254, 174, 52, 0.3); background: linear-gradient(180deg, rgba(254, 174, 52, 0.06), rgba(0, 0, 0, 0.3)); }
+.face.clickable:hover, .chip:hover { border-color: var(--hair-bright); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 0 14px var(--glow), 0 10px 20px rgba(0, 0, 0, 0.6); transform: translateY(-2px); }
+.face.clickable, .chip { transition: transform 120ms ease, box-shadow 120ms ease; }
+.face.selected, .chip.selected { border-color: var(--amber); box-shadow: 0 0 0 1px var(--amber), 0 0 18px var(--glow); }
+.face.l2, .card.l2, .chip.l2 { border-color: rgba(247, 118, 34, 0.7); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 10px rgba(247, 118, 34, 0.3), 0 8px 18px rgba(0, 0, 0, 0.55); }
+.face.l3, .card.l3, .chip.l3 { border-color: var(--gold); box-shadow: 0 0 0 1px rgba(254, 231, 97, 0.5), 0 0 16px rgba(254, 231, 97, 0.4), 0 8px 18px rgba(0, 0, 0, 0.55); }
+.face .fprice { background: var(--ink); border: 1px solid var(--amber); box-shadow: 0 0 6px var(--glow); }
+.face .fprice.free { box-shadow: 0 0 6px rgba(99, 199, 77, 0.4); }
+.card .title { color: var(--gold); border-bottom: 1px solid rgba(228, 166, 114, 0.2); padding-bottom: 2px; }
+.card .art { width: 136px; height: 136px; }
+.chip { border-radius: 2px; }
+.chip .cname { color: var(--text); }
+.chip.spent { filter: grayscale(1) brightness(0.6); }
+
+/* The board: wet stone slabs; the player's side warmed by the lantern, the enemy's by drowned light. */
+.cell { background: linear-gradient(165deg, #1a1828 0%, #110f1b 100%); border: 1px solid #2a2740; box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.035); border-radius: 1px; }
+.cell.mine { background: linear-gradient(165deg, #1c1826 0%, #141019 100%); box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.75), inset 0 -3px 10px rgba(247, 118, 34, 0.06); }
+.cell.enemy { background: linear-gradient(165deg, #15232a 0%, #0e171b 100%); border-color: #223238; box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.8), inset 0 3px 10px rgba(44, 232, 245, 0.04); }
+.cell.empty.playable { border-color: rgba(254, 174, 52, 0.7); box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.75), inset 0 0 0 1px rgba(254, 174, 52, 0.25), 0 0 8px var(--glow); }
+.cell.empty.playable:hover { background: linear-gradient(165deg, #2a2030 0%, #1a141c 100%); }
+.cell.dark { background: linear-gradient(165deg, #1a0f1c 0%, #0d070f 100%); border-color: #3a2140; box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.9); }
+.cell.dark .unit { filter: brightness(0.55) saturate(0.6); }
+.divider { height: 3px; background: linear-gradient(90deg, transparent, var(--bronze) 20%, var(--gold) 50%, var(--bronze) 80%, transparent); box-shadow: 0 0 12px rgba(254, 174, 52, 0.4); opacity: 0.8; }
+.unit .sprite, .unit .sprite-wrap .sprite { filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.8)); }
+.unit.theirs .sprite { filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.8)) brightness(0.92); }
+.rowlabel, .lane-label { color: #6a7390; text-shadow: 0 1px 0 #000; }
+
+/* Lines, rivers, maps. */
+.river { background: linear-gradient(180deg, rgba(10, 30, 36, 0.85) 0%, rgba(12, 44, 70, 0.35) 60%, rgba(18, 78, 137, 0.12) 100%); border: 1px solid rgba(44, 232, 245, 0.14); box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.6), inset 0 -20px 30px rgba(44, 232, 245, 0.05); }
+.mapwrap { background: radial-gradient(ellipse at 50% 100%, rgba(247, 118, 34, 0.08), transparent 60%), rgba(10, 8, 16, 0.75); border: 1px solid var(--hair); box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8); }
+.wardencard { padding: 12px; }
+.wardencard h2 { color: var(--gold); }
+.log { color: #7f8aa6; }
+.log .hot { color: var(--text); text-shadow: 0 0 6px rgba(254, 174, 52, 0.25); }
+.overlay { background: radial-gradient(ellipse at 50% 60%, rgba(24, 20, 37, 0.7), rgba(8, 6, 12, 0.94)); }
+.modal-back { background: rgba(8, 6, 12, 0.72); }
+.tooltip { border-color: var(--amber); }
+.coach-card { border-color: var(--gold); }
+
+/* Title: the lantern. */
+.screen.title { gap: 6px; }
+.screen.title h1 { font-size: 72px; margin: 0; color: var(--gold); text-shadow: 0 0 24px rgba(254, 174, 52, 0.55), 0 0 60px rgba(247, 118, 34, 0.3), 0 3px 0 #3a2208; }
+.screen.title .lantern { margin-bottom: -8px; filter: drop-shadow(0 0 22px rgba(254, 174, 52, 0.75)) drop-shadow(0 10px 8px rgba(0, 0, 0, 0.9)); animation: lanternglow 2.4s steps(6) infinite; }
+.app.no-anim .screen.title .lantern { animation: none; }
+@keyframes lanternglow { 0% { filter: drop-shadow(0 0 18px rgba(254, 174, 52, 0.6)) drop-shadow(0 10px 8px rgba(0, 0, 0, 0.9)); } 50% { filter: drop-shadow(0 0 30px rgba(254, 174, 52, 0.9)) drop-shadow(0 10px 8px rgba(0, 0, 0, 0.9)); } 100% { filter: drop-shadow(0 0 18px rgba(254, 174, 52, 0.6)) drop-shadow(0 10px 8px rgba(0, 0, 0, 0.9)); } }
+.screen.title .tag { color: var(--bronze); font-style: italic; }
+.screen.title .row { margin-top: 10px; }
+.screen.title .row button { font-size: 20px; padding: 10px 26px; }
+.embers-rise { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.embers-rise i { position: absolute; bottom: -10px; width: 3px; height: 3px; background: var(--amber); box-shadow: 0 0 6px var(--orange); opacity: 0; animation: ember 7s steps(28) infinite; }
+@keyframes ember { 0% { transform: translate(0, 0); opacity: 0; } 10% { opacity: 0.9; } 60% { opacity: 0.6; } 100% { transform: translate(40px, -560px); opacity: 0; } }
+.app.no-anim .embers-rise i { animation: none; opacity: 0.6; transform: translate(10px, -200px); }

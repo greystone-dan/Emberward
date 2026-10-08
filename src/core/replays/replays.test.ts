@@ -5,8 +5,8 @@ import { renderToText } from '../battle/render';
 
 describe('golden replays', () => {
   const replays = golden as Replay[];
-  it('has replays for every Warden and fight', () => {
-    expect(replays.length).toBe(24);
+  it('has replays for every Warden and fight, plus the regressions', () => {
+    expect(replays.length).toBe(25); // 24 Warden-fight games + the Martyr 2 regression
   });
   for (const r of replays) {
     it(`${r.name} replays to the same state`, () => {

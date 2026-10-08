@@ -35,6 +35,8 @@ export const FLAGS = {
   bossPhase2Hp: 26,
   bossPhase3Hp: 12,
   kilnBreathBurn: 3,
+  /** Cracked Bell (the Bell-Keeper): Shield on Front-row units that start the battle there (wave 1 summons included). */
+  crackedBellShield: 3,
   poisonDecays: true,
   triggerQueueCap: 200,
   /** When a unit loses derived max HP (Kinship, Brawler, Abyssal), it keeps at least 1 HP rather than dying. */

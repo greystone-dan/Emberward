@@ -177,3 +177,26 @@ img, canvas { image-rendering: pixelated; image-rendering: crisp-edges; }
 .card.l2 .art { box-shadow: inset 0 0 0 1px var(--amber); }
 .card.l3 { box-shadow: 0 0 0 2px var(--orange), 0 0 10px 2px rgba(254, 231, 97, 0.45); animation: aura 0.75s steps(3) infinite; }
 .card.l3 .art { box-shadow: inset 0 0 0 1px var(--gold); }
+
+/* Phase 7: tooltips, settings, coach */
+.kw { color: var(--gold); border-bottom: 1px dotted var(--gold); cursor: help; }
+.tooltip { position: absolute; transform: translateX(-50%); width: 300px; padding: 8px 10px; background: var(--bg); color: var(--text); border: 2px solid var(--amber); font-size: 14px; line-height: 18px; z-index: 40; pointer-events: none; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6); }
+.gear { position: absolute; top: 6px; right: 8px; z-index: 30; padding: 2px 8px; font-size: 18px; line-height: 22px; background: transparent; border-color: transparent; color: var(--muted); }
+.gear:hover { color: var(--amber); border-color: var(--amber); }
+.modal-back { position: absolute; inset: 0; background: rgba(24, 20, 37, 0.7); z-index: 35; display: flex; align-items: center; justify-content: center; }
+.modal { background: var(--panel); border: 2px solid var(--line); padding: 18px 22px; width: 460px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7); }
+.modal h2 { margin: 0; color: var(--gold); font-size: 24px; }
+.modal label { display: grid; grid-template-columns: 130px 1fr 50px; align-items: center; gap: 10px; }
+.modal input[type='range'] { accent-color: var(--amber); }
+.modal .val { font-family: var(--font-num); font-size: 12px; color: var(--muted); text-align: right; }
+.modal .speedrow { display: flex; align-items: center; gap: 6px; }
+.modal .speedrow span { width: 130px; }
+.modal .row { display: flex; justify-content: flex-end; gap: 8px; }
+button.small { padding: 3px 10px; font-size: 14px; }
+.coach { position: absolute; inset: 0; z-index: 32; pointer-events: none; }
+.coach-ring { position: absolute; border: 3px solid var(--gold); box-shadow: 0 0 0 4000px rgba(24, 20, 37, 0.45), 0 0 18px var(--amber); pointer-events: none; }
+.coach-card { background: var(--bg); border: 2px solid var(--gold); padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; pointer-events: auto; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7); }
+.coach-title { color: var(--gold); font-size: 18px; font-weight: 600; }
+.coach-text { font-size: 15px; line-height: 20px; }
+.coach-card .row { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+.coach-card .row .muted { margin-right: auto; font-family: var(--font-num); font-size: 12px; }

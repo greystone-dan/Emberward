@@ -37,7 +37,7 @@ export function eliteConfig(index: number): BattleSideConfig {
   const e = content.elites[index % content.elites.length]!;
   const deck = ELITE_DECKS[index % ELITE_DECKS.length]!;
   return {
-    hp: e.hp || FLAGS.enemyHp.elite,
+    hp: FLAGS.enemyHp.elite,
     embers: 4,
     cards: deck.map((n) => ({ key: keyFor(n), level: 1 as const })),
     wardenName: e.name,
@@ -46,11 +46,13 @@ export function eliteConfig(index: number): BattleSideConfig {
 }
 
 export function bossConfig(): BattleSideConfig {
-  const deck = ['e_waxen', 'e_thief', 'e_waxen', 'e_thief', 'Kiln Mortar', 'Lantern Sentry', 'The Sun Furnace', 'The Sun Furnace', 'The Sun Furnace'];
+  // Scripted phases (cards.json → boss.phases): Effigies and Thieves first, the Mortar and Sentry from wave 3,
+  // the Sun Furnaces only in the last two waves.
+  const deck: [string, number][] = [['e_waxen', 1], ['e_thief', 1], ['e_waxen', 1], ['e_thief', 1], ['Kiln Mortar', 3], ['Lantern Sentry', 3], ['The Sun Furnace', 5], ['The Sun Furnace', 5], ['The Sun Furnace', 5]];
   return {
-    hp: content.boss.hp || FLAGS.enemyHp.boss,
+    hp: FLAGS.enemyHp.boss,
     embers: 5,
-    cards: deck.map((n) => ({ key: keyFor(n), level: 1 as const })),
+    cards: deck.map(([n, w]) => ({ key: keyFor(n), level: 1 as const, fromWave: w > 1 ? w : undefined })),
     wardenName: content.boss.name,
   };
 }

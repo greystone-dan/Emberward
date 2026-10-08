@@ -44,13 +44,14 @@ export function isBattleScenario(name: string): boolean {
 
 /**
  * Run scenarios for screenshots and tests. The bot plays until the named phase is on screen.
- * - run-warden: the Warden select. run-drift: the opening Drift. run-map / run-muster / run-market /
+ * - run-title: the title screen. run-warden: the Warden select. run-drift: the opening Drift. run-map / run-muster / run-market /
  *   run-hearth / run-shrine / run-reward: the first such screen the bot reaches. run-battle: a run battle.
  */
 export function applyRunScenario(store: import('./runStore').RunStore, name: string): void {
   const m = /^run-(\w+)$/.exec(name);
   if (!m) return;
   const want = m[1]!;
+  if (want === 'title') return;
   store.newRun();
   if (want === 'warden') return;
   store.dispatch({ type: 'chooseWarden', warden: 0 });

@@ -1,6 +1,7 @@
 import { activeTiers, traitCounts } from '../../core/battle/stats';
 import { content } from '../../content/cards';
 import type { BattleState, Side } from '../../core/types';
+import { traitTip } from '../tooltip';
 
 /** Active trait tiers for both sides and the battle log. */
 export function SidePanel({ state, log }: { state: BattleState; log: string[] }) {
@@ -33,7 +34,7 @@ function Tiers({ state, side, title }: { state: BattleState; side: Side; title: 
           const tier = active.get(trait);
           const next = def.tiers.find((t) => t.n > n);
           return (
-            <div key={trait} className="tier" style={{ color: tier ? def.col : undefined }} title={def.tiers.map((t) => `${t.n}: ${t.text}`).join('\n')}>
+            <div key={trait} className="tier" style={{ color: tier ? def.col : undefined }} data-tip={traitTip(trait)}>
               <span className="n">{n}</span>
               <span>{trait}</span>
               <span className="t">{tier ? def.tiers.find((t) => t.n === tier)?.text : next ? `(${next.n} for a bonus)` : ''}</span>

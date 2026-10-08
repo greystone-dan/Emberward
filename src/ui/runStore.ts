@@ -3,13 +3,15 @@ import { applyRunAction, legalRunActions, newRun, type RunOptions } from '../cor
 import type { RunAction, RunEvent, RunState } from '../core/run/types';
 import type { Action } from '../core/types';
 import { GameStore } from './store';
+import { music, sfx } from './audio';
+import { kvDel, kvGet, kvSet } from './save';
 
 /**
  * The run store: the RunState, the battle store while a battle is on, and save/resume.
  * Every change goes through applyRunAction; battle actions taken in the GameStore are mirrored here.
  */
 
-const SAVE_KEY = 'emberward.run.v1';
+const SAVE_KEY = 'run.v1';
 const UNLOCK_KEY = 'emberward.unlocks.v1';
 
 export type Screen = 'title' | RunState['phase'];
@@ -26,6 +28,8 @@ export class RunStore {
   private version = 0;
   private seed: string;
   private skip = false;
+  /** The saved run loaded at boot (IndexedDB), kept so the title can offer Continue synchronously. */
+  private saved: RunState | null = null;
 
   constructor(seed: string) {
     this.seed = seed;
@@ -53,12 +57,15 @@ export class RunStore {
     }
   }
 
+  /** Loads the saved run from IndexedDB before the first render. */
+  async boot(): Promise<void> {
+    const r = await kvGet<RunState>(SAVE_KEY);
+    this.saved = r && r.phase !== 'over' ? r : null;
+    this.emit();
+  }
+
   hasSave(): boolean {
-    try {
-      return typeof localStorage !== 'undefined' && localStorage.getItem(SAVE_KEY) !== null;
-    } catch {
-      return false;
-    }
+    return this.saved !== null;
   }
 
   newRun(seed = this.seed): void {
@@ -70,21 +77,17 @@ export class RunStore {
   }
 
   resume(): boolean {
-    try {
-      const raw = localStorage.getItem(SAVE_KEY);
-      if (!raw) return false;
-      this.run = JSON.parse(raw) as RunState;
-      this.screen = this.run.phase;
-      this.sync();
-      return true;
-    } catch {
-      return false;
-    }
+    if (!this.saved) return false;
+    this.run = structuredClone(this.saved);
+    this.screen = this.run.phase;
+    this.sync();
+    return true;
   }
 
   toTitle(): void {
     this.stopBattle();
     this.screen = 'title';
+    music(null);
     this.emit();
   }
 
@@ -99,6 +102,11 @@ export class RunStore {
     const { state, events } = applyRunAction(this.run, action, this.options());
     this.run = state;
     this.events.push(...events);
+    for (const e of events) {
+      if (e.type === 'draft' && e.price > 0) sfx('reach');
+      else if (e.type === 'rekindle') sfx('rekindle');
+      else if (e.type === 'buy' || e.type === 'relic' || e.type === 'sigil') sfx('click');
+    }
     if (this.events.length > 200) this.events.splice(0, this.events.length - 200);
     this.picking = null;
     this.sync();
@@ -169,6 +177,7 @@ export class RunStore {
       this.screen = run.phase;
     }
     if (run.phase === 'over' && run.won) this.unlockSexton();
+    music(run.phase === 'over' ? null : run.phase === 'battle' && run.battleConfig?.kind === 'boss' ? 'boss' : 'stair', run.seed);
     this.save();
     this.emit();
   }
@@ -191,12 +200,12 @@ export class RunStore {
   }
 
   private save(): void {
-    try {
-      if (typeof localStorage === 'undefined') return;
-      if (this.run && this.run.phase !== 'over') localStorage.setItem(SAVE_KEY, JSON.stringify(this.run));
-      else localStorage.removeItem(SAVE_KEY);
-    } catch {
-      /* private mode */
+    if (this.run && this.run.phase !== 'over') {
+      this.saved = this.run;
+      void kvSet(SAVE_KEY, this.run);
+    } else {
+      this.saved = null;
+      void kvDel(SAVE_KEY);
     }
   }
 

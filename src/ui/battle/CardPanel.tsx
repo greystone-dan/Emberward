@@ -7,6 +7,7 @@ import { cardIdOf } from '../../core/battle/defs';
 import type { BattleState, Level } from '../../core/types';
 import { Sprite } from '../sprites';
 import type { GameStore } from '../store';
+import { Keywords, traitTip } from '../tooltip';
 
 const SHAPE_CELLS: Record<Shape, number[]> = {
   // 3x3 mini grid, the attacker at the bottom centre (index 7). Lit cells show what the shape reaches.
@@ -66,7 +67,7 @@ export function CardPanel({ store, state }: { store: GameStore; state: BattleSta
       </div>
       <div className="traits">
         {def.traits.map((t) => (
-          <span key={t} className="tchip" style={{ color: content.traits[t].col, borderColor: content.traits[t].col }} title={content.traits[t].what}>
+          <span key={t} className="tchip" style={{ color: content.traits[t].col, borderColor: content.traits[t].col }} data-tip={traitTip(t)}>
             {t}
           </span>
         ))}
@@ -81,7 +82,9 @@ export function CardPanel({ store, state }: { store: GameStore; state: BattleSta
             </span>
             <span>{unit ? `${isRooted(state, unit) ? 'Rooted' : `Swift ${swiftOf(state, unit)}`}` : ''}</span>
           </div>
-          <div>{def.text || SHAPE_TEXT[def.shape]}</div>
+          <div>
+            <Keywords text={def.text || SHAPE_TEXT[def.shape]} />
+          </div>
           {unit && kinship(state, unit) > 0 && <div className="muted">Kinship +{kinship(state, unit)}/+{kinship(state, unit)} from neighbours.</div>}
         </div>
       )}
@@ -91,7 +94,9 @@ export function CardPanel({ store, state }: { store: GameStore; state: BattleSta
             <span>{def.spellName}</span>
             <span>{cost}✦</span>
           </div>
-          <div>{def.spellText}</div>
+          <div>
+            <Keywords text={def.spellText} />
+          </div>
         </div>
       )}
       {canAct && (

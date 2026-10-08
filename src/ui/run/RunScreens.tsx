@@ -10,6 +10,7 @@ import { defFor, cardKey } from '../../core/battle/defs';
 import { Sprite } from '../sprites';
 import type { RunStore } from '../runStore';
 import { CardFace } from './CardFace';
+import { Coach, tutorialWanted } from '../tutorial';
 import { eliteConfig, bossConfig, fightConfig } from '../../core/run/encounters';
 
 // ---------- shared ----------
@@ -115,6 +116,14 @@ export function SigilPicker({ store, run }: { store: RunStore; run: RunState }) 
 export function TitleScreen({ store }: { store: RunStore }) {
   return (
     <div className="screen title" data-testid="title">
+      <div className="embers-rise" aria-hidden>
+        {Array.from({ length: 14 }, (_, i) => (
+          <i key={i} style={{ left: `${8 + i * 6.3}%`, animationDelay: `${(i * 0.53) % 7}s`, animationDuration: `${6 + (i % 4)}s` }} />
+        ))}
+      </div>
+      <div className="lantern">
+        <Sprite unitKey="placeholder" level={1} scale={5} />
+      </div>
       <h1>Emberward</h1>
       <p className="tag">Carry the lantern down the drowned stair.</p>
       <div className="row">
@@ -170,6 +179,7 @@ export function WardenSelect({ store, run }: { store: RunStore; run: RunState })
 export function DriftScreen({ store, run }: { store: RunStore; run: RunState }) {
   const [inspect, setInspect] = useState<number | null>(null);
   const opening = run.visited.length === 0;
+  const [coach, setCoach] = useState(() => tutorialWanted('drift'));
   const canSkip = store.legal().some((a) => a.type === 'driftSkip');
   return (
     <div className="screen" data-testid="drift">
@@ -204,6 +214,7 @@ export function DriftScreen({ store, run }: { store: RunStore; run: RunState }) 
       </div>
       <RekindleModal store={store} run={run} />
       <SigilPicker store={store} run={run} />
+      {coach && run.rekindle.length === 0 && <Coach tour="drift" onDone={() => setCoach(false)} />}
     </div>
   );
 }

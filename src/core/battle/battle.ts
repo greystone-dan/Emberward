@@ -17,7 +17,7 @@ export interface BattleSideConfig {
   hp: number;
   embers: number;
   /** Cards brought to the battle (after Muster). */
-  cards: { key: string; level: Level; sigil?: import('../../content/types').Trait; temper?: number }[];
+  cards: { key: string; level: Level; sigil?: import('../../content/types').Trait; temper?: number; fromWave?: number }[];
   relics?: string[];
   wardenName?: string;
   /** Units already on the board (Persist, elite signature units). */
@@ -36,7 +36,7 @@ export interface BattleConfig {
 }
 
 function sideState(cfg: BattleSideConfig, uidBase: number): SideState {
-  const cards: BattleCard[] = cfg.cards.map((c, i) => ({ uid: uidBase + i, key: c.key, level: c.level, spent: false, sigil: c.sigil, temper: c.temper }));
+  const cards: BattleCard[] = cfg.cards.map((c, i) => ({ uid: uidBase + i, key: c.key, level: c.level, spent: false, sigil: c.sigil, temper: c.temper, fromWave: c.fromWave }));
   return {
     hp: cfg.hp,
     maxHp: cfg.hp,
@@ -96,9 +96,9 @@ export function newBattle(cfg: BattleConfig): { state: BattleState; events: Batt
     }
   }
   startWave(ctx, 1);
-  // Cracked Bell: Front row starts with Shield 3. Bronze Abbess Flame: start with Shield 2.
+  // Cracked Bell: units that start the battle in the Front row (persisted or summoned in wave 1) have Shield 3.
   for (const side of [0, 1] as Side[]) {
-    if (hasRelic(st, side, 'Cracked Bell')) for (const u of unitsOf(st.units, side)) if (u.row === 0) u.shield += 3;
+    if (hasRelic(st, side, 'Cracked Bell')) for (const u of unitsOf(st.units, side)) if (u.row === 0) u.shield += FLAGS.crackedBellShield;
   }
   return { state: st, events: ctx.events };
 }
@@ -222,7 +222,7 @@ export function legalActions(st: BattleState, side: Side = st.turn): Action[] {
   const s = st.sides[side];
   const empties = emptyCells(st.units, side);
   for (const card of s.cards) {
-    if (card.spent) continue;
+    if (card.spent || (card.fromWave !== undefined && st.wave < card.fromWave)) continue;
     const def = defFor(card.key, card.level);
     for (const c of empties) out.push({ type: 'summon', card: card.uid, lane: c.lane, row: c.row });
     if (def.spell && st.wave > s.noSpellsUntilWave && spellCost(st, side, card) <= s.embers) {
@@ -265,9 +265,11 @@ export function applyAction(input: BattleState, action: Action): ApplyResult {
     case 'summon': {
       const card = s.cards.find((c) => c.uid === action.card);
       if (!card || card.spent) return fail(ctx, 'NO_SUCH_CARD');
+      if (card.fromWave !== undefined && st.wave < card.fromWave) return fail(ctx, 'NOT_YET');
       if (unitAt(st.units, side, action.lane, action.row)) return fail(ctx, 'CELL_OCCUPIED');
       const u = makeUnit(ctx, side, card.key, card.level, { lane: action.lane as Lane, row: action.row as Row }, card.uid);
       if (card.sigil && !u.traits.includes(card.sigil)) u.extraTraits.push(card.sigil);
+      if (st.wave === 1 && action.row === 0 && hasRelic(st, side, 'Cracked Bell')) u.shield += FLAGS.crackedBellShield;
       if (card.temper) {
         u.buffAtk += card.temper;
         u.buffHp += card.temper;

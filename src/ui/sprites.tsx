@@ -23,7 +23,8 @@ export function Sprite({ unitKey, level = 1, scale = 2 }: { unitKey: string; lev
     // ART.md level effects: Flame gets a warm rim-light along the outline, Fire a gold one.
     if (level >= 2) rimLight(ctx, sprite, scale, level === 2 ? '#feae34' : '#fee761');
     // Until a card has its own sprite, tint the placeholder with the Origin colour of its first trait.
-    if (sprite.id === 'placeholder') {
+    // (The lantern itself, asked for by its own id, stays untinted.)
+    if (sprite.id === 'placeholder' && unitKey !== 'placeholder') {
       const id = cardIdOf(unitKey);
       const def = defFor(unitKey, level);
       const trait = def.traits[0];
