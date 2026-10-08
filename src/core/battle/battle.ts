@@ -22,6 +22,8 @@ export interface BattleSideConfig {
   wardenName?: string;
   /** Units already on the board (Persist, elite signature units). */
   board?: { key: string; level?: Level; lane: Lane; row: Row }[];
+  /** This side's wave-1 summons arrive Stunned (a Shrine effect). */
+  startStunned?: boolean;
 }
 
 export interface BattleConfig {
@@ -58,6 +60,7 @@ function sideState(cfg: BattleSideConfig, uidBase: number): SideState {
     bonebound2Used: false,
     faceDamageDealt: 0,
     pouchEmbers: 0,
+    summonsStunnedUntilWave: cfg.startStunned ? 1 : 0,
   };
 }
 
@@ -270,6 +273,7 @@ export function applyAction(input: BattleState, action: Action): ApplyResult {
         u.buffHp += card.temper;
       }
       card.spent = true;
+      if (st.wave <= s.summonsStunnedUntilWave) u.stunned = true;
       placeUnit(ctx, u);
       for (const a of unitsOf(st.units, side)) for (const p of defFor(a.key, a.level).passives) if (p.k === 'shieldsNeverExpire' && p.startShield && a.id !== u.id) u.shield += p.startShield;
       if (unitTraits(u).includes('Abyssal') && hasTier(st, side, 'Abyssal', 1) && !s.abyssalFreeUsed) {

@@ -105,6 +105,8 @@ export interface SideState {
   faceDamageDealt: number;
   /** Tinder Pouch embers that vanish at the end. */
   pouchEmbers: number;
+  /** Units this side summons start Stunned while wave <= this (Shrine: "Ring it back"). */
+  summonsStunnedUntilWave: number;
   lastSpell?: { key: string; level: Level; targets: Target[] };
 }
 
