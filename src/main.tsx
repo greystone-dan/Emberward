@@ -3,6 +3,7 @@ import '@fontsource/pixelify-sans/600.css';
 import '@fontsource/silkscreen/400.css';
 import './ui/theme.css';
 import './ui/run.css';
+import './ui/gloom.css';
 import { useState, useSyncExternalStore } from 'react';
 import { createRoot } from 'react-dom/client';
 import { RunApp, SandboxApp } from './ui/App';
@@ -13,6 +14,7 @@ import { applyScenarioSetup, applyRunScenario, isBattleScenario } from './ui/sce
 import { installAudioUnlock } from './ui/audio';
 import { SettingsButton } from './ui/SettingsPanel';
 import { TooltipLayer } from './ui/tooltip';
+import { Gloom } from './ui/Gloom';
 
 const params = readParams();
 installAudioUnlock();
@@ -31,6 +33,7 @@ if (isBattleScenario(params.scenario)) {
     useSyncExternalStore(store.subscribe, store.getVersion);
     return (
       <div className={`app${store.skip ? ' no-anim' : ''}`} data-testid="app">
+        <Gloom />
         <SettingsButton />
         <TooltipLayer />
         <SandboxApp
@@ -53,6 +56,7 @@ if (isBattleScenario(params.scenario)) {
     const skip = run.battle?.skip ?? false;
     return (
       <div className={`app${skip ? ' no-anim' : ''}`} data-testid="app">
+        <Gloom />
         <SettingsButton />
         <TooltipLayer />
         <RunApp store={run} />

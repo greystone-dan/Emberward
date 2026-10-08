@@ -116,6 +116,14 @@ export function SigilPicker({ store, run }: { store: RunStore; run: RunState }) 
 export function TitleScreen({ store }: { store: RunStore }) {
   return (
     <div className="screen title" data-testid="title">
+      <div className="embers-rise" aria-hidden>
+        {Array.from({ length: 14 }, (_, i) => (
+          <i key={i} style={{ left: `${8 + i * 6.3}%`, animationDelay: `${(i * 0.53) % 7}s`, animationDuration: `${6 + (i % 4)}s` }} />
+        ))}
+      </div>
+      <div className="lantern">
+        <Sprite unitKey="placeholder" level={1} scale={5} />
+      </div>
       <h1>Emberward</h1>
       <p className="tag">Carry the lantern down the drowned stair.</p>
       <div className="row">

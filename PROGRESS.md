@@ -115,3 +115,11 @@ Append-only. Newest phase summary at the top; the loop log below it.
 **Contract.** settings.ts, audio.ts (ZzFX + Tone), save.ts (IndexedDB), tooltip.tsx, tutorial.tsx, SettingsPanel.tsx; store frames carry sfx and the clock scales by the speed setting; e2e onboarding.spec.ts (5 tests).
 **Evidence.** `npm run check` green (124 tests); `npx playwright test` 10 passed; `npm run shoot -- "run-drift?tutorial=1" "run-battle?tutorial=1" run-over` reviewed.
 **Gotchas.** (1) Headless Chromium does run WebAudio: Tone's transport reports 'started', so the music test is real. (2) `page.evaluate` serialises objects, so a debug `state()` method must be called inside the page. (3) ESLint's no-sparse-arrays rejects ZzFX's usual `[,,440,...]` style; write `undefined`. (4) The tutorial must step aside for a Rekindle offer, which can appear on the third take of the opening Drift.
+
+## Loop: gloom art pass (2026-10-08)
+Daniel: "it looks like a windows menu (cards), I want more of a gloomy theme as well with torchlite and shadows".
+- Added `src/ui/gloom.css` + `Gloom.tsx`: near-black wet-stone background, two flickering torch glows and a drowned
+  teal light, vignette, slate card/panel frames with bronze hairlines and lit art windows, iron/ember buttons,
+  rising embers and a lantern on the title. `run-title` scenario added for screenshots.
+- Evidence: shots/run-title, run-warden, run-drift, battle-wave3, run-market, card-inspect (looked at all six).
+- `npm run check` green (124 tests), Playwright 10/10.
