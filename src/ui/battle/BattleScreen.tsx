@@ -8,7 +8,7 @@ import { CardPanel } from './CardPanel';
 import { DeckStrip } from './DeckStrip';
 import { SidePanel } from './SidePanel';
 
-export function BattleScreen({ store, onRestart }: { store: GameStore; onRestart: () => void }) {
+export function BattleScreen({ store, onRestart, restartLabel = 'Fight again' }: { store: GameStore; onRestart: () => void; restartLabel?: string }) {
   useSyncExternalStore(store.subscribe, store.getVersion);
   useEffect(() => store.startClock(), [store]);
   const state = store.state;
@@ -95,12 +95,17 @@ export function BattleScreen({ store, onRestart }: { store: GameStore; onRestart
       </div>
       {state.phase === 'over' && (
         <div className="overlay" data-testid="overlay">
-          <h1 className={state.winner === 0 ? '' : 'lost'}>{state.winner === 0 ? 'The light holds.' : state.winner === 1 ? 'The light goes out.' : 'Both lights gutter.'}</h1>
+          <h1 className={state.winner === 0 ? '' : 'lost'}>
+            {state.winner === 0 ? (state.outcome === 'kill' ? 'The enemy falls.' : 'You hold the stair.') : state.winner === 1 ? (state.outcome === 'kill' ? 'The light goes out.' : 'The enemy holds the stair.') : 'Both lights gutter.'}
+          </h1>
           <p>
-            {state.outcome === 'kill' ? 'A Warden fell.' : `After ${FLAGS.wavesPerBattle} waves, ${state.winner === null ? 'neither side had more health.' : 'the healthier Warden stands.'}`} You {me.hp}♥ · Enemy {foe.hp}♥.
+            {state.outcome === 'kill'
+              ? 'A Warden fell.'
+              : `After ${FLAGS.wavesPerBattle} waves the side that dealt more face damage wins (you ${state.sides[0].faceDamageDealt}, enemy ${state.sides[1].faceDamageDealt}).${state.winner === 1 ? ' You take the difference as health and the enemy retreats.' : ''}`}{' '}
+            You {me.hp}♥ · Enemy {foe.hp}♥.
           </p>
           <button className="primary" onClick={onRestart} data-testid="btn-restart">
-            Fight again
+            {restartLabel}
           </button>
         </div>
       )}

@@ -17,3 +17,14 @@ SPEC.md (v2), PROMPT.md and ART.md reflect these. The research docs and the pitc
 - **Tokens don't count for traits.** Wisps, Bats, Rubble and Bone Walls are not cards, so they never add to a trait count (Bonebound 4 makes Wisps Bonebound for tier effects only).
 - **"Every unit Beside it, friend or foe"** (Brazier Golem) reads as the units Beside it on its own grid, since the enemy grid has no cell Beside it.
 - **"Around the cell across"** includes the cell across itself plus its orthogonal neighbours.
+
+## Run-loop decisions (Claude, 2026-10-08; flagged for Daniel)
+
+- **Boss and the wave limit.** A boss battle that reaches wave 6 without a kill is decided by face damage like any other, but the boss never retreats: losing that count ends the run. (SPEC §9 only describes retreat for ordinary enemies.)
+- **Elite and boss decks.** `content/cards.json` gives elites and the boss rules and health but no decks. `src/core/run/encounters.ts` composes decks from existing units (and a signature unit standing in the Back row) until phase 5 gives them their own.
+- **Relic prices in the market.** 6✦ common, 9✦ uncommon, 12✦ rare (SPEC prices cards and Sigils only).
+- **Selling.** Half of the card's rarity price × its level, rounded down; Snuffer refunds the full amount. A deck never sells or snuffs its last card.
+- **Anchorstone.** The player picks the survivor on the reward screen; with no pick, nothing persists.
+- **Scout.** Reveals the names of the next three fights, elites or boss reachable ahead on any path; revealed nodes show their enemy on the map.
+- **Shrines.** "Ring it back" makes the next fight's wave-1 enemy summons arrive Stunned. "Fight him" turns the Shrine node into an elite fight (one of the three, seeded) with the elite reward. "Reach in" echoes the first card in the deck. Choir of the Sunk's "Join the song" rekindles two copies (one level), and only if the player owns a pair.
+- **Trait tiers in drafting (Pilgrim 4, Kindler 3)** count distinct cards in the deck carrying the trait (Sigils count).

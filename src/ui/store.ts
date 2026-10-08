@@ -55,9 +55,16 @@ export class GameStore {
   private version = 0;
   private timer: ReturnType<typeof setInterval> | undefined;
   private lastTick = 0;
+  /** Called after every applied action (both sides), so a run store can mirror the battle. */
+  onAction: ((action: Action, state: BattleState) => void) | undefined;
 
   constructor(config: BattleConfig) {
     this.load(config);
+  }
+
+  stopClock(): void {
+    if (this.timer) clearInterval(this.timer);
+    this.timer = undefined;
   }
 
   // ---------- subscription ----------
@@ -179,6 +186,7 @@ export class GameStore {
     const { state, events } = applyAction(prev, action);
     this.actions.push(action);
     this.state = state;
+    this.onAction?.(action, state);
     this.enqueue(this.skip ? [{ view: state, pops: [], log: describe(events, prev, state), ms: 0 }] : buildFrames(prev, events, state, this.nextPop));
   }
   private nextPop = (): number => this.popKey++;
@@ -544,7 +552,7 @@ export function describe(events: BattleEvent[], st: BattleState, after?: BattleS
         out.push(`Wave ${e.wave} ends.`);
         break;
       case 'battleOver':
-        out.push(e.winner === 0 ? 'Victory. The light holds.' : e.winner === 1 ? 'Defeat. The light goes out.' : 'Draw.');
+        out.push(e.winner === 0 ? (e.outcome === 'kill' ? 'Victory. The enemy falls.' : 'Victory. You hold the stair.') : e.winner === 1 ? (e.outcome === 'kill' ? 'Defeat. The light goes out.' : 'The enemy holds the stair and retreats.') : 'Draw.');
         break;
       case 'error':
         out.push(`Error: ${e.message}`);
