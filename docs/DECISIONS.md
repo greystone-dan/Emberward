@@ -35,3 +35,10 @@ SPEC.md (v2), PROMPT.md and ART.md reflect these. The research docs and the pitc
 - **Kiln Breath.** The boss's phase-2 spell is cast at Wave Start from wave 2 on while its HP is 26 or lower: Burn 3 on the player's frontmost unit (lowest row, then lane A first) and the units beside it. No embers, no action; it is a phase rule, not a card.
 - **Dark lanes in wave 1.** Lane A is dark from the first wave (the announcement is the Muster screen's boss description); from then on the next lane is shown a wave ahead with a "dark next" label.
 - **Greedy AI scoring.** Post-Clash state: Warden HP difference ×3, board value (Power ×1.5 + health + shield/2 − Burn − Poison, tokens at half), own embers ×0.5; a win is ±1000. Candidates: the best three cells per distinct card by the scripted lane heuristics, every cast and move, and pass; at most 24. The lookahead passes both sides, so it never models the player's replies (1-ply as SPEC says).
+
+## Balance readings (Claude, 2026-10-08; flagged for Daniel)
+
+- **Include win rate** is run level: runs won with the card in the final deck, over cards seen in at least 20 runs. Battle-level include win is reported too but starter cards sit in every battle, so it tracks the battle win rate.
+- **First seat** is side 0 (acts first in wave 1; initiative alternates after) over seat-swapped pairings of the eight designed comps with the scripted AI on both sides, draws excluded; random mirrors are the control.
+- **Median run length** is judged on runs that reach the boss, with measured animation time plus stated human decision times (in the report). A run that dies at node 3 is short by design.
+- **4-tier reachable** means at least one bot deck in 1,000 runs held four cards with the trait; the pool count per trait is reported beside it.

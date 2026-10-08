@@ -39,7 +39,7 @@ export interface UiState {
 
 export type Listener = () => void;
 
-const ANIM_MS = { action: 250, beat: 650, waveEnd: 500, waveStart: 350, think: 400 };
+export const ANIM_MS = { action: 250, beat: 650, waveEnd: 500, waveStart: 350, think: 400 };
 
 export class GameStore {
   state!: BattleState;

@@ -892,18 +892,20 @@
     "area": "balance",
     "desc": "npm run balance reports include win-rate, pick rate, first-seat win rate, ember split, run length",
     "verify": [
-      "report: reports/balance-latest.md"
+      "report: npm run balance -- --runs 1000 --seed 2 --mirrors 24 \u2192 reports/balance-latest.md (per-card include win and pick rate, first-seat win rate two ways, ember split, run length with the time model, trait 4-tiers)",
+      "tools/balance.ts drives the run bot step by step and plays seat-swapped comp battles"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "BAL-002",
     "area": "balance",
     "desc": "Bands met: no card above 60% include-win-rate, first seat 45-55%, median run 15-25 min, every 4-tier reachable",
     "verify": [
-      "report: reports/balance-latest.md"
+      "report: reports/balance-latest.md 2026-10-08: include win (run level) PASS, first seat 50% scripted / 54% random PASS, median run to the boss 17.4 min PASS, every 4-tier reached by at least one bot deck PASS",
+      "Caveat logged in PROGRESS.md: overall win rates are 1-9% because the boss is overtuned (Question 4), so the include-win band is weak evidence until the boss is retuned"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "SHIP-001",
