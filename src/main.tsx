@@ -15,6 +15,7 @@ import { installAudioUnlock } from './ui/audio';
 import { SettingsButton } from './ui/SettingsPanel';
 import { TooltipLayer } from './ui/tooltip';
 import { Gloom } from './ui/Gloom';
+import { ErrorBoundary } from './ui/ErrorBoundary';
 
 const params = readParams();
 installAudioUnlock();
@@ -46,13 +47,20 @@ if (isBattleScenario(params.scenario)) {
       </div>
     );
   }
-  createRoot(document.getElementById('root')!).render(<Sandbox />);
+  createRoot(document.getElementById('root')!).render(
+    <ErrorBoundary>
+      <Sandbox />
+    </ErrorBoundary>,
+  );
 } else {
   const run = new RunStore(params.seed);
-  installDebugApi({ run, loadScenario: (name) => applyRunScenario(run, name) });
+  const api = installDebugApi({ run, loadScenario: (name) => applyRunScenario(run, name) });
   void run.boot().then(() => applyRunScenario(run, params.scenario));
   function Game() {
     useSyncExternalStore(run.subscribe, run.getVersion);
+    const [crash, setCrash] = useState(false);
+    if (params.debug) api.crash = () => setCrash(true);
+    if (crash) throw new Error('debug crash');
     const skip = run.battle?.skip ?? false;
     return (
       <div className={`app${skip ? ' no-anim' : ''}`} data-testid="app">
@@ -63,5 +71,9 @@ if (isBattleScenario(params.scenario)) {
       </div>
     );
   }
-  createRoot(document.getElementById('root')!).render(<Game />);
+  createRoot(document.getElementById('root')!).render(
+    <ErrorBoundary>
+      <Game />
+    </ErrorBoundary>,
+  );
 }

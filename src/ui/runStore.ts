@@ -16,6 +16,13 @@ const UNLOCK_KEY = 'emberward.unlocks.v1';
 
 export type Screen = 'title' | RunState['phase'];
 
+/** A saved run from an older build or a damaged store must not take the title down with it. */
+export function looksLikeRun(r: unknown): r is RunState {
+  if (!r || typeof r !== 'object') return false;
+  const o = r as Partial<RunState>;
+  return typeof o.phase === 'string' && typeof o.seed === 'string' && Array.isArray(o.deck) && Array.isArray(o.map) && !!o.rng && typeof o.hp === 'number';
+}
+
 export class RunStore {
   run: RunState | null = null;
   battle: GameStore | null = null;
@@ -59,8 +66,13 @@ export class RunStore {
 
   /** Loads the saved run from IndexedDB before the first render. */
   async boot(): Promise<void> {
-    const r = await kvGet<RunState>(SAVE_KEY);
-    this.saved = r && r.phase !== 'over' ? r : null;
+    let r: RunState | null = null;
+    try {
+      r = await kvGet<RunState>(SAVE_KEY);
+    } catch {
+      r = null;
+    }
+    this.saved = r && looksLikeRun(r) && r.phase !== 'over' ? r : null;
     this.emit();
   }
 

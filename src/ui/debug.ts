@@ -29,6 +29,8 @@ export interface DebugApi {
     phase(): string;
   };
   params: { seed: string; scenario: string; debug: boolean };
+  /** Throws inside the next render (debug builds), to exercise the error boundary. */
+  crash?: () => void;
 }
 
 export function readParams(): DebugApi['params'] {
