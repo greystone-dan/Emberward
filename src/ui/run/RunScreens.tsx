@@ -366,35 +366,52 @@ export function MusterScreen({ store, run }: { store: RunStore; run: RunState })
 export function RewardScreen({ store, run }: { store: RunStore; run: RunState }) {
   const r = run.result!;
   const anchor = run.relics.includes('Anchorstone');
+  const kind = r.kind === 'boss' ? 'The Lamplighter Who Drowned' : r.kind === 'elite' ? 'The elite' : 'The patrol';
+  const line = r.won
+    ? r.outcome === 'kill'
+      ? `${kind} is snuffed. The stair is quiet for a while.`
+      : `${kind} falls back when the sixth wave breaks. You hold the stair.`
+    : `${kind} drives you back down the stair. You lose ${r.hpLost} health.`;
+  const rows: [string, string][] = [[r.won ? 'Pay' : 'Salvage', `+${r.pay}✦`]];
+  if (r.won && r.interest > 0) rows.push(['Interest', `+${r.interest}✦`]);
+  if (r.relic) rows.push(['Relic', `${r.relic}: ${relicText(r.relic)}`]);
+  if (r.sigil) rows.push(['Sigil', 'a trait of your choosing, set into one card']);
   return (
     <div className="screen" data-testid="reward">
       <TopBar store={store} run={run} title={r.won ? 'Victory' : 'The enemy retreats'} />
       <div className="reward">
-        <p>
-          {r.won ? `Pay ${r.pay}✦, interest ${r.interest}✦.` : `You lose ${r.hpLost} health and take ${r.pay}✦.`}
-          {r.relic ? ` Relic: ${r.relic} (${relicText(r.relic)}).` : ''}
-          {r.sigil ? ' A Sigil.' : ''}
-        </p>
-        {anchor && r.survivors.length > 0 && (
-          <>
-            <div className="panel-title">Anchorstone: one survivor persists</div>
-            <div className="faces">
-              {r.survivors.map((s, i) => (
-                <div key={i} className={`face mini${r.persisted && r.persisted.lane === s.lane && r.persisted.row === s.row ? ' selected' : ''}`} onClick={() => store.dispatch({ type: 'persistChoose', index: i })}>
-                  <div className="fhead">
-                    <span className="fname">{s.name}</span>
+        <div className="reward-tablet">
+          <div className="reward-head">{r.won ? 'The lane holds' : 'The light gutters'}</div>
+          <p className="reward-line">{line}</p>
+          <div className="reward-rows">
+            {rows.map(([k, v]) => (
+              <div key={k} className="reward-row">
+                <span className="reward-k">{k}</span>
+                <span className="reward-v">{v}</span>
+              </div>
+            ))}
+          </div>
+          {anchor && r.survivors.length > 0 && (
+            <>
+              <div className="panel-title">Anchorstone: one survivor persists</div>
+              <div className="faces">
+                {r.survivors.map((s, i) => (
+                  <div key={i} className={`face mini${r.persisted && r.persisted.lane === s.lane && r.persisted.row === s.row ? ' selected' : ''}`} onClick={() => store.dispatch({ type: 'persistChoose', index: i })}>
+                    <div className="fhead">
+                      <span className="fname">{s.name}</span>
+                    </div>
+                    <div className="fart">
+                      <Sprite unitKey={s.key} level={s.level} scale={2} />
+                    </div>
                   </div>
-                  <div className="fart">
-                    <Sprite unitKey={s.key} level={s.level} scale={2} />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </>
-        )}
-        <button className="primary" onClick={() => store.dispatch({ type: 'continue' })} data-testid="btn-reward-continue">
-          Continue
-        </button>
+                ))}
+              </div>
+            </>
+          )}
+          <button className="primary" onClick={() => store.dispatch({ type: 'continue' })} data-testid="btn-reward-continue">
+            {r.kind === 'boss' ? 'Continue' : 'Continue to the Drift'}
+          </button>
+        </div>
       </div>
       <RekindleModal store={store} run={run} />
     </div>

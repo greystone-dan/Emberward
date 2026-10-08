@@ -127,3 +127,40 @@ button:disabled { box-shadow: none; }
 .embers-rise i { position: absolute; bottom: -10px; width: 3px; height: 3px; background: var(--amber); box-shadow: 0 0 6px var(--orange); opacity: 0; animation: ember 7s steps(28) infinite; }
 @keyframes ember { 0% { transform: translate(0, 0); opacity: 0; } 10% { opacity: 0.9; } 60% { opacity: 0.6; } 100% { transform: translate(40px, -560px); opacity: 0; } }
 .app.no-anim .embers-rise i { animation: none; opacity: 0.6; transform: translate(10px, -200px); }
+
+/* Reward: one lit tablet in the dark. */
+.reward { align-items: center; justify-content: center; min-height: 520px; }
+.reward-tablet {
+  width: 560px; padding: 26px 30px 24px; display: flex; flex-direction: column; gap: 14px; align-items: center; text-align: center;
+  background: linear-gradient(180deg, #1b1a24 0%, #121219 100%);
+  border: 1px solid #5a4330; outline: 1px solid #0b0b10; box-shadow: 0 0 0 1px #2a2230 inset, 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 90px rgba(254, 174, 52, 0.08);
+}
+.reward-head { font-family: 'Silkscreen', monospace; font-size: 28px; color: #feae34; text-shadow: 0 0 18px rgba(254, 174, 52, 0.55), 0 2px 0 #3a1a08; letter-spacing: 1px; }
+.reward-line { margin: 0; color: #c7b9a3; font-size: 16px; max-width: 460px; }
+.reward-rows { width: 100%; display: flex; flex-direction: column; gap: 6px; margin: 4px 0; }
+.reward-row { display: flex; justify-content: space-between; gap: 16px; padding: 8px 12px; background: rgba(0, 0, 0, 0.35); border: 1px solid #2f2a3a; text-align: left; }
+.reward-k { color: #8b9bb4; font-family: 'Silkscreen', monospace; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; padding-top: 2px; }
+.reward-v { color: #fee761; font-size: 16px; }
+.reward .primary { margin-top: 6px; }
+
+/* Shrine: the event reads like a tablet at a lantern-shrine. */
+.shrine {
+  margin: 36px auto 0; width: 720px; max-width: 720px; padding: 26px 30px 24px; gap: 16px;
+  background: linear-gradient(180deg, #1b1a24 0%, #121219 100%);
+  border: 1px solid #5a4330; outline: 1px solid #0b0b10; box-shadow: 0 0 0 1px #2a2230 inset, 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 90px rgba(99, 199, 177, 0.06);
+}
+.shrine .flavour { margin: 0; font-size: 20px; line-height: 1.4; color: #e4d9c3; }
+.shrine .options button { background: linear-gradient(180deg, #2a2537 0%, #1b1824 100%); border: 1px solid #4a3f5c; color: #e8e0cc; }
+.shrine .options button:hover { border-color: #feae34; color: #fee761; box-shadow: 0 0 18px rgba(254, 174, 52, 0.18); }
+
+/* Deck chips carry their sprite, lit from below, with the text over it. */
+.chip { height: 96px; padding-top: 8px; justify-content: flex-end; overflow: hidden; }
+.strip.enemy .chip { height: 72px; width: 76px; padding-top: 6px; }
+.chip .cart { position: absolute; left: 0; right: 0; top: 4px; display: flex; justify-content: center; pointer-events: none; opacity: 0.95; filter: drop-shadow(0 0 6px rgba(254, 174, 52, 0.25)); }
+.strip.enemy .chip .cart { top: 2px; filter: drop-shadow(0 0 6px rgba(99, 199, 177, 0.25)); }
+.chip .cname, .chip .cstats, .chip .cshape { position: relative; z-index: 1; text-shadow: 0 1px 0 #000, 0 0 6px #000; }
+.chip .cname { font-size: 11px; }
+.chip.spent .cart { opacity: 0.5; }
+.chip .cstats { font-size: 11px; white-space: nowrap; }
+.chip .cshape { color: var(--muted); font-family: inherit; }
+.chip .intent { top: -1px; bottom: auto; z-index: 2; }
