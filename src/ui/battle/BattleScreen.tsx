@@ -105,9 +105,11 @@ export function BattleScreen({ store, onRestart, restartLabel = 'Fight again' }:
           </h1>
           <p>
             {state.outcome === 'kill'
-              ? 'A Warden fell.'
+              ? state.winner === 0
+                ? 'Their Warden fell.'
+                : 'Your Warden fell.'
               : `After ${FLAGS.wavesPerBattle} waves the side that dealt more face damage wins (you ${state.sides[0].faceDamageDealt}, enemy ${state.sides[1].faceDamageDealt}).${state.winner === 1 ? ' You take the difference as health and the enemy retreats.' : ''}`}{' '}
-            You {me.hp}♥ · Enemy {foe.hp}♥.
+            You {Math.max(0, me.hp)}♥ · Enemy {Math.max(0, foe.hp)}♥.
           </p>
           <button className="primary" onClick={onRestart} data-testid="btn-restart">
             {restartLabel}

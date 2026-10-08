@@ -56,7 +56,7 @@ export function applyRunScenario(store: import('./runStore').RunStore, name: str
   if (want === 'warden') return;
   store.dispatch({ type: 'chooseWarden', warden: 0 });
   if (want === 'drift') return;
-  const target: Record<string, string> = { map: 'map', muster: 'muster', market: 'market', hearth: 'hearth', shrine: 'shrine', reward: 'reward', battle: 'battle', over: 'over' };
+  const target: Record<string, string> = { map: 'map', muster: 'muster', market: 'market', hearth: 'hearth', shrine: 'shrine', scout: 'scout', reward: 'reward', battle: 'battle', over: 'over' };
   const phase = target[want];
   if (!phase) return;
   let guard = 0;

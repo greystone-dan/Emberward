@@ -560,17 +560,19 @@ export function ScoutScreen({ store, run }: { store: RunStore; run: RunState }) 
   return (
     <div className="screen" data-testid="scout">
       <TopBar store={store} run={run} title="Scout" />
-      <p className="hint">From this ledge you can see what waits below.</p>
-      <ul className="scoutlist">
-        {names.map((n) => (
-          <li key={n.id}>
-            Row {n.y + 1}: {encounterName(n)}
-          </li>
-        ))}
-      </ul>
-      <button className="primary" onClick={() => store.dispatch({ type: 'leave' })} data-testid="btn-leave">
-        Back to the stair
-      </button>
+      <div className="shrine scout">
+        <p className="flavour">From this ledge you can see what waits below.</p>
+        <ul className="scoutlist">
+          {names.map((n) => (
+            <li key={n.id}>
+              Row {n.y + 1}: {encounterName(n)}
+            </li>
+          ))}
+        </ul>
+        <button className="primary" onClick={() => store.dispatch({ type: 'leave' })} data-testid="btn-leave">
+          Back to the stair
+        </button>
+      </div>
     </div>
   );
 }
