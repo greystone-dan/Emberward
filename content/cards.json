@@ -2462,10 +2462,10 @@
    "id": "e_abbot",
    "name": "The Choir Abbot",
    "atk": 1,
-   "hp": 6,
+   "hp": 4,
    "shape": "none",
    "icon": "abbot-meeple",
-   "text": "At Wave End, every empty cell on this side fills with a Chorister."
+   "text": "At Wave End, two empty cells on this side fill with Choristers."
   },
   {
    "id": "e_tideCaller",
@@ -2479,11 +2479,11 @@
   {
    "id": "e_brazierKnight",
    "name": "The Brazier Knight",
-   "atk": 3,
-   "hp": 8,
+   "atk": 2,
+   "hp": 6,
    "shape": "strike",
    "icon": "black-knight-helm",
-   "text": "Taunt. Immune to Burn. At Wave End, heals its Warden one for every Burning unit anywhere."
+   "text": "Taunt. Immune to Burn. At Wave End, heals its Warden one for every Burning unit anywhere, up to two."
   }
  ],
  "fights": [
@@ -2605,7 +2605,7 @@
    "name": "The Choir Abbot",
    "traits": "Bonebound · Chanter",
    "icon": "abbot-meeple",
-   "rule": "Breaks the rule that empty cells stay empty: at Wave End, every empty cell on its side fills with a Chorister.",
+   "rule": "Breaks the rule that empty cells stay empty: at Wave End, two empty cells on its side fill with Choristers.",
    "counter": "Pierce, Cleave and Burn spread. Kill the Abbot (it sits in the Back row) and the refilling stops.",
    "hp": 22
   },
@@ -2621,7 +2621,7 @@
    "name": "The Brazier Knight",
    "traits": "Waxborn · Guardian",
    "icon": "black-knight-helm",
-   "rule": "Breaks the rule that Burn helps you: it is immune to Burn, and every unit Burning anywhere heals it 1 at Wave End.",
+   "rule": "Breaks the rule that Burn helps you: it is immune to Burn, and every unit Burning anywhere heals it 1 at Wave End (up to 2).",
    "counter": "Poison and plain damage. Burn decks must change plan or play something else.",
    "hp": 22
   }

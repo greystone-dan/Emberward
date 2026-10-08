@@ -35,6 +35,9 @@ export const FLAGS = {
   bossPhase2Hp: 26,
   bossPhase3Hp: 12,
   kilnBreathBurn: 3,
+  /** Elite tuning: the Choir Abbot fills this many empty cells per Wave End; the Brazier Knight heals at most this much per Wave End. */
+  abbotRefill: 2,
+  knightHealCap: 2,
   /** Cracked Bell (the Bell-Keeper): Shield on Front-row units that start the battle there (wave 1 summons included). */
   crackedBellShield: 3,
   poisonDecays: true,

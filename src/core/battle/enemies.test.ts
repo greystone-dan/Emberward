@@ -13,7 +13,7 @@ function withEnemy(st: BattleState, patch: Partial<BattleConfig>): BattleState {
 }
 
 describe('elites', () => {
-  it('The Choir Abbot fills every empty cell on its side with a Chorister at Wave End while it lives', () => {
+  it('The Choir Abbot fills two empty cells on its side with Choristers at Wave End while it lives (lane A, Front first)', () => {
     const st = newBattle({
       seed: 't',
       kind: 'elite',
@@ -23,8 +23,10 @@ describe('elites', () => {
     }).state;
     const after = clash(st).state;
     const enemies = after.units.filter((u) => u.side === 1);
-    expect(enemies).toHaveLength(12);
-    expect(enemies.filter((u) => u.key === 't_chorister')).toHaveLength(11);
+    expect(enemies).toHaveLength(1 + FLAGS.abbotRefill);
+    const choristers = enemies.filter((u) => u.key === 't_chorister');
+    expect(choristers).toHaveLength(2);
+    expect(choristers.map((u) => [u.lane, u.row])).toEqual([[0, 0], [0, 1]]);
   });
 
   it('The Tide-Caller pulls the player Front row one lane toward A at Wave Start; Rooted units stay', () => {
@@ -41,7 +43,7 @@ describe('elites', () => {
     expect(at(after, 0, 2, 0)?.key).toBe('e_salthound');
   });
 
-  it('The Brazier Knight is immune to Burn and heals its Warden one per Burning unit at Wave End', () => {
+  it('The Brazier Knight is immune to Burn and heals its Warden one per Burning unit at Wave End, capped', () => {
     let st = setup({ kind: 'elite', playerCards: ['Kiln Mortar'], enemy: [{ name: 'e_brazierKnight', lane: 1, row: 0 }, { name: 'e_waxen', lane: 2, row: 0 }], embers: 10 });
     st = { ...st, elite: { kind: 'brazierKnight' } };
     st.sides[1].hp = 10;
@@ -57,7 +59,7 @@ describe('elites', () => {
     // Warden takes no damage and Wave End heals it one per Burning unit still standing.
     const res = clash(r.state);
     const stillBurning = r.state.units.filter((u) => u.burn > 0 && res.state.units.some((x) => x.id === u.id)).length;
-    expect(res.state.sides[1].hp).toBe(10 + stillBurning);
+    expect(res.state.sides[1].hp).toBe(10 + Math.min(FLAGS.knightHealCap, stillBurning));
   });
 });
 

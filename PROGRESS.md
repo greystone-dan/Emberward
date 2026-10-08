@@ -140,3 +140,15 @@ Daniel: "it looks like a windows menu (cards), I want more of a gloomy theme as 
   the board before the tier was read. Fixed in engine.ts (tier read before removal), golden replay `martyr-2-heal`.
 - Static build probe: dist served by `python3 -m http.server` under /Emberward/, Playwright clicked New run, no errors.
 - Pages workflow, README, CREDITS. `npm run check` + `npm run e2e` green before the commit.
+
+## Loop: elite tuning (2026-10-08)
+- Per-battle probe over 150 runs per Warden: fights and the boss are won by every Warden; elites decide runs. The
+  Choir Abbot at 3–8% for every Warden was the outlier; the Brazier Knight next.
+- Abbot refill capped at two cells (flag), Abbot 6→4 HP; Knight 3/8→2/6, heal capped at 2 (flag). Elite rule texts
+  updated; tests updated (refill order and count, heal cap). Numbers and the ten rejected Bell-Keeper nerfs in
+  DECISIONS.md, Elite tuning. `npm run check` green (129 tests). Balance report re-run follows.
+- Balance report after the elite tuning (1,000 runs, seed 4): wins Lamplighter 46%, Ferryman 43%, Bell-Keeper 94%;
+  first seat 50% PASS; median 17.5 min PASS; include-win FAIL (Bell-Keeper cards dominate the list because the
+  Bell-Keeper wins); Abyssal 4-tier FAIL. The elites were the only thing the Bell-Keeper lost to, so softening them
+  raised it further: the next loop must take something from the Bell-Keeper itself (candidates: starting HP, starting
+  embers, or a weaker Cracked Bell), measured against the same probe.
