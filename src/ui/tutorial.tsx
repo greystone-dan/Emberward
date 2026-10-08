@@ -20,7 +20,7 @@ const TOURS: Record<Tour, Step[]> = {
     { target: '[data-testid="strip-1"]', title: 'Their whole deck is face up', text: 'These are every card the enemy brought. The one marked "next" is what it plays on its turn, and the aimed cell glows on the board. No draws, no surprises.', place: 'below' },
     { target: '[data-testid="strip-0"]', title: 'So is yours', text: 'Click any card to inspect it, then Summon it to a cell for free or Cast its spell for embers (✦). Each wave you get a few actions; passing first earns 1✦.', place: 'above' },
     { target: '[data-testid="tiers-0"]', title: 'Traits count on the board', text: 'Each card carries traits. Reach two, four or six different cards with a trait on your side and the tier bonus switches on. Neighbours sharing a trait also get Kinship, +1/+1 each.', place: 'right' },
-    { target: '[data-testid="board"]', title: 'Arrows show the Clash', text: 'When both sides pass, units attack row by row: Front, then Mid, then Back. The arrows show exactly who hits what, so place your units where the arrows favour you.', place: 'left' },
+    { target: '[data-testid="board"]', title: 'Arrows show the Clash', text: 'When both sides pass, units attack row by row: Front, then Mid, then Back. The arrows show exactly who hits what. A lane with none of your units lets their attacks through to your Warden, so cover the lanes they strike from.', place: 'left' },
     { target: '[data-testid="btn-pass"]', title: 'End the turn when ready', text: 'Pass with this button or press E. The battle lasts six waves; empty the enemy Warden’s health, or lead on face damage when the waves run out.', place: 'above' },
   ],
   drift: [
