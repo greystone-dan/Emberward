@@ -164,3 +164,26 @@ button:disabled { box-shadow: none; }
 .chip .cstats { font-size: 11px; white-space: nowrap; }
 .chip .cshape { color: var(--muted); font-family: inherit; }
 .chip .intent { top: -1px; bottom: auto; z-index: 2; }
+
+/* Warden select: four lit portraits. */
+.wardens-hint { margin: 0 0 14px; color: #a99a84; max-width: 760px; }
+.wardens { gap: 18px; align-items: stretch; }
+.wardencard { padding: 14px 14px 16px; gap: 10px; align-items: stretch; }
+.wardencard .wportrait {
+  height: 150px; display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(ellipse at 50% 70%, rgba(254, 174, 52, 0.22) 0%, rgba(254, 174, 52, 0.05) 45%, transparent 70%), linear-gradient(180deg, #0f1118 0%, #171a22 100%);
+  border: 1px solid #2f2a3a; box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.7);
+}
+.wardencard.locked .wportrait { filter: grayscale(1) brightness(0.6); }
+.wardencard h2 { margin: 2px 0 0; font-size: 20px; }
+.wardencard .faces.small { gap: 6px; }
+.wardencard .faces.small .minisprite { width: 72px; height: 72px; display: flex; align-items: center; justify-content: center; background: #0f1118; border: 1px solid #2f2a3a; }
+.wardencard .muted { min-height: 36px; }
+.wardencard .primary { margin-top: auto; }
+
+/* Market stalls: every slot the same height, the Buy row on the counter. */
+.river { align-items: stretch; }
+.river .slot { display: flex; flex-direction: column; gap: 8px; }
+.river .slot .face { flex: 1; }
+.river .slot .row, .river .slot > .primary { margin-top: auto; }
+.river .slot .face.relicface { min-height: 120px; }

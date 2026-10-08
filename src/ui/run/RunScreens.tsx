@@ -147,11 +147,15 @@ export function WardenSelect({ store, run }: { store: RunStore; run: RunState })
   return (
     <div className="screen" data-testid="warden-select">
       <h1>Choose your Warden</h1>
+      <p className="hint wardens-hint">Each Warden carries a lantern down the same stair with a different deck, a different leaning and one relic. The Bell-Keeper is the safest first descent.</p>
       <div className="wardens">
         {content.wardens.map((w, i) => {
           const locked = w.locked && !unlocked;
           return (
             <div key={w.name} className={`wardencard${locked ? ' locked' : ''}`} data-testid={`warden-${i}`}>
+              <div className="wportrait">
+                <Sprite unitKey={cardKey(w.deck[w.deck.length - 1]!)} scale={4} />
+              </div>
               <h2>{w.name}</h2>
               <div className="worigin" style={{ color: content.traits[w.origin].col }}>
                 {w.origin}
@@ -160,7 +164,7 @@ export function WardenSelect({ store, run }: { store: RunStore; run: RunState })
               <div className="faces small">
                 {w.deck.map((id, k) => (
                   <span key={k} className="minisprite" title={cardName(id)}>
-                    <Sprite unitKey={cardKey(id)} scale={1} />
+                    <Sprite unitKey={cardKey(id)} scale={2} />
                   </span>
                 ))}
               </div>
