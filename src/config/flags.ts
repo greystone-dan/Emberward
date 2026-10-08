@@ -33,6 +33,8 @@ export const FLAGS = {
   burnSpreadDivisor: 2,
   poisonDecays: true,
   triggerQueueCap: 200,
+  /** When a unit loses derived max HP (Kinship, Brawler, Abyssal), it keeps at least 1 HP rather than dying. */
+  bonusHpLossNeverKills: true,
   // §9 winning
   playerHp: 50,
   enemyHp: { fight: 12, elite: 22, boss: 40 },

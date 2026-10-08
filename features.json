@@ -79,7 +79,7 @@
     "verify": [
       "unit: grid.test.ts"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "BATTLE-002",
@@ -97,7 +97,7 @@
     "verify": [
       "unit: battle.test.ts legalActions"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "BATTLE-004",
@@ -106,7 +106,7 @@
     "verify": [
       "unit: battle.test.ts waves"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "BATTLE-005",
@@ -115,7 +115,7 @@
     "verify": [
       "unit: battle.test.ts pass"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "BATTLE-006",
@@ -124,7 +124,7 @@
     "verify": [
       "unit: battle.test.ts summon"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "BATTLE-007",
@@ -133,7 +133,7 @@
     "verify": [
       "unit: battle.test.ts cast"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "BATTLE-008",
@@ -142,7 +142,7 @@
     "verify": [
       "unit: battle.test.ts move"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "BATTLE-009",
@@ -151,7 +151,7 @@
     "verify": [
       "unit: battle.test.ts waveLimit"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "BATTLE-010",
@@ -160,7 +160,7 @@
     "verify": [
       "unit: battle.test.ts win"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "BATTLE-011",
@@ -169,7 +169,7 @@
     "verify": [
       "unit: battle.test.ts purity"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "BATTLE-012",
@@ -178,7 +178,7 @@
     "verify": [
       "unit: render.test.ts"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "BATTLE-013",
@@ -187,7 +187,7 @@
     "verify": [
       "sim: npm run sim -- --battles 1000 --bot random"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "BATTLE-014",
@@ -196,7 +196,7 @@
     "verify": [
       "unit: replays.test.ts"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "CLASH-001",
@@ -205,7 +205,7 @@
     "verify": [
       "unit: clash.test.ts beats"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "CLASH-002",
@@ -215,7 +215,7 @@
       "unit: clash.test.ts strike",
       "replay: shape-strike"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "CLASH-003",
@@ -225,7 +225,7 @@
       "unit: clash.test.ts shoot",
       "replay: shape-shoot"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "CLASH-004",
@@ -235,7 +235,7 @@
       "unit: clash.test.ts pierce",
       "replay: shape-pierce"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "CLASH-005",
@@ -245,7 +245,7 @@
       "unit: clash.test.ts cleave",
       "replay: shape-cleave"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "CLASH-006",
@@ -255,7 +255,7 @@
       "unit: clash.test.ts lob",
       "replay: shape-lob"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "CLASH-007",
@@ -264,7 +264,7 @@
     "verify": [
       "unit: clash.test.ts taunt"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "CLASH-008",
@@ -273,7 +273,7 @@
     "verify": [
       "unit: clash.test.ts waveEnd"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "CLASH-009",
@@ -291,7 +291,7 @@
     "verify": [
       "unit: preview.test.ts"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "STATUS-001",
@@ -301,7 +301,7 @@
       "unit: statuses.test.ts shield",
       "replay: status-shield"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "STATUS-002",
@@ -311,7 +311,7 @@
       "unit: statuses.test.ts burn",
       "replay: status-burn"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "STATUS-003",
@@ -321,7 +321,7 @@
       "unit: statuses.test.ts poison",
       "replay: status-poison"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "STATUS-004",
@@ -331,7 +331,7 @@
       "unit: statuses.test.ts stun",
       "replay: status-stun"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "STATUS-005",
@@ -349,7 +349,7 @@
     "verify": [
       "unit: triggers.test.ts"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "STATUS-007",
@@ -358,7 +358,7 @@
     "verify": [
       "unit: auras.test.ts"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "STATUS-008",
@@ -367,7 +367,7 @@
     "verify": [
       "unit: tokens.test.ts"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "TRAIT-001",
@@ -376,7 +376,7 @@
     "verify": [
       "unit: traits.test.ts count"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "TRAIT-002",
@@ -385,7 +385,7 @@
     "verify": [
       "unit: traits.test.ts tiers"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "TRAIT-003",
@@ -394,7 +394,7 @@
     "verify": [
       "unit: traits.test.ts kinship"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "TRAIT-004",
@@ -412,7 +412,7 @@
     "verify": [
       "unit: traits.test.ts positional"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "TRAIT-006",
@@ -430,7 +430,7 @@
     "verify": [
       "unit: effects.test.ts coverage"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "CARD-002",
@@ -439,7 +439,7 @@
     "verify": [
       "unit: effects.test.ts flame"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "CARD-003",
@@ -448,7 +448,7 @@
     "verify": [
       "unit: effects.test.ts text"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "CARD-004",
@@ -457,7 +457,7 @@
     "verify": [
       "unit: levels.test.ts"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "CARD-005",
@@ -466,7 +466,7 @@
     "verify": [
       "unit: effects.test.ts enemies"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "CARD-006",

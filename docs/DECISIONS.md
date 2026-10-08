@@ -11,3 +11,9 @@ SPEC.md (v2), PROMPT.md and ART.md reflect these. The research docs and the pitc
 - Battle: the whole deck is face-up, no draw. Before each battle, Muster: bring up to 10 cards (flag). Enemy deck revealed with intent markers.
 - The Drift: after each fight, 6 cards, front 2 free, +1 ember per place behind, take 1 (2 after an elite) or skip for 3. Untaken cards advance 2 places per node; the front 2 wash away. Opening Drift of 8 with 3 takes.
 - Traits count different cards on the grid (two copies count once, a Flame counts once). Kinship: +1/+1 per neighbour sharing a trait, max +2.
+
+## Build decisions (Claude, 2026-10-08; flagged, awaiting Daniel)
+- **Losing bonus health never kills.** Kinship, Brawler and Abyssal health are recomputed from the board. When a unit loses a neighbour (a pull, a death, a move) and its max health drops below the damage it has taken, it stays at 1 health instead of dying. Flag `bonusHpLossNeverKills`.
+- **Tokens don't count for traits.** Wisps, Bats, Rubble and Bone Walls are not cards, so they never add to a trait count (Bonebound 4 makes Wisps Bonebound for tier effects only).
+- **"Every unit Beside it, friend or foe"** (Brazier Golem) reads as the units Beside it on its own grid, since the enemy grid has no cell Beside it.
+- **"Around the cell across"** includes the cell across itself plus its orthogonal neighbours.
