@@ -179,3 +179,11 @@ Daniel: "it looks like a windows menu (cards), I want more of a gloomy theme as 
 ## Loop: keyboard (2026-10-08)
 - Battle: 1-9 select the nth unspent card in your strip (then the board highlights cells as with a click); E or
   Enter ends the turn; Escape clears. The turn hint says so.
+
+## Loop: click-through (2026-10-08)
+- A Playwright probe played whole runs with only clicks and keys (1 then a lit cell, E to end the turn; Rekindle,
+  Drift, map, Muster, reward, Market, Hearth, Shrine, Scout), three Wardens, no console errors, no 404s but the
+  favicon. Random placement loses to the first elite, as expected without spells.
+- Fixed from its screenshots: the battle-over line read "A Warden fell. You 50♥ · Enemy -8♥" on a win; it now says
+  whose Warden fell and clamps HP at 0. The Scout screen was a bare list over a full-width button; it sits on the
+  shrine tablet (shots/run-scout.png, scenario run-scout). Added a pixel-ember favicon (public/favicon.svg).

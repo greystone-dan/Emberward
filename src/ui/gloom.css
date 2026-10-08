@@ -191,3 +191,8 @@ button:disabled { box-shadow: none; }
 /* The inspected card in the Drift stays fully on screen, top-aligned beside the deck. */
 .split { align-items: flex-start; }
 .split .face.full { position: sticky; top: 8px; flex: none; }
+
+/* Scout: the same tablet as a shrine, with the sightings as a lit list. */
+.scout .scoutlist { margin: 4px 0 8px; padding-left: 22px; font-size: 20px; line-height: 1.6; }
+.scout .scoutlist li::marker { color: #feae34; }
+.scout .primary { align-self: flex-start; }
