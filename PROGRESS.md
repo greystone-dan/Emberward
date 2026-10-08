@@ -201,3 +201,12 @@ Daniel: "it looks like a windows menu (cards), I want more of a gloomy theme as 
 - Why the Ferryman probe bled: one unit a turn left three lanes open, 27 face damage in six waves, then 8 more as the
   wave-limit difference (Question 6). The "Arrows show the Clash" coach card now says an uncovered lane lets attacks
   through to your Warden.
+- Click-through batch 3 (seeds c8 to c11): no errors, no stuck screens. Boss beaten by random placement in 2 of 4
+  again (Ferryman 39♥, Bell-Keeper 33♥); the other two died to an elite and a late fight. Across eight random runs,
+  4 boss wins: fights and the boss are soft for anyone who covers lanes; the elites carry the difficulty. Tune after
+  Daniel's first plays (BAL-002).
+
+## Loop: hosting (2026-10-08 06:40Z)
+- Daniel chose "Make repo public" on the hosting card. pages.yml deploys on push to main again; the repository
+  is still private at this writing, so the first run waits for the visibility change, then
+  https://greystone-dan.github.io/Emberward/ is the demo address.
