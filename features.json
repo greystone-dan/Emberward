@@ -88,9 +88,10 @@
     "area": "battle",
     "desc": "Muster: bring up to musterLimit cards; unbrought cards take no part and are not spent",
     "verify": [
-      "unit: battle.test.ts muster"
+      "unit: battle.test.ts muster",
+      "src/core/run/run.ts musterSet/musterConfirm \u2192 playerSide builds the battle from the chosen cards only; e2e/run.spec.ts toggles a card"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "BATTLE-003",
@@ -421,9 +422,10 @@
     "area": "traits",
     "desc": "Sigils add one extra trait to a card for the run, within the data's limits",
     "verify": [
-      "unit: sigils.test.ts"
+      "unit: sigils.test.ts",
+      "src/core/run/run.ts inscribe + canInscribe (no Origin on Abyssal, one per card); battle.ts applies card.sigil as an extra trait"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "CARD-001",
@@ -475,162 +477,180 @@
     "area": "cards",
     "desc": "Rekindling: 3 copies merge into the next level and the deck shrinks by 2; can be postponed",
     "verify": [
-      "unit: rekindle.test.ts"
+      "unit: rekindle.test.ts",
+      "src/core/run/run.ts rekindleOffers/doRekindle/postponeRekindle; run.test.ts \"three Sparks rekindle\""
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "RUN-001",
     "area": "run",
     "desc": "Warden select offers Lamplighter, Ferryman and Bell-Keeper; Sexton shown locked",
     "verify": [
-      "e2e: run.spec.ts warden"
+      "e2e: run.spec.ts warden",
+      "src/ui/run/RunScreens.tsx WardenSelect; run.test.ts Sexton locked; shots/run-warden.png"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "RUN-002",
     "area": "run",
     "desc": "Opening Drift: 8 cards, 3 takes, normal prices, start with 8 embers",
     "verify": [
-      "unit: drift.test.ts opening"
+      "unit: drift.test.ts opening",
+      "run.test.ts opening Drift (8 cards, 3 takes, 8 embers); shots/run-drift.png"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "RUN-003",
     "area": "run",
     "desc": "Post-fight Drift: 6 cards, front 2 free, +1 per place, 1 take (2 after elite), skip for 3",
     "verify": [
-      "unit: drift.test.ts"
+      "unit: drift.test.ts",
+      "src/core/run/drift.ts driftPrice; run.ts continue \u2192 openDrift(6, 1 or 2 after elite); driftSkip +3"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "RUN-004",
     "area": "run",
     "desc": "Untaken Drift cards advance 2 places per node, front 2 wash away, new cards join",
     "verify": [
-      "unit: drift.test.ts advance"
+      "unit: drift.test.ts advance",
+      "src/core/run/drift.ts advanceLine; run.ts mapChoose \u2192 advanceDrift; run.test.ts preview equals the next line"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "RUN-005",
     "area": "run",
     "desc": "Echoes (1 in 3, weighted to cards owned twice) and Omens (3 waxing traits at 1.5x)",
     "verify": [
-      "unit: drift.test.ts echoes"
+      "unit: drift.test.ts echoes",
+      "src/core/run/drift.ts newLine/rollEcho (1/3, 3\u00d7 owned twice), rollCard omen weight; run.ts chooseWarden draws 3 Omens"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "RUN-006",
     "area": "run",
     "desc": "Rarity odds 65/31/4 with rare pity",
     "verify": [
-      "unit: drift.test.ts rarity"
+      "unit: drift.test.ts rarity",
+      "src/core/run/drift.ts rollRarity with pity from drift.pity (closeDrift)"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "RUN-007",
     "area": "run",
     "desc": "Act I map: 7x15 lattice, 6 non-crossing paths, node rules, Hearth before the boss",
     "verify": [
-      "unit: map.test.ts"
+      "unit: map.test.ts",
+      "src/core/run/map.ts generateMap; run.test.ts map test (boss row, Hearth row, elites from row 5, no crossings)"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "RUN-008",
     "area": "run",
     "desc": "Next node's Drift is previewable before choosing a path",
     "verify": [
-      "e2e: run.spec.ts preview"
+      "e2e: run.spec.ts preview",
+      "src/core/run/drift.ts previewNextLine; MapScreen \"Next Drift\"; run.test.ts"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "RUN-009",
     "area": "run",
     "desc": "Market: 4 cards (one Echo), relic, Sigil; prices 3/5/8; reroll 1 rising; hold a slot; sell for half",
     "verify": [
-      "unit: market.test.ts"
+      "unit: market.test.ts",
+      "src/core/run/run.ts buildMarket/marketBuy/Relic/Sigil/Reroll/Hold/sell; shots/run-market.png"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "RUN-010",
     "area": "run",
     "desc": "Hearth: heal 30%, Snuff a card, or Temper +1/+1",
     "verify": [
-      "unit: hearth.test.ts"
+      "unit: hearth.test.ts",
+      "src/core/run/run.ts hearthHeal/Snuff/Temper; shots/run-hearth.png"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "RUN-011",
     "area": "run",
     "desc": "Shrine events (5) with their options",
     "verify": [
-      "unit: events.test.ts"
+      "unit: events.test.ts",
+      "src/core/run/run.ts applyShrine for the 5 events; shots/run-shrine.png"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "RUN-012",
     "area": "run",
     "desc": "Scout reveals the next 3 enemies",
     "verify": [
-      "unit: map.test.ts scout"
+      "unit: map.test.ts scout",
+      "src/core/run/run.ts enterNode scout: reveals the next 3 fights; MapScreen shows names on scouted nodes"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "RUN-013",
     "area": "run",
     "desc": "Interest +1 per 5 banked capped at 4, then battle pay 5/8/12",
     "verify": [
-      "unit: economy.test.ts"
+      "unit: economy.test.ts",
+      "src/core/run/run.ts interestFor + resolveBattle (interest before pay; 5/8/12)"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "RUN-014",
     "area": "run",
     "desc": "All 12 relics and the 3 Warden relics are implemented",
     "verify": [
-      "unit: relics.test.ts"
+      "unit: relics.test.ts",
+      "engine: Tinderbox, Cracked Bell, Grave Lantern, Tinder Pouch, Bellows, Miser's Wick, Cracked Lens, Saint's Reliquary, Prism of Vael; run: Long Wick, Echo Shell, Snuffer, Anchorstone, Twin Lantern, Ferryman's Pole, Coin for the Crossing, Miser's Wick cap"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "RUN-015",
     "area": "run",
     "desc": "Persist keeps a unit on the board into the next battle",
     "verify": [
-      "unit: run.test.ts persist"
+      "unit: run.test.ts persist",
+      "run.ts persistChoose \u2192 run.persist \u2192 BattleSideConfig.board (newBattle places it)"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "RUN-016",
     "area": "run",
     "desc": "A bot completes a full run headless",
     "verify": [
-      "sim: npm run sim -- --runs 10"
+      "sim: npm run sim -- --runs 10",
+      "src/core/run/bot.ts playRun; run.test.ts \"bot completes whole runs\"; npm run sim:runs"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "RUN-017",
     "area": "run",
     "desc": "Playwright completes a run on a fixed seed",
     "verify": [
-      "e2e: run.spec.ts full"
+      "e2e: run.spec.ts full",
+      "e2e/run.spec.ts"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "RUN-018",
@@ -752,9 +772,10 @@
     "area": "ui",
     "desc": "Map, Drift, Market, Hearth, Shrine, Muster and Rekindling screens",
     "verify": [
-      "shots: map, drift, market, hearth, shrine, muster, rekindle"
+      "shots: map, drift, market, hearth, shrine, muster, rekindle",
+      "src/ui/run/RunScreens.tsx; shots/run-*.png reviewed"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "UI-007",

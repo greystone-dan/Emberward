@@ -1,0 +1,94 @@
+/* Run screens: title, Warden select, Drift, map, Muster, market, Hearth, Shrine. Same palette and fonts as theme.css. */
+.screen { width: 1280px; height: 720px; padding: 10px 16px; display: flex; flex-direction: column; gap: 8px; overflow: hidden; position: relative; }
+.screen h1 { margin: 4px 0; font-size: 30px; color: var(--gold); }
+.screen h1.lost { color: var(--red); }
+.screen h2 { margin: 0; font-size: 20px; }
+.screen .muted { color: var(--muted); font-size: 13px; }
+.screen .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.screen .split { display: flex; gap: 16px; flex: 1; min-height: 0; }
+.screen.title { align-items: center; justify-content: center; text-align: center; }
+.screen.title h1 { font-size: 64px; letter-spacing: 2px; }
+.screen.title .tag { color: var(--bone); font-size: 18px; }
+button.small { padding: 3px 10px; font-size: 13px; }
+
+.runbar { display: flex; gap: 16px; align-items: baseline; padding: 4px 0 8px; border-bottom: 2px solid var(--panel2); font-size: 14px; flex-wrap: wrap; }
+.runbar .rtitle { font-size: 22px; color: var(--gold); }
+.runbar .rwarden { color: var(--bone); }
+.runbar .rhp { font-family: var(--font-num); color: var(--amber); }
+.runbar .rdeck { color: var(--muted); }
+.runbar .rrelics { display: flex; gap: 6px; flex-wrap: wrap; }
+.runbar .relic { border: 1px solid var(--bronze); color: var(--bronze); padding: 0 6px; font-size: 12px; }
+.runbar .romens { color: var(--muted); font-size: 12px; margin-left: auto; }
+
+/* Card faces */
+.faces { display: flex; gap: 8px; flex-wrap: wrap; align-items: flex-start; }
+.faces.small { gap: 4px; }
+.minisprite { width: 36px; height: 36px; background: var(--bg); border: 1px solid var(--panel2); display: inline-flex; align-items: center; justify-content: center; }
+.face { background: var(--panel); border: 3px solid var(--line); display: flex; flex-direction: column; gap: 3px; position: relative; }
+.face.mini { width: 118px; padding: 3px; font-size: 11px; }
+.face.full { width: 260px; padding: 6px; font-size: 13px; }
+.face.l2 { border-color: var(--bronze); }
+.face.l3 { border-color: var(--gold); box-shadow: 0 0 8px rgba(254, 231, 97, 0.4); }
+.face.clickable { cursor: pointer; }
+.face.clickable:hover { border-color: var(--amber); }
+.face.selected { border-color: var(--amber); box-shadow: 0 0 0 2px var(--amber); }
+.face.dim { opacity: 0.45; }
+.face.empty { align-items: center; justify-content: center; height: 150px; color: var(--muted); }
+.face .fhead { display: flex; justify-content: space-between; gap: 4px; }
+.face .fname { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.face .frar { color: var(--muted); }
+.face .fart { position: relative; background: var(--bg); border: 1px solid var(--panel2); display: flex; align-items: center; justify-content: center; min-height: 70px; }
+.face.full .fart { min-height: 134px; }
+.face .fprice { position: absolute; top: 2px; right: 2px; background: var(--bg); color: var(--amber); font-family: var(--font-num); font-size: 11px; padding: 0 3px; border: 1px solid var(--amber); }
+.face .fprice.free { color: var(--green); border-color: var(--green); }
+.face .fbadge { position: absolute; bottom: 2px; left: 2px; background: var(--teal); color: var(--bg); font-size: 10px; padding: 0 4px; }
+.face .fecho { position: absolute; top: 2px; left: 2px; background: var(--plum); color: var(--white); font-size: 10px; padding: 0 4px; }
+.face .flevel { position: absolute; bottom: 2px; right: 2px; font-size: 10px; color: var(--bronze); }
+.face .flevel.l3 { color: var(--gold); }
+.face .ftraits { display: flex; gap: 3px; flex-wrap: wrap; }
+.face .ftraits .tchip { font-size: 10px; padding: 0 3px; }
+.face .fstats { font-family: var(--font-num); font-size: 11px; color: var(--bone); }
+.face .ftemper { color: var(--green); }
+.face .fdesc { font-size: 12px; color: var(--text); padding: 4px; min-height: 90px; }
+.face.relicface .fhead { color: var(--bronze); }
+.face .half { border: 2px solid var(--panel2); padding: 4px; }
+.face .half.spell { border-style: dashed; }
+.face .half .head { display: flex; justify-content: space-between; color: var(--amber); font-family: var(--font-num); font-size: 11px; }
+
+.deckpanel { display: flex; flex-direction: column; gap: 4px; min-width: 0; flex: 1; overflow: hidden; }
+.deckpanel .faces { overflow-y: auto; max-height: 100%; }
+
+/* Drift and market */
+.river { display: flex; gap: 10px; padding: 10px; background: linear-gradient(180deg, rgba(25, 60, 62, 0.9), rgba(18, 78, 137, 0.25)); border: 2px solid var(--panel2); overflow-x: auto; }
+.river .slot { display: flex; flex-direction: column; gap: 4px; align-items: center; }
+.river .slot.cant .face { opacity: 0.7; }
+
+/* Warden select */
+.wardens { display: flex; gap: 14px; }
+.wardencard { flex: 1; background: var(--panel); border: 3px solid var(--line); padding: 10px; display: flex; flex-direction: column; gap: 8px; }
+.wardencard.locked { opacity: 0.55; }
+.wardencard .wrelic { font-size: 13px; color: var(--bone); min-height: 48px; }
+.wardencard .worigin { font-size: 14px; }
+
+/* Map */
+.mapwrap { flex: none; overflow: auto; max-height: 590px; padding: 4px; background: rgba(24, 20, 37, 0.6); border: 2px solid var(--panel2); }
+.mapsvg text { font-family: var(--font-ui); pointer-events: none; }
+.mapside { display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 0; }
+.legend { display: flex; gap: 10px; flex-wrap: wrap; font-size: 12px; color: var(--muted); }
+
+/* Muster */
+.enemyside { width: 560px; display: flex; flex-direction: column; gap: 6px; }
+.musterside { flex: 1; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.musterside .faces { overflow-y: auto; max-height: 520px; }
+.face.enemy.firstwave { border-color: var(--teal); }
+
+/* Reward, Hearth, Shrine, Scout */
+.reward { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; font-size: 16px; }
+.shrine { display: flex; flex-direction: column; gap: 12px; max-width: 760px; }
+.shrine .flavour { font-size: 20px; color: var(--bone); font-style: italic; }
+.shrine .options { display: flex; flex-direction: column; gap: 8px; }
+.shrine .options button { text-align: left; font-size: 16px; padding: 10px 14px; }
+.scoutlist { font-size: 18px; color: var(--cyan); }
+.traitgrid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; max-width: 760px; }
+.overlay .faces { align-items: center; }
+.overlay .arrow { font-size: 32px; color: var(--amber); }

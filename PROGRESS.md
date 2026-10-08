@@ -8,6 +8,14 @@ Append-only. Newest phase summary at the top; the loop log below it.
 2. **Fire level.** Fire is in (stats ×1.5, free spell, the six hand-written lines work). The other 54 Fire lines are not written: reaching Fire needs 9 copies of a card, which a 15-minute Act I run can't do. Recommended: leave Fire by formula for the demo and write the lines for Act II.
 3. **Tokens and traits.** Wisps, Bats, Rubble and Bone Walls don't count toward trait tiers (they aren't cards). Recommended: keep.
 
+## Phase 4: run loop — done (2026-10-08)
+
+- The whole run plays: title (new run, continue), Warden select (Sexton locked until a win), the opening Drift (8 cards, 3 takes), the Act I map (7×15 lattice, 6 walks, Hearth before the boss, elites from row 5) with the next Drift previewed, Muster (enemy deck and first wave shown, bring up to 10), battle, reward (pay after interest, elite relic and Sigil, Anchorstone pick), the post-fight Drift (front 2 free, +1✦ per place, skip for 3✦, advance 2 per node, Echoes, Omens, rarity pity), market (4 cards with an Echo, relic, Sigil, rising reroll, hold, sell), Hearth (heal 30%, Snuff, Temper), the 5 Shrines, Scout, Rekindling with postpone, Sigil inscribing, and the run's end.
+- `src/core/run/` is pure: `applyRunAction` is the run's only mutator and forwards battle actions to `applyAction`. A run bot (`playRun`) completes runs headless; `npm run sim:runs -- --runs 60` plays 60 runs in 3.4 s with zero errors (early numbers: Lamplighter 25%, Ferryman 35%, Bell-Keeper 85% wins; most losses at the boss). Not balance yet.
+- Save and resume through localStorage (the features entry asks for IndexedDB, so it stays open until phase 7).
+- Playwright: a run from the title through Warden select, Drift, map, Muster into battle, then finished by the bot; save and resume. 9 run unit tests. Screenshots of every run screen reviewed.
+- Open: elites and the boss use composed decks (phase 5); features.json 81 passing.
+
 ## Phase 3: sprites, pass 1 — done (2026-10-08)
 
 - 75 code-authored 32×32 sprites in Endesga 32: all 60 cards, 5 tokens, 9 enemy units and the placeholder, split by Origin in `src/content/sprites/*.ts`. A test checks every card, token and enemy key has a valid sprite (outline, padding, palette, unique ids).
@@ -60,3 +68,8 @@ Append-only. Newest phase summary at the top; the loop log below it.
 **Contract.** One sprite per card, token and enemy as code; registry wired behind ArtProvider; coverage test; contact sheet reviewed; level effects; integer scaling on the board.
 **Evidence.** `npm run check` green (105 tests); `npm run sprites:sheet` → reports/sprites-sheet.png opened and reviewed; `npm run shoot -- battle-wave3 levels` reviewed.
 **Gotchas.** (1) The board drew 32px canvases at 48px CSS, a ×1.5 scale that ART.md forbids; cells grew to 72px so sprites draw at an exact ×2. (2) Drawing 74 sprites in one pass is parallel work: four artists, one file per Origin group, each with its own validate-and-look loop before registering.
+
+### 2026-10-08 · Phase 4 run loop
+**Contract.** Run types, map generator, Drift maths, run reducer with every node type, Rekindling, Sigils, relics; run bot and `sim:runs`; run store with save/resume mirroring the battle store; run screens; e2e run test.
+**Evidence.** `npm run check` green (114 tests); `npx playwright test` 5 passed; `npm run sim:runs -- --runs 60 --seed 3` 0 errors; `npm run shoot -- run-warden run-drift run-map run-muster run-market run-hearth run-shrine` reviewed.
+**Gotchas.** (1) The battle store must be dropped when any non-battle run action arrives, or the battle overlay stays on screen after the run has moved on. (2) The enemy's last summon of a wave can resolve the Clash inside the same applyAction, so the run reducer never assumes a battle action leaves the battle in 'action'. (3) The Ferryman's first reach is free, which an e2e test forgot when asserting the third Drift slot costs 1✦. (4) The boss cannot "retreat" on the wave limit; the run ends either way.

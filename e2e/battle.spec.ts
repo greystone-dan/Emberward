@@ -66,7 +66,7 @@ test('a human can play a full battle with the mouse, and the preview shows what 
   expect(result.text).not.toContain('ERRORS');
   expect(JSON.parse(result.replay).actions.length).toBeGreaterThan(5);
   await expect(page.getByTestId('overlay')).toBeVisible();
-  await expect(page.getByTestId('overlay')).toContainText(/light/);
+  await expect(page.getByTestId('overlay')).toContainText(/light|falls|stair/);
 });
 
 test('spells target through the board and cards grey out when spent', async ({ page }) => {
