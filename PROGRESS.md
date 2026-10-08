@@ -163,3 +163,9 @@ Daniel: "it looks like a windows menu (cards), I want more of a gloomy theme as 
 - Shrine events sit on the same tablet (shots/run-shrine.png).
 - Deck chips (both strips in battle) now carry the card's sprite with the name and stats over it, stats and shape on
   one line, the enemy's "next" marker on top. shots/battle-wave3.png, card-inspect.png.
+- First-fight losses (bot): the starting decks alone, scripted vs scripted, are deterministic: the Lamplighter stalls
+  against fight 1 and the Ferryman against fight 2 to the wave limit every time, the Bell-Keeper wins all three. In
+  runs the opening Drift changes that (87% / 74% / 100% at the first fight). The scripted bot never casts spells, so
+  a person does better; no tuning from this.
+- Warden select: each card gets a lit portrait (its signature card at 4×), 2× deck sprites in framed cells and a
+  one-line hint; the four cards now fill the 720px height. shots/run-warden.png.
